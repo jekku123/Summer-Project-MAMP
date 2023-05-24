@@ -1,0 +1,11 @@
+# Misc.
+ssl
+.idea
+nbproject
+public/uploads/*
+!public/uploads/.gitkeep
+*.pem
+stuff
+
+# env.
+.env
