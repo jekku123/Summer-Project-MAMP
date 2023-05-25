@@ -1,15 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-function Main() {
-    return <h1>Hi</h1>;
-}
-
-export default Main;
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
     <React.StrictMode>
-        <Main />,
+        <App />,
     </React.StrictMode>
 );
