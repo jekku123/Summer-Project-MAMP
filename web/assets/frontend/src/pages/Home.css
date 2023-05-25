@@ -1,0 +1,52 @@
+.home h2 {
+    font-size: 1rem;
+}
+
+.search-area {
+    display: flex;
+    justify-content: center;
+    width: 98%;
+    margin: auto;
+    margin-bottom: 3rem;
+}
+
+#search-name {
+    margin-right: 2rem;
+    padding: 0.4rem;
+}
+
+
+
+/* DESKTOP VERSION */
+@media (min-width: 1200px) {
+    .home {
+        min-height: 100%;
+
+    }
+
+    .home h2 {
+        font-size: 1.5rem;
+    }
+
+    .search-area {
+        display: flex;
+        justify-content: center;
+        width: 98%;
+        margin: auto;
+        margin-bottom: 3rem;
+    }
+
+    #search-name {
+        margin-right: 2rem;
+        padding: 0.4rem;
+    }
+
+    .events {
+        width: 98%;
+        margin: auto;
+        margin-bottom: 0.5rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+}
