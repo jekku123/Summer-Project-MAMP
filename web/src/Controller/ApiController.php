@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Conference;
 use App\Entity\Speaker;
+use App\Entity\Exhibition;
 
 #[Route('/api', name: 'api_main')]
 class ApiController extends AbstractController
@@ -23,32 +24,34 @@ class ApiController extends AbstractController
     #[Route('/', name: 'getAllData', methods: ['GET'])]
 public function getAllData(): Response
 {
-    $conferences = $this->doctrine->getRepository(Conference::class)->findAll();
-    $speakers = $this->doctrine->getRepository(Speaker::class)->findAll();
+  $conferences = $this->doctrine->getRepository(Conference::class)->findAll();
     
-    $data = [
-        'conferences' => [],
-        'speakers' => [],
-    ];
+    $data = [];
     foreach ($conferences as $conference) {
-        $data['conferences'][] = [
+      $conferenceData = [
             'id' => $conference->getId(),
             'title' => $conference->getTitle(),
             'description' => $conference->getDescription(),
             'location' => $conference->getLocation(),
             'start_at' => $conference->getStartAt(),
             'end_at' => $conference->getEndAt(),
+            'exhibitions' => [],
+      ];
+   
+      foreach ($conference->getExhibitions() as $exhibition) {
+          $exhibitionData = [
+            'id' => $exhibition->getId(),
+            'title' => $exhibition->getTitle(),
+            'description' => $exhibition->getDescription(),
+            'location' => $exhibition->getLocation(),
+            'start_at' => $exhibition->getStartAt(),
+            'end_at' => $exhibition->getEndAt(),
         ];
+
+      $conferenceData['exhibitions'][] = $exhibitionData;
     }
-    foreach ($speakers as $speaker) {
-        $data['speakers'][] = [
-            'id' => $speaker->getId(),
-            'firstname' => $speaker->getFirstname(),
-            'lastname' => $speaker->getLastname(),
-            'bio' => $speaker->getBio(),
-            'organization' => $speaker->getOrganization(),
-        ];
-    }
+    $data[] = $conferenceData;
+  }
     return $this->json($data);
 }
     #[Route('/conference', name: 'getAllConferences', methods: ['GET'])]
