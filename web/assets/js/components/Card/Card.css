@@ -1,0 +1,43 @@
+.event-card {
+    width: 340px;
+    height: 360px;
+    margin: auto;
+    background: rgb(250, 233, 227);
+    padding: 0.5em;
+    border-radius: 6px;
+    box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+}
+
+.event-card img {
+    width: 100%;
+}
+
+/* #more-info {
+    font-size: small;
+    color: rgb(245, 11, 163);
+    margin-bottom: 0.8rem;
+} */
+
+/* DESKTOP VERSION */
+/* @media (min-width: 1200px) {
+    .event-card {
+        width: 300px;
+        height: 350px;
+        background: rgb(250, 233, 227);
+        padding: 0.5em;
+        border-radius: 6px;
+        box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+
+
+    }
+
+    .event-card img {
+        width: 100%;
+    }
+
+    #more-info {
+        font-size: small;
+        color: rgb(245, 11, 163);
+        margin-bottom: 0.4rem;
+    }
+} */

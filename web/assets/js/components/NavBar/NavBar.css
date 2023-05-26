@@ -1,0 +1,19 @@
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgba(242, 216, 206, 1);
+    transition: 0.5s ease;
+}
+
+nav ul li a:hover {
+    color: white;
+}
+
+[aria-current='page'] {
+    color: rgb(255, 255, 255);
+}
