@@ -43,11 +43,19 @@ class Conference
     #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Exhibition::class)]
     private Collection $exhibitions;
 
+    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Event::class)]
+    private Collection $events;
+
+    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Attendee::class)]
+    private Collection $attendees;
+
     public function __construct()
     {
         $this->conferenceSpeakers = new ArrayCollection();
         $this->sessions = new ArrayCollection();
         $this->exhibitions = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->attendees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -211,6 +219,66 @@ class Conference
             // set the owning side to null (unless already changed)
             if ($exhibition->getConference() === $this) {
                 $exhibition->setConference(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setConference($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getConference() === $this) {
+                $event->setConference(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Attendee>
+     */
+    public function getAttendees(): Collection
+    {
+        return $this->attendees;
+    }
+
+    public function addAttendee(Attendee $attendee): self
+    {
+        if (!$this->attendees->contains($attendee)) {
+            $this->attendees->add($attendee);
+            $attendee->setConference($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttendee(Attendee $attendee): self
+    {
+        if ($this->attendees->removeElement($attendee)) {
+            // set the owning side to null (unless already changed)
+            if ($attendee->getConference() === $this) {
+                $attendee->setConference(null);
             }
         }
 
