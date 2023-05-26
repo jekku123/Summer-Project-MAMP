@@ -45,7 +45,6 @@ const useForm = (init) => {
             const id = dataset.idx;
 
             if (name === arrayObjKey) {
-                validate(name, value, id, objArrayIdentifier);
                 setFormData((prevData) => ({
                     ...prevData,
                     [objArrayIdentifier]: prevData[objArrayIdentifier].map(
@@ -61,7 +60,6 @@ const useForm = (init) => {
                     ),
                 }));
             } else {
-                validate(name, value);
                 setFormData((prevState) => ({
                     ...prevState,
                     [name]: value,
