@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Conference;
-use App\Entity\Speaker;
-use App\Entity\Exhibition;
 
 #[Route('/api', name: 'api_main')]
 class ApiController extends AbstractController
@@ -48,7 +46,23 @@ public function getAllData(): Response
             'end_at' => $exhibition->getEndAt(),
         ];
 
+        foreach ($exhibition->getBooths() as $booth) {
+          $boothData = [
+            'id' => $booth->getId(),
+            'title' => $booth->getTitle(),
+            'booth_number' => $booth->getBoothNumber(),
+            'description' => $booth->getDescription(),
+            'company' => [
+                'id' => $booth->getCompany()->getId(),
+                'name' => $booth->getCompany()->getName(),
+            ],
+        ];
+        $exhibitionData['booths'][] = $boothData;
+        }
+
+
       $conferenceData['exhibitions'][] = $exhibitionData;
+      
     }
     $data[] = $conferenceData;
   }
