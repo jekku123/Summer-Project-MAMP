@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CompanyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,14 @@ class Company
 
     #[ORM\Column(length: 255)]
     private ?string $website = null;
+
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Booth::class)]
+    private Collection $booths;
+
+    public function __construct()
+    {
+        $this->booths = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +70,36 @@ class Company
     public function setWebsite(string $website): self
     {
         $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Booth>
+     */
+    public function getBooths(): Collection
+    {
+        return $this->booths;
+    }
+
+    public function addBooth(Booth $booth): self
+    {
+        if (!$this->booths->contains($booth)) {
+            $this->booths->add($booth);
+            $booth->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooth(Booth $booth): self
+    {
+        if ($this->booths->removeElement($booth)) {
+            // set the owning side to null (unless already changed)
+            if ($booth->getCompany() === $this) {
+                $booth->setCompany(null);
+            }
+        }
 
         return $this;
     }

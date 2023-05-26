@@ -40,10 +40,14 @@ class Conference
     #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Session::class)]
     private Collection $sessions;
 
+    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Exhibition::class)]
+    private Collection $exhibitions;
+
     public function __construct()
     {
         $this->conferenceSpeakers = new ArrayCollection();
         $this->sessions = new ArrayCollection();
+        $this->exhibitions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +181,36 @@ class Conference
             // set the owning side to null (unless already changed)
             if ($session->getConference() === $this) {
                 $session->setConference(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Exhibition>
+     */
+    public function getExhibitions(): Collection
+    {
+        return $this->exhibitions;
+    }
+
+    public function addExhibition(Exhibition $exhibition): self
+    {
+        if (!$this->exhibitions->contains($exhibition)) {
+            $this->exhibitions->add($exhibition);
+            $exhibition->setConference($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExhibition(Exhibition $exhibition): self
+    {
+        if ($this->exhibitions->removeElement($exhibition)) {
+            // set the owning side to null (unless already changed)
+            if ($exhibition->getConference() === $this) {
+                $exhibition->setConference(null);
             }
         }
 
