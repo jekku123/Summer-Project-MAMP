@@ -1,0 +1,81 @@
+{
+    "conferences": [
+        {
+            "id": 1,
+            "title": "Title",
+            "description": "Description",
+            "imagePath": "imagePath",
+            "location": "Location",
+            "startDateTime": "startDateTime",
+            "endDateTime": "endDateTime",
+
+            "companies": [
+                {
+                    "id": 1,
+                    "name": "Company name 1",
+                    "description": "Company description 1",
+                    "website": "www.company1.com"
+                }
+            ],
+
+            "speakers": [
+                {
+                    "id:": 1,
+                    "name": "Name",
+                    "bio": "Bio",
+                    "organization": "Organization"
+                }
+            ],
+
+            "sessions": [
+                {
+                    "id": 1,
+                    "title": "Title",
+                    "description": "Description",
+                    "location": "Location",
+                    "startDateTime": "startDateTime",
+                    "endDateTime": "endDateTime",
+                    "speaker": {
+                        "id:": 1,
+                        "name": "Name",
+                        "bio": "Bio",
+                        "organization": "Organization"
+                    }
+                }
+            ],
+
+            "exhibition": {
+                "id": 1,
+                "title": "Title",
+                "description": "Description",
+                "location": "Location",
+                "startTime": "startTime",
+                "endTime": "endTime",
+                "booths": [
+                    {
+                        "id": 1,
+                        "booth_number": 1,
+                        "title": "Title",
+                        "description": "Description",
+                        "company": {
+                            "id": 1,
+                            "name": "Company name",
+                            "description": "Company description",
+                            "website": "www.company.com"
+                        }
+                    }
+                ]
+            },
+            "events": [
+                {
+                    "id": 1,
+                    "title": "Break",
+                    "description": "Coffee",
+                    "location": "BC Restaurant",
+                    "startTime": "startTime",
+                    "endTime": "endTime"
+                }
+            ]
+        }
+    ]
+}
