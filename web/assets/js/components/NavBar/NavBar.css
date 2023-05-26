@@ -16,5 +16,4 @@ nav ul li a:hover {
 
 [aria-current='page'] {
     color: rgb(255, 255, 255);
-    text-decoration: underline;
 }

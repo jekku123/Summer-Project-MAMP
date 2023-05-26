@@ -10,10 +10,10 @@ const NavBar = () => {
                     <NavLink to='/'>Home</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/event-list'>Events</NavLink>
+                    <NavLink to='/events'>Events</NavLink>
                 </li>
                 <li>
-                    <NavLink to='/helsinki-info'>Helsinki Info</NavLink>
+                    <NavLink to='/helsinki'>Helsinki Info</NavLink>
                 </li>
                 <li>
                     <NavLink to='/faq'>FAQ</NavLink>
