@@ -19,6 +19,8 @@ class ApiController extends AbstractController
         $this->doctrine = $doctrine;
     }
 
+// all the detailed data needed for the single conference page
+
     #[Route('/', name: 'getAllData', methods: ['GET'])]
 public function getAllData(): Response
 {
@@ -35,17 +37,26 @@ public function getAllData(): Response
             'end_at' => $conference->getEndAt(),
             'exhibitions' => [],
       ];
-   
-      foreach ($conference->getExhibitions() as $exhibition) {
-          $exhibitionData = [
-            'id' => $exhibition->getId(),
-            'title' => $exhibition->getTitle(),
-            'description' => $exhibition->getDescription(),
-            'location' => $exhibition->getLocation(),
-            'start_at' => $exhibition->getStartAt(),
-            'end_at' => $exhibition->getEndAt(),
+      foreach ($conference->getSessions() as $session) {
+          $sessionData = [
+            'id' => $session->getId(),
+            'title' => $session->getTitle(),
+            'description' => $session->getDescription(),
+            'location' => $session->getLocation(),
+            'start_at' => $session->getStartAt(),
+            'end_at' => $session->getEndAt(),
         ];
-
+        $conferenceData['sessions'][] = $sessionData;
+      }
+      foreach ($conference->getExhibitions() as $exhibition) {
+        $exhibitionData = [
+          'id' => $exhibition->getId(),
+          'title' => $exhibition->getTitle(),
+          'description' => $exhibition->getDescription(),
+          'location' => $exhibition->getLocation(),
+          'start_at' => $exhibition->getStartAt(),
+          'end_at' => $exhibition->getEndAt(),
+      ];
         foreach ($exhibition->getBooths() as $booth) {
           $boothData = [
             'id' => $booth->getId(),
@@ -59,16 +70,16 @@ public function getAllData(): Response
         ];
         $exhibitionData['booths'][] = $boothData;
         }
-
-
       $conferenceData['exhibitions'][] = $exhibitionData;
-      
     }
     $data[] = $conferenceData;
   }
     return $this->json($data);
 }
-    #[Route('/conference', name: 'getAllConferences', methods: ['GET'])]
+   
+// separate route for just basic informtion for the front page
+
+#[Route('/conference', name: 'getAllConferences', methods: ['GET'])]
     public function getAllConferences(): Response
     {
         $conferences = $this->doctrine->getRepository(Conference::class)->findAll();
