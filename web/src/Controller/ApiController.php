@@ -11,10 +11,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 
+#[Route('/api', name: 'api__conferences')]
 class ApiController extends AbstractController
 {
-    #[Route('api/conferences', name: 'api_all_conferences', methods: ['GET'])]
-    public function index(EntityManagerInterface $em): JsonResponse
+    #[Route('/conferences', name: 'api_all_conferences', methods: ['GET'])]
+    public function getAllConfrences(EntityManagerInterface $em): JsonResponse
     {
         $conferences = $em->getRepository(Conference::class)->findAll();
         $response = [];
@@ -38,8 +39,8 @@ class ApiController extends AbstractController
         return $this->json($response);
     }
 
-    #[Route('api/conferences/{id}', name: 'api_one_conference', methods: ['GET'])]
-    public function getOne($id, EntityManagerInterface $em): JsonResponse
+    #[Route('/conferences/{id}', name: 'api_one_conference', methods: ['GET'])]
+    public function getOneConfrences($id, EntityManagerInterface $em): JsonResponse
     {
         $conference = $em->getRepository(Conference::class)->find($id);
 
