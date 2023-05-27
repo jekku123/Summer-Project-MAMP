@@ -22,7 +22,7 @@ class Company
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $website = null;
 
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Booth::class)]
@@ -67,7 +67,7 @@ class Company
         return $this->website;
     }
 
-    public function setWebsite(string $website): self
+    public function setWebsite(?string $website): self
     {
         $this->website = $website;
 

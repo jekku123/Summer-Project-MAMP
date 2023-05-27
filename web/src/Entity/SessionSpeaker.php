@@ -13,27 +13,15 @@ class SessionSpeaker
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'speaker')]
-    private ?Session $session = null;
-
     #[ORM\ManyToOne(inversedBy: 'sessionSpeakers')]
     private ?Speaker $speaker = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sessionSpeakers')]
+    private ?Session $session = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getSession(): ?Session
-    {
-        return $this->session;
-    }
-
-    public function setSession(?Session $session): self
-    {
-        $this->session = $session;
-
-        return $this;
     }
 
     public function getSpeaker(): ?Speaker
@@ -44,6 +32,18 @@ class SessionSpeaker
     public function setSpeaker(?Speaker $speaker): self
     {
         $this->speaker = $speaker;
+
+        return $this;
+    }
+
+    public function getSession(): ?Session
+    {
+        return $this->session;
+    }
+
+    public function setSession(?Session $session): self
+    {
+        $this->session = $session;
 
         return $this;
     }
