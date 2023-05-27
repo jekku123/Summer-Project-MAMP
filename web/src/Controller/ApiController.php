@@ -26,12 +26,12 @@ class ApiController extends AbstractController
                 'description' => $conference->getDescription(),
                 'location' => $conference->getLocation(),
                 'image' => $conference->getImage(),
+                'start_at' => $conference->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
                 'speakers' => $this->getSpeakersByConference($conference),
                 'sessions' => $this->getSessionsByConference($conference),
                 'exhibitions' => $this->getExhibitionsByConference($conference),
                 'attendees' => $this->getAttendeesByConference($conference),
-                'start_at' => $conference->getStartAt()->format('Y-m-d H:i:s'),
-                'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
             ];
         }
 
