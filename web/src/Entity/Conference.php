@@ -26,7 +26,7 @@ class Conference
     private ?string $location = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $image_url = null;
+    private ?string $image = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $start_at = null;
@@ -34,8 +34,8 @@ class Conference
     #[ORM\Column]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: ConferenceSpeaker::class)]
-    private Collection $conferenceSpeakers;
+    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Speaker::class)]
+    private Collection $speakers;
 
     #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Session::class)]
     private Collection $sessions;
@@ -43,18 +43,14 @@ class Conference
     #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Exhibition::class)]
     private Collection $exhibitions;
 
-    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Event::class)]
-    private Collection $events;
-
     #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Attendee::class)]
     private Collection $attendees;
 
     public function __construct()
     {
-        $this->conferenceSpeakers = new ArrayCollection();
+        $this->speakers = new ArrayCollection();
         $this->sessions = new ArrayCollection();
         $this->exhibitions = new ArrayCollection();
-        $this->events = new ArrayCollection();
         $this->attendees = new ArrayCollection();
     }
 
@@ -99,14 +95,14 @@ class Conference
         return $this;
     }
 
-    public function getImageUrl(): ?string
+    public function getImage(): ?string
     {
-        return $this->image_url;
+        return $this->image;
     }
 
-    public function setImageUrl(string $image_url): self
+    public function setImage(string $image): self
     {
-        $this->image_url = $image_url;
+        $this->image = $image;
 
         return $this;
     }
@@ -136,29 +132,29 @@ class Conference
     }
 
     /**
-     * @return Collection<int, ConferenceSpeaker>
+     * @return Collection<int, Speaker>
      */
-    public function getConferenceSpeakers(): Collection
+    public function getSpeakers(): Collection
     {
-        return $this->conferenceSpeakers;
+        return $this->speakers;
     }
 
-    public function addConferenceSpeaker(ConferenceSpeaker $conferenceSpeaker): self
+    public function addSpeaker(Speaker $speaker): self
     {
-        if (!$this->conferenceSpeakers->contains($conferenceSpeaker)) {
-            $this->conferenceSpeakers->add($conferenceSpeaker);
-            $conferenceSpeaker->setConference($this);
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers->add($speaker);
+            $speaker->setConference($this);
         }
 
         return $this;
     }
 
-    public function removeConferenceSpeaker(ConferenceSpeaker $conferenceSpeaker): self
+    public function removeSpeaker(Speaker $speaker): self
     {
-        if ($this->conferenceSpeakers->removeElement($conferenceSpeaker)) {
+        if ($this->speakers->removeElement($speaker)) {
             // set the owning side to null (unless already changed)
-            if ($conferenceSpeaker->getConference() === $this) {
-                $conferenceSpeaker->setConference(null);
+            if ($speaker->getConference() === $this) {
+                $speaker->setConference(null);
             }
         }
 
@@ -219,36 +215,6 @@ class Conference
             // set the owning side to null (unless already changed)
             if ($exhibition->getConference() === $this) {
                 $exhibition->setConference(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Event>
-     */
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-
-    public function addEvent(Event $event): self
-    {
-        if (!$this->events->contains($event)) {
-            $this->events->add($event);
-            $event->setConference($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvent(Event $event): self
-    {
-        if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
-            if ($event->getConference() === $this) {
-                $event->setConference(null);
             }
         }
 

@@ -15,10 +15,10 @@ class Booth
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private ?string $booth_number = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $booth_number = null;
+    private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -34,18 +34,6 @@ class Booth
         return $this->id;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
     public function getBoothNumber(): ?string
     {
         return $this->booth_number;
@@ -54,6 +42,18 @@ class Booth
     public function setBoothNumber(string $booth_number): self
     {
         $this->booth_number = $booth_number;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

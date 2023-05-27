@@ -28,15 +28,14 @@ class Speaker
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $organization = null;
 
-    #[ORM\OneToMany(mappedBy: 'speaker', targetEntity: ConferenceSpeaker::class)]
-    private Collection $conferenceSpeakers;
+    #[ORM\ManyToOne(inversedBy: 'speakers')]
+    private ?Conference $conference = null;
 
     #[ORM\OneToMany(mappedBy: 'speaker', targetEntity: SessionSpeaker::class)]
     private Collection $sessionSpeakers;
 
     public function __construct()
     {
-        $this->conferenceSpeakers = new ArrayCollection();
         $this->sessionSpeakers = new ArrayCollection();
     }
 
@@ -93,32 +92,14 @@ class Speaker
         return $this;
     }
 
-    /**
-     * @return Collection<int, ConferenceSpeaker>
-     */
-    public function getConferenceSpeakers(): Collection
+    public function getConference(): ?Conference
     {
-        return $this->conferenceSpeakers;
+        return $this->conference;
     }
 
-    public function addConferenceSpeaker(ConferenceSpeaker $conferenceSpeaker): self
+    public function setConference(?Conference $conference): self
     {
-        if (!$this->conferenceSpeakers->contains($conferenceSpeaker)) {
-            $this->conferenceSpeakers->add($conferenceSpeaker);
-            $conferenceSpeaker->setSpeaker($this);
-        }
-
-        return $this;
-    }
-
-    public function removeConferenceSpeaker(ConferenceSpeaker $conferenceSpeaker): self
-    {
-        if ($this->conferenceSpeakers->removeElement($conferenceSpeaker)) {
-            // set the owning side to null (unless already changed)
-            if ($conferenceSpeaker->getSpeaker() === $this) {
-                $conferenceSpeaker->setSpeaker(null);
-            }
-        }
+        $this->conference = $conference;
 
         return $this;
     }

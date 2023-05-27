@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
@@ -18,7 +19,7 @@ class Session
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
@@ -34,11 +35,11 @@ class Session
     private ?Conference $conference = null;
 
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionSpeaker::class)]
-    private Collection $speaker;
+    private Collection $sessionSpeakers;
 
     public function __construct()
     {
-        $this->speaker = new ArrayCollection();
+        $this->sessionSpeakers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -121,27 +122,27 @@ class Session
     /**
      * @return Collection<int, SessionSpeaker>
      */
-    public function getSpeaker(): Collection
+    public function getSessionSpeakers(): Collection
     {
-        return $this->speaker;
+        return $this->sessionSpeakers;
     }
 
-    public function addSpeaker(SessionSpeaker $speaker): self
+    public function addSessionSpeaker(SessionSpeaker $sessionSpeaker): self
     {
-        if (!$this->speaker->contains($speaker)) {
-            $this->speaker->add($speaker);
-            $speaker->setSession($this);
+        if (!$this->sessionSpeakers->contains($sessionSpeaker)) {
+            $this->sessionSpeakers->add($sessionSpeaker);
+            $sessionSpeaker->setSession($this);
         }
 
         return $this;
     }
 
-    public function removeSpeaker(SessionSpeaker $speaker): self
+    public function removeSessionSpeaker(SessionSpeaker $sessionSpeaker): self
     {
-        if ($this->speaker->removeElement($speaker)) {
+        if ($this->sessionSpeakers->removeElement($sessionSpeaker)) {
             // set the owning side to null (unless already changed)
-            if ($speaker->getSession() === $this) {
-                $speaker->setSession(null);
+            if ($sessionSpeaker->getSession() === $this) {
+                $sessionSpeaker->setSession(null);
             }
         }
 

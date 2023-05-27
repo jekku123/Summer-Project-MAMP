@@ -26,7 +26,7 @@ class Attendee
     private ?string $phone = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $registration_date = null;
+    private ?\DateTimeImmutable $registered_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'attendees')]
     private ?Conference $conference = null;
@@ -84,14 +84,14 @@ class Attendee
         return $this;
     }
 
-    public function getRegistrationDate(): ?\DateTimeImmutable
+    public function getRegisteredAt(): ?\DateTimeImmutable
     {
-        return $this->registration_date;
+        return $this->registered_at;
     }
 
-    public function setRegistrationDate(\DateTimeImmutable $registration_date): self
+    public function setRegisteredAt(\DateTimeImmutable $registered_at): self
     {
-        $this->registration_date = $registration_date;
+        $this->registered_at = $registered_at;
 
         return $this;
     }
