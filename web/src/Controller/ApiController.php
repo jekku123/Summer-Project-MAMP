@@ -36,6 +36,7 @@ public function getAllData(): Response
             'start_at' => $conference->getStartAt(),
             'end_at' => $conference->getEndAt(),
             'exhibitions' => [],
+            'sessions' => [],
       ];
       foreach ($conference->getSessions() as $session) {
           $sessionData = [
@@ -45,7 +46,18 @@ public function getAllData(): Response
             'location' => $session->getLocation(),
             'start_at' => $session->getStartAt(),
             'end_at' => $session->getEndAt(),
+            'speakers' => []
         ];
+        foreach ($session->getSpeaker() as $sessionSpeaker) {
+          $speakerData = [
+              'id' => $sessionSpeaker->getSpeaker()->getId(),
+              'firstname' => $sessionSpeaker->getSpeaker()->getFirstname(),
+              'lastname' => $sessionSpeaker->getSpeaker()->getLastname(),
+              'bio' => $sessionSpeaker->getSpeaker()->getBio(),
+              'organization' => $sessionSpeaker->getSpeaker()->getOrganization(),
+          ];
+          $sessionData['speakers'][] = $speakerData;
+      }
         $conferenceData['sessions'][] = $sessionData;
       }
       foreach ($conference->getExhibitions() as $exhibition) {
