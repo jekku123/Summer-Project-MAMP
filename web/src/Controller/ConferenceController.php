@@ -40,7 +40,7 @@ class ApiController extends AbstractController
     }
 
     #[Route('/conferences/{id}', name: 'api_one_conference', methods: ['GET'])]
-    public function getOneConfrences($id, EntityManagerInterface $em): JsonResponse
+    public function getOneConfrence($id, EntityManagerInterface $em): JsonResponse
     {
         $conference = $em->getRepository(Conference::class)->find($id);
 
