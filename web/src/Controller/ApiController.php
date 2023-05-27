@@ -33,8 +33,8 @@ public function getAllData(): Response
             'title' => $conference->getTitle(),
             'description' => $conference->getDescription(),
             'location' => $conference->getLocation(),
-            'start_at' => $conference->getStartAt(),
-            'end_at' => $conference->getEndAt(),
+            'start_at' => $conference->getStartAt()->format('Y-m-d H:i:s'),
+            'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
             'exhibitions' => [],
             'sessions' => [],
             'speakers' => []
@@ -55,8 +55,8 @@ public function getAllData(): Response
             'title' => $session->getTitle(),
             'description' => $session->getDescription(),
             'location' => $session->getLocation(),
-            'start_at' => $session->getStartAt(),
-            'end_at' => $session->getEndAt(),
+            'start_at' => $session->getStartAt()->format('Y-m-d H:i:s'),
+            'end_at' => $session->getEndAt()->format('Y-m-d H:i:s'),
             'speakers' => []
         ];
         foreach ($session->getSpeaker() as $sessionSpeaker) {
@@ -77,8 +77,8 @@ public function getAllData(): Response
             'title' => $event->getTitle(),
             'description' => $event->getDescription(),
             'location' => $event->getLocation(),
-            'start_at' => $event->getStartAt(),
-            'end_at' => $event->getEndAt()
+            'start_at' => $event->getStartAt()->format('Y-m-d H:i:s'),
+            'end_at' => $event->getEndAt()->format('Y-m-d H:i:s')
         ];
         
         $conferenceData['events'][] = $eventData;
@@ -89,8 +89,8 @@ public function getAllData(): Response
           'title' => $exhibition->getTitle(),
           'description' => $exhibition->getDescription(),
           'location' => $exhibition->getLocation(),
-          'start_at' => $exhibition->getStartAt(),
-          'end_at' => $exhibition->getEndAt(),
+          'start_at' => $exhibition->getStartAt()->format('Y-m-d H:i:s'),
+          'end_at' => $exhibition->getEndAt()->format('Y-m-d H:i:s'),
       ];
         foreach ($exhibition->getBooths() as $booth) {
           $boothData = [
@@ -128,8 +128,8 @@ public function getAllData(): Response
             'title' => $conference->getTitle(),
             'description' => $conference->getDescription(),
             'location' => $conference->getLocation(),
-            'start_at' => $conference->getStartAt(),
-            'end_at' => $conference->getEndAt(),
+            'start_at' => $conference->getStartAt()->format('Y-m-d H:i:s'),
+            'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
         ];
         }
         
