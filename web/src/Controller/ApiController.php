@@ -89,6 +89,8 @@ public function getAllData(): Response
             'company' => [
                 'id' => $booth->getCompany()->getId(),
                 'name' => $booth->getCompany()->getName(),
+                'description' => $booth->getCompany()->getDescription(),
+                'website' => $booth->getCompany()->getWebsite()
             ],
         ];
         $exhibitionData['booths'][] = $boothData;
