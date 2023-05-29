@@ -53,27 +53,29 @@
             }
         ],
 
-        "exhibitions": {
-            "id": 1,
-            "title": "Title",
-            "description": "Description",
-            "location": "Location",
-            "start_at": "start_at",
-            "end_at": "end_at",
-            "booths": [
-                {
-                    "id": 1,
-                    "booth_number": 1,
-                    "title": "Title",
-                    "description": "Description",
-                    "company": {
+        "exhibitions": [
+            {
+                "id": 1,
+                "title": "Title",
+                "description": "Description",
+                "location": "Location",
+                "start_at": "start_at",
+                "end_at": "end_at",
+                "booths": [
+                    {
                         "id": 1,
-                        "name": "Company name",
-                        "description": "Company description",
-                        "website": "www.company.com"
+                        "booth_number": 1,
+                        "title": "Title",
+                        "description": "Description",
+                        "company": {
+                            "id": 1,
+                            "name": "Company name",
+                            "description": "Company description",
+                            "website": "www.company.com"
+                        }
                     }
-                }
-            ]
-        }
+                ]
+            }
+        ]
     }
 ]
