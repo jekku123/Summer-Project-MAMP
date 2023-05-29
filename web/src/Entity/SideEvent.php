@@ -2,14 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\SessionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\SideEventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SessionRepository::class)]
-class Session
+#[ORM\Entity(repositoryClass: SideEventRepository::class)]
+class SideEvent
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,26 +23,20 @@ class Session
     #[ORM\Column(length: 100)]
     private ?string $location = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $image = null;
+
     #[ORM\Column]
     private ?\DateTimeImmutable $start_at = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
+    #[ORM\ManyToOne(inversedBy: 'sideEvents')]
     private ?Conference $conference = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
+    #[ORM\ManyToOne(inversedBy: 'sideEvents')]
     private ?Seminar $seminar = null;
-
-    #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionSpeaker::class)]
-    private Collection $sessionSpeakers;
-
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
-    public function __construct()
-    {
-        $this->sessionSpeakers = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -83,6 +75,18 @@ class Session
     public function setLocation(string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
@@ -131,36 +135,6 @@ class Session
     public function setSeminar(?Seminar $seminar): self
     {
         $this->seminar = $seminar;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, SessionSpeaker>
-     */
-    public function getSessionSpeakers(): Collection
-    {
-        return $this->sessionSpeakers;
-    }
-
-    public function addSessionSpeaker(SessionSpeaker $sessionSpeaker): self
-    {
-        if (!$this->sessionSpeakers->contains($sessionSpeaker)) {
-            $this->sessionSpeakers->add($sessionSpeaker);
-            $sessionSpeaker->setSession($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSessionSpeaker(SessionSpeaker $sessionSpeaker): self
-    {
-        if ($this->sessionSpeakers->removeElement($sessionSpeaker)) {
-            // set the owning side to null (unless already changed)
-            if ($sessionSpeaker->getSession() === $this) {
-                $sessionSpeaker->setSession(null);
-            }
-        }
 
         return $this;
     }

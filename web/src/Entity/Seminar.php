@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ConferenceRepository;
+use App\Repository\SeminarRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ConferenceRepository::class)]
-class Conference
+#[ORM\Entity(repositoryClass: SeminarRepository::class)]
+class Seminar
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -34,33 +34,25 @@ class Conference
     #[ORM\Column]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: SideEvent::class)]
+    #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: SideEvent::class)]
     private Collection $sideEvents;
 
-    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Session::class)]
+    #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: Session::class)]
     private Collection $sessions;
 
-    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Workshop::class)]
-    private Collection $workshops;
-
-    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Exhibition::class)]
-    private Collection $exhibitions;
-
-    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Attendee::class)]
+    #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: Attendee::class)]
     private Collection $attendees;
 
-    #[ORM\OneToMany(mappedBy: 'conference', targetEntity: Speaker::class)]
+    #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: Speaker::class)]
     private Collection $speakers;
 
-    #[ORM\ManyToOne(inversedBy: 'conferences')]
+    #[ORM\ManyToOne(inversedBy: 'seminars')]
     private ?Event $event = null;
 
     public function __construct()
     {
         $this->sideEvents = new ArrayCollection();
         $this->sessions = new ArrayCollection();
-        $this->workshops = new ArrayCollection();
-        $this->exhibitions = new ArrayCollection();
         $this->attendees = new ArrayCollection();
         $this->speakers = new ArrayCollection();
     }
@@ -154,7 +146,7 @@ class Conference
     {
         if (!$this->sideEvents->contains($sideEvent)) {
             $this->sideEvents->add($sideEvent);
-            $sideEvent->setConference($this);
+            $sideEvent->setSeminar($this);
         }
 
         return $this;
@@ -164,8 +156,8 @@ class Conference
     {
         if ($this->sideEvents->removeElement($sideEvent)) {
             // set the owning side to null (unless already changed)
-            if ($sideEvent->getConference() === $this) {
-                $sideEvent->setConference(null);
+            if ($sideEvent->getSeminar() === $this) {
+                $sideEvent->setSeminar(null);
             }
         }
 
@@ -184,7 +176,7 @@ class Conference
     {
         if (!$this->sessions->contains($session)) {
             $this->sessions->add($session);
-            $session->setConference($this);
+            $session->setSeminar($this);
         }
 
         return $this;
@@ -194,68 +186,8 @@ class Conference
     {
         if ($this->sessions->removeElement($session)) {
             // set the owning side to null (unless already changed)
-            if ($session->getConference() === $this) {
-                $session->setConference(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Workshop>
-     */
-    public function getWorkshops(): Collection
-    {
-        return $this->workshops;
-    }
-
-    public function addWorkshop(Workshop $workshop): self
-    {
-        if (!$this->workshops->contains($workshop)) {
-            $this->workshops->add($workshop);
-            $workshop->setConference($this);
-        }
-
-        return $this;
-    }
-
-    public function removeWorkshop(Workshop $workshop): self
-    {
-        if ($this->workshops->removeElement($workshop)) {
-            // set the owning side to null (unless already changed)
-            if ($workshop->getConference() === $this) {
-                $workshop->setConference(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Exhibition>
-     */
-    public function getExhibitions(): Collection
-    {
-        return $this->exhibitions;
-    }
-
-    public function addExhibition(Exhibition $exhibition): self
-    {
-        if (!$this->exhibitions->contains($exhibition)) {
-            $this->exhibitions->add($exhibition);
-            $exhibition->setConference($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExhibition(Exhibition $exhibition): self
-    {
-        if ($this->exhibitions->removeElement($exhibition)) {
-            // set the owning side to null (unless already changed)
-            if ($exhibition->getConference() === $this) {
-                $exhibition->setConference(null);
+            if ($session->getSeminar() === $this) {
+                $session->setSeminar(null);
             }
         }
 
@@ -274,7 +206,7 @@ class Conference
     {
         if (!$this->attendees->contains($attendee)) {
             $this->attendees->add($attendee);
-            $attendee->setConference($this);
+            $attendee->setSeminar($this);
         }
 
         return $this;
@@ -284,8 +216,8 @@ class Conference
     {
         if ($this->attendees->removeElement($attendee)) {
             // set the owning side to null (unless already changed)
-            if ($attendee->getConference() === $this) {
-                $attendee->setConference(null);
+            if ($attendee->getSeminar() === $this) {
+                $attendee->setSeminar(null);
             }
         }
 
@@ -304,7 +236,7 @@ class Conference
     {
         if (!$this->speakers->contains($speaker)) {
             $this->speakers->add($speaker);
-            $speaker->setConference($this);
+            $speaker->setSeminar($this);
         }
 
         return $this;
@@ -314,8 +246,8 @@ class Conference
     {
         if ($this->speakers->removeElement($speaker)) {
             // set the owning side to null (unless already changed)
-            if ($speaker->getConference() === $this) {
-                $speaker->setConference(null);
+            if ($speaker->getSeminar() === $this) {
+                $speaker->setSeminar(null);
             }
         }
 
