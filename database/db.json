@@ -1,0 +1,79 @@
+[
+    {
+        "id": 1,
+        "title": "Title",
+        "description": "Description",
+        "image": "Image",
+        "location": "Location",
+        "start_at": "start_at",
+        "end_at": "end_at",
+
+        "workshops": [
+            {
+                "id": 1,
+                "title": "Title",
+                "description": "Description",
+                "location": "Location",
+                "date": "Date",
+                "start_at": "start_at",
+                "end_at": "end_at",
+                "speakers": [
+                    {
+                        "id:": 1,
+                        "name": "Name",
+                        "bio": "Bio",
+                        "organization": "Organization"
+                    }
+                ]
+            }
+        ],
+
+        "sessions": [
+            {
+                "id": 1,
+                "title": "Title",
+                "description": "Description",
+                "location": "Location",
+                "start_at": "start_at",
+                "end_at": "end_at",
+                "speakers": [
+                    {
+                        "id:": 2,
+                        "name": "Name",
+                        "bio": "Bio",
+                        "organization": "Organization"
+                    },
+                    {
+                        "id:": 3,
+                        "name": "Name",
+                        "bio": "Bio",
+                        "organization": "Organization"
+                    }
+                ]
+            }
+        ],
+
+        "exhibitions": {
+            "id": 1,
+            "title": "Title",
+            "description": "Description",
+            "location": "Location",
+            "start_at": "start_at",
+            "end_at": "end_at",
+            "booths": [
+                {
+                    "id": 1,
+                    "booth_number": 1,
+                    "title": "Title",
+                    "description": "Description",
+                    "company": {
+                        "id": 1,
+                        "name": "Company name",
+                        "description": "Company description",
+                        "website": "www.company.com"
+                    }
+                }
+            ]
+        }
+    }
+]
