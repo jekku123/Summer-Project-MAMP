@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AttendeeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AttendeeRepository::class)]
@@ -13,23 +15,34 @@ class Attendee
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 30)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 30)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 30, nullable: true)]
     private ?string $phone = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $registered_at = null;
+    #[ORM\Column(nullable: true)]
+    private ?bool $is_attending = null;
 
     #[ORM\ManyToOne(inversedBy: 'attendees')]
     private ?Conference $conference = null;
+
+    #[ORM\ManyToOne(inversedBy: 'attendees')]
+    private ?Seminar $seminar = null;
+
+    #[ORM\OneToMany(mappedBy: 'attendee', targetEntity: WorkshopAttendee::class)]
+    private Collection $workshopAttendees;
+
+    public function __construct()
+    {
+        $this->workshopAttendees = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -84,14 +97,14 @@ class Attendee
         return $this;
     }
 
-    public function getRegisteredAt(): ?\DateTimeImmutable
+    public function isIsAttending(): ?bool
     {
-        return $this->registered_at;
+        return $this->is_attending;
     }
 
-    public function setRegisteredAt(\DateTimeImmutable $registered_at): self
+    public function setIsAttending(?bool $is_attending): self
     {
-        $this->registered_at = $registered_at;
+        $this->is_attending = $is_attending;
 
         return $this;
     }
@@ -104,6 +117,48 @@ class Attendee
     public function setConference(?Conference $conference): self
     {
         $this->conference = $conference;
+
+        return $this;
+    }
+
+    public function getSeminar(): ?Seminar
+    {
+        return $this->seminar;
+    }
+
+    public function setSeminar(?Seminar $seminar): self
+    {
+        $this->seminar = $seminar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WorkshopAttendee>
+     */
+    public function getWorkshopAttendees(): Collection
+    {
+        return $this->workshopAttendees;
+    }
+
+    public function addWorkshopAttendee(WorkshopAttendee $workshopAttendee): self
+    {
+        if (!$this->workshopAttendees->contains($workshopAttendee)) {
+            $this->workshopAttendees->add($workshopAttendee);
+            $workshopAttendee->setAttendee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshopAttendee(WorkshopAttendee $workshopAttendee): self
+    {
+        if ($this->workshopAttendees->removeElement($workshopAttendee)) {
+            // set the owning side to null (unless already changed)
+            if ($workshopAttendee->getAttendee() === $this) {
+                $workshopAttendee->setAttendee(null);
+            }
+        }
 
         return $this;
     }

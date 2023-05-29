@@ -16,27 +16,34 @@ class Speaker
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 30)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 30)]
     private ?string $lastname = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bio = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 30, nullable: true)]
     private ?string $organization = null;
 
     #[ORM\ManyToOne(inversedBy: 'speakers')]
     private ?Conference $conference = null;
 
+    #[ORM\ManyToOne(inversedBy: 'speakers')]
+    private ?Seminar $seminar = null;
+
     #[ORM\OneToMany(mappedBy: 'speaker', targetEntity: SessionSpeaker::class)]
     private Collection $sessionSpeakers;
+
+    #[ORM\OneToMany(mappedBy: 'speaker', targetEntity: WorkshopSpeaker::class)]
+    private Collection $workshopSpeakers;
 
     public function __construct()
     {
         $this->sessionSpeakers = new ArrayCollection();
+        $this->workshopSpeakers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,7 +80,7 @@ class Speaker
         return $this->bio;
     }
 
-    public function setBio(string $bio): self
+    public function setBio(?string $bio): self
     {
         $this->bio = $bio;
 
@@ -104,6 +111,18 @@ class Speaker
         return $this;
     }
 
+    public function getSeminar(): ?Seminar
+    {
+        return $this->seminar;
+    }
+
+    public function setSeminar(?Seminar $seminar): self
+    {
+        $this->seminar = $seminar;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, SessionSpeaker>
      */
@@ -128,6 +147,36 @@ class Speaker
             // set the owning side to null (unless already changed)
             if ($sessionSpeaker->getSpeaker() === $this) {
                 $sessionSpeaker->setSpeaker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WorkshopSpeaker>
+     */
+    public function getWorkshopSpeakers(): Collection
+    {
+        return $this->workshopSpeakers;
+    }
+
+    public function addWorkshopSpeaker(WorkshopSpeaker $workshopSpeaker): self
+    {
+        if (!$this->workshopSpeakers->contains($workshopSpeaker)) {
+            $this->workshopSpeakers->add($workshopSpeaker);
+            $workshopSpeaker->setSpeaker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshopSpeaker(WorkshopSpeaker $workshopSpeaker): self
+    {
+        if ($this->workshopSpeakers->removeElement($workshopSpeaker)) {
+            // set the owning side to null (unless already changed)
+            if ($workshopSpeaker->getSpeaker() === $this) {
+                $workshopSpeaker->setSpeaker(null);
             }
         }
 

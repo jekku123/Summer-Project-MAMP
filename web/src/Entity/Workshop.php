@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\SessionRepository;
+use App\Repository\WorkshopRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SessionRepository::class)]
-class Session
+#[ORM\Entity(repositoryClass: WorkshopRepository::class)]
+class Workshop
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -31,19 +31,19 @@ class Session
     #[ORM\Column]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
+    #[ORM\ManyToOne(inversedBy: 'workshops')]
     private ?Conference $conference = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
-    private ?Seminar $seminar = null;
+    #[ORM\OneToMany(mappedBy: 'workshop', targetEntity: WorkshopSpeaker::class)]
+    private Collection $workshopSpeakers;
 
-    #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionSpeaker::class)]
-    private Collection $sessionSpeakers;
+    #[ORM\OneToMany(mappedBy: 'workshop', targetEntity: WorkshopAttendee::class)]
+    private Collection $workshopAttendees;
 
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
     public function __construct()
     {
-        $this->sessionSpeakers = new ArrayCollection();
+        $this->workshopSpeakers = new ArrayCollection();
+        $this->workshopAttendees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,42 +123,60 @@ class Session
         return $this;
     }
 
-    public function getSeminar(): ?Seminar
-    {
-        return $this->seminar;
-    }
-
-    public function setSeminar(?Seminar $seminar): self
-    {
-        $this->seminar = $seminar;
-
-        return $this;
-    }
-
     /**
-     * @return Collection<int, SessionSpeaker>
+     * @return Collection<int, WorkshopSpeaker>
      */
-    public function getSessionSpeakers(): Collection
+    public function getWorkshopSpeakers(): Collection
     {
-        return $this->sessionSpeakers;
+        return $this->workshopSpeakers;
     }
 
-    public function addSessionSpeaker(SessionSpeaker $sessionSpeaker): self
+    public function addWorkshopSpeaker(WorkshopSpeaker $workshopSpeaker): self
     {
-        if (!$this->sessionSpeakers->contains($sessionSpeaker)) {
-            $this->sessionSpeakers->add($sessionSpeaker);
-            $sessionSpeaker->setSession($this);
+        if (!$this->workshopSpeakers->contains($workshopSpeaker)) {
+            $this->workshopSpeakers->add($workshopSpeaker);
+            $workshopSpeaker->setWorkshop($this);
         }
 
         return $this;
     }
 
-    public function removeSessionSpeaker(SessionSpeaker $sessionSpeaker): self
+    public function removeWorkshopSpeaker(WorkshopSpeaker $workshopSpeaker): self
     {
-        if ($this->sessionSpeakers->removeElement($sessionSpeaker)) {
+        if ($this->workshopSpeakers->removeElement($workshopSpeaker)) {
             // set the owning side to null (unless already changed)
-            if ($sessionSpeaker->getSession() === $this) {
-                $sessionSpeaker->setSession(null);
+            if ($workshopSpeaker->getWorkshop() === $this) {
+                $workshopSpeaker->setWorkshop(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WorkshopAttendee>
+     */
+    public function getWorkshopAttendees(): Collection
+    {
+        return $this->workshopAttendees;
+    }
+
+    public function addWorkshopAttendee(WorkshopAttendee $workshopAttendee): self
+    {
+        if (!$this->workshopAttendees->contains($workshopAttendee)) {
+            $this->workshopAttendees->add($workshopAttendee);
+            $workshopAttendee->setWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkshopAttendee(WorkshopAttendee $workshopAttendee): self
+    {
+        if ($this->workshopAttendees->removeElement($workshopAttendee)) {
+            // set the owning side to null (unless already changed)
+            if ($workshopAttendee->getWorkshop() === $this) {
+                $workshopAttendee->setWorkshop(null);
             }
         }
 

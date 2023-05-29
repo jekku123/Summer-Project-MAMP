@@ -5,19 +5,26 @@ namespace App\Controller;
 use App\Entity\Conference;
 use App\Entity\Exhibition;
 use App\Entity\Session;
-
+use App\Entity\Workshop;
+use App\Repository\ConferenceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 
-#[Route('/api', name: 'api__conferences')]
+#[Route('/api', name: 'api')]
 class ApiController extends AbstractController
 {
-    #[Route('/conferences', name: 'api_all_conferences', methods: ['GET'])]
-    public function getAllConfrences(EntityManagerInterface $em): JsonResponse
+    private $conferences;
+
+    public function __construct(ConferenceRepository $conferences)
     {
-        $conferences = $em->getRepository(Conference::class)->findAll();
+        $this->conferences = $conferences;
+    }
+
+    #[Route('/conferences', name: 'api_all', methods: ['GET'])]
+    public function getAllConferences(): JsonResponse
+    {
+        $conferences = $this->conferences->findAll();
         $response = [];
 
         foreach ($conferences as $conference) {
@@ -31,6 +38,7 @@ class ApiController extends AbstractController
                 'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
                 'speakers' => $this->getSpeakersByConference($conference),
                 'sessions' => $this->getSessionsByConference($conference),
+                'workshops' => $this->getWorkshopsByConference($conference),
                 'exhibitions' => $this->getExhibitionsByConference($conference),
                 'attendees' => $this->getAttendeesByConference($conference),
             ];
@@ -39,10 +47,10 @@ class ApiController extends AbstractController
         return $this->json($response);
     }
 
-    #[Route('/conferences/{id}', name: 'api_one_conference', methods: ['GET'])]
-    public function getOneConfrence($id, EntityManagerInterface $em): JsonResponse
+    #[Route('/conferences/{id}', name: 'api_one', methods: ['GET'])]
+    public function getOneConfrence($id): JsonResponse
     {
-        $conference = $em->getRepository(Conference::class)->find($id);
+        $conference = $this->conferences->find($id);
 
         if (!$conference) {
             return $this->json('Nothing found with id: ' . $id, 400);
@@ -54,12 +62,13 @@ class ApiController extends AbstractController
             'description' => $conference->getDescription(),
             'location' => $conference->getLocation(),
             'image' => $conference->getImage(),
-            'speakers' => $this->getSpeakersByConference($conference),
-            'attendees' => $this->getAttendeesByConference($conference),
-            'sessions' => $this->getSessionsByConference($conference),
-            'exhibitions' => $this->getExhibitionsByConference($conference),
             'start_at' => $conference->getStartAt()->format('Y-m-d H:i:s'),
             'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
+            'speakers' => $this->getSpeakersByConference($conference),
+            'sessions' => $this->getSessionsByConference($conference),
+            'workshops' => $this->getWorkshopsByConference($conference),
+            'exhibitions' => $this->getExhibitionsByConference($conference),
+            'attendees' => $this->getAttendeesByConference($conference),
         ];
 
         return $this->json($response);
@@ -75,30 +84,32 @@ class ApiController extends AbstractController
                 'title' => $session->getTitle(),
                 'description' => $session->getDescription(),
                 'location' => $session->getLocation(),
-                'speakers' => $this->getSpeakersBySession($session),
                 'start_at' => $session->getStartAt()->format('Y-m-d H:i:s'),
                 'end_at' => $session->getEndAt()->format('Y-m-d H:i:s'),
+                'speakers' => $this->getSpeakersBySession($session),
             ];
         }
 
         return $sessions;
     }
 
-    private function getSpeakersByConference(Conference $conference)
+    private function getWorkshopsByConference(Conference $conference)
     {
-        $speakers = [];
+        $workshops = [];
 
-        foreach ($conference->getSpeakers() as $speaker) {
-            $speakers[] = [
-                'id' => $speaker->getId(),
-                'firstname' => $speaker->getFirstname(),
-                'lastname' => $speaker->getLastname(),
-                'bio' => $speaker->getBio(),
-                'organization' => $speaker->getOrganization(),
+        foreach ($conference->getWorkshops() as $workshop) {
+            $workshops[] = [
+                'id' => $workshop->getId(),
+                'title' => $workshop->getTitle(),
+                'description' => $workshop->getDescription(),
+                'location' => $workshop->getLocation(),
+                'start_at' => $workshop->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $workshop->getEndAt()->format('Y-m-d H:i:s'),
+                'speakers' => $this->getSpeakersByWorkshop($workshop)
             ];
         }
 
-        return $speakers;
+        return $workshops;
     }
 
     private function getAttendeesByConference(Conference $conference)
@@ -112,7 +123,6 @@ class ApiController extends AbstractController
                 'lastname' => $attendee->getLastname(),
                 'email' => $attendee->getEmail(),
                 'phone' => $attendee->getPhone(),
-                'registered' => $attendee->getRegisteredAt()->format('Y-m-d H:i:s'),
             ];
         }
 
@@ -124,7 +134,6 @@ class ApiController extends AbstractController
         $exhibitions = [];
 
         foreach ($conference->getExhibitions() as $exhibition) {
-            $booths = $this->getBoothsByExhibition($exhibition);
             $exhibitions[] = [
                 'id' => $exhibition->getId(),
                 'title' => $exhibition->getTitle(),
@@ -132,7 +141,7 @@ class ApiController extends AbstractController
                 'location' => $exhibition->getLocation(),
                 'start_at' => $exhibition->getStartAt()->format('Y-m-d H:i:s'),
                 'end_at' => $exhibition->getEndAt()->format('Y-m-d H:i:s'),
-                'booths' => $booths,
+                'booths' => $this->getBoothsByExhibition($exhibition),
             ];
         }
 
@@ -145,7 +154,41 @@ class ApiController extends AbstractController
 
         foreach ($session->getSessionSpeakers() as $sessionSpeaker) {
             $speaker = $sessionSpeaker->getSpeaker();
+            $speakers[] = [
+                'id' => $speaker->getId(),
+                'firstname' => $speaker->getFirstname(),
+                'lastname' => $speaker->getLastname(),
+                'bio' => $speaker->getBio(),
+                'organization' => $speaker->getOrganization(),
+            ];
+        }
 
+        return $speakers;
+    }
+
+    private function getSpeakersByWorkshop(Workshop $workshop)
+    {
+        $speakers = [];
+
+        foreach ($workshop->getWorkshopSpeakers() as $workshopSpeaker) {
+            $speaker = $workshopSpeaker->getSpeaker();
+            $speakers[] = [
+                'id' => $speaker->getId(),
+                'firstname' => $speaker->getFirstname(),
+                'lastname' => $speaker->getLastname(),
+                'bio' => $speaker->getBio(),
+                'organization' => $speaker->getOrganization(),
+            ];
+        }
+
+        return $speakers;
+    }
+
+    private function getSpeakersByConference(Conference $conference)
+    {
+        $speakers = [];
+
+        foreach ($conference->getSpeakers() as $speaker) {
             $speakers[] = [
                 'id' => $speaker->getId(),
                 'firstname' => $speaker->getFirstname(),
