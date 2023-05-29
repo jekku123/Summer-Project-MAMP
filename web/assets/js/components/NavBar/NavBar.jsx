@@ -19,7 +19,7 @@ const NavBar = () => {
                     <NavLink to='/faq'>FAQ</NavLink>
                 </li>
                 <li>
-                    <NavLink to='https://en.bc.fi/'>Business College</NavLink>
+                  <a href="https://en.bc.fi/" target="blank">Business College</a>
                 </li>
             </ul>
         </nav>
