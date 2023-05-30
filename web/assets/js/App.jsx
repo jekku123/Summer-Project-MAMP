@@ -8,6 +8,7 @@ import Faq from './pages/Faq/Faq';
 import EventList from './pages/EventList/EventList';
 import './App.css';
 
+
 function App() {
     return (
         <div className='App'>
