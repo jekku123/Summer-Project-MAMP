@@ -21,27 +21,27 @@ class SeminarController extends AbstractController
     #[Route('/seminars', name: 'api_seminars_all', methods: ['GET'])]
     public function getAllSeminars(): JsonResponse
     {
-      $seminars = $this->seminars->findAll();
-      $response = [];
+        $seminars = $this->seminars->findAll();
+        $response = [];
 
-      foreach ($seminars as $seminar) {
-          $response[] = [
-              'id' => $seminar->getId(),
-              'title' => $seminar->getTitle(),
-              'description' => $seminar->getDescription(),
-              'location' => $seminar->getLocation(),
-              'image' => $seminar->getImage(),
-              'start_at' => $seminar->getStartAt()->format('Y-m-d H:i:s'),
-              'end_at' => $seminar->getEndAt()->format('Y-m-d H:i:s'),
-              'speakers' => $this->getSpeakersBySeminar($seminar),
-              'sessions' => $this->getSessionsBySeminar($seminar),
-          ];
-      }
+        foreach ($seminars as $seminar) {
+            $response[] = [
+                'id' => $seminar->getId(),
+                'title' => $seminar->getTitle(),
+                'description' => $seminar->getDescription(),
+                'location' => $seminar->getLocation(),
+                'image' => $seminar->getImage(),
+                'start_at' => $seminar->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $seminar->getEndAt()->format('Y-m-d H:i:s'),
+                'speakers' => $this->getSpeakersBySeminar($seminar),
+                'sessions' => $this->getSessionsBySeminar($seminar),
+            ];
+        }
 
-      return $this->json($response);
-  }
+        return $this->json($response);
+    }
 
-  #[Route('/seminars/{id}', name: 'api_one', methods: ['GET'])]
+    #[Route('/seminars/{id}', name: 'api_one', methods: ['GET'])]
     public function getOneConfrence($id): JsonResponse
     {
         $seminar = $this->seminars->find($id);
@@ -86,14 +86,8 @@ class SeminarController extends AbstractController
     {
         $speakers = [];
 
-        foreach ($seminar->getSpeakers() as $speaker) {
-            $speakers[] = [
-                'id' => $speaker->getId(),
-                'firstname' => $speaker->getFirstname(),
-                'lastname' => $speaker->getLastname(),
-                'bio' => $speaker->getBio(),
-                'organization' => $speaker->getOrganization(),
-            ];
+        foreach ($seminar->getSessions() as $session) {
+            $speakers[] = $this->getSpeakersBySession($session);
         }
 
         return $speakers;

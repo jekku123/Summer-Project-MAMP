@@ -43,18 +43,11 @@ class Seminar
     #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: Attendee::class)]
     private Collection $attendees;
 
-    #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: Speaker::class)]
-    private Collection $speakers;
-
-    #[ORM\ManyToOne(inversedBy: 'seminars')]
-    private ?Event $event = null;
-
     public function __construct()
     {
         $this->sideEvents = new ArrayCollection();
         $this->sessions = new ArrayCollection();
         $this->attendees = new ArrayCollection();
-        $this->speakers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,48 +213,6 @@ class Seminar
                 $attendee->setSeminar(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Speaker>
-     */
-    public function getSpeakers(): Collection
-    {
-        return $this->speakers;
-    }
-
-    public function addSpeaker(Speaker $speaker): self
-    {
-        if (!$this->speakers->contains($speaker)) {
-            $this->speakers->add($speaker);
-            $speaker->setSeminar($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSpeaker(Speaker $speaker): self
-    {
-        if ($this->speakers->removeElement($speaker)) {
-            // set the owning side to null (unless already changed)
-            if ($speaker->getSeminar() === $this) {
-                $speaker->setSeminar(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getEvent(): ?Event
-    {
-        return $this->event;
-    }
-
-    public function setEvent(?Event $event): self
-    {
-        $this->event = $event;
 
         return $this;
     }

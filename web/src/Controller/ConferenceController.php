@@ -188,14 +188,8 @@ class ConferenceController extends AbstractController
     {
         $speakers = [];
 
-        foreach ($conference->getSpeakers() as $speaker) {
-            $speakers[] = [
-                'id' => $speaker->getId(),
-                'firstname' => $speaker->getFirstname(),
-                'lastname' => $speaker->getLastname(),
-                'bio' => $speaker->getBio(),
-                'organization' => $speaker->getOrganization(),
-            ];
+        foreach ($conference->getSessions() as $session) {
+            $speakers[] = $this->getSpeakersBySession($session);
         }
 
         return $speakers;
