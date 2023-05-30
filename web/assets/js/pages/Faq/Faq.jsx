@@ -1,12 +1,9 @@
 import React from 'react';
 import './Faq.css';
+import Conference from '../Event/Conference';
 
 const Faq = () => {
-    return (
-        <div className='faq'>
-            <h2>Here will be FFQ!!</h2>
-        </div>
-    );
+    return <Conference />;
 };
 
 export default Faq;
