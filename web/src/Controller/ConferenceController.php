@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/api', name: 'api')]
-class ApiController extends AbstractController
+class ConferenceController extends AbstractController
 {
     private $conferences;
 
