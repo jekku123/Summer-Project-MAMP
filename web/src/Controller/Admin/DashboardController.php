@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Conference;
 use App\Entity\Seminar;
 use App\Entity\Session;
+use App\Entity\Exhibition;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 
@@ -34,5 +35,6 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToCrud('Conferences', 'fas fa-map-marker-alt', Conference::class);
         yield MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class);
+        yield MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class);
     }
 }
