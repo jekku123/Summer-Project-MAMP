@@ -49,11 +49,11 @@ class DashboardController extends AbstractDashboardController
         Company::class);
         yield MenuItem::linkToCrud('Workshops', 'fas fa-map-marker-alt', 
         Workshop::class);
-        yield MenuItem::linkToCrud('Speakers', 'fas fa-map-marker-alt', 
+        yield MenuItem::linkToCrud('Speakers', 'fas fa-microphone', 
         Speaker::class);
-        yield MenuItem::linkToCrud('Session Speakers', 'fas fa-map-marker-alt', 
+        yield MenuItem::linkToCrud('Session Speakers', 'fas fa-microphone', 
         SessionSpeaker::class);
-        yield MenuItem::linkToCrud('Workshop Speakers', 'fas fa-map-marker-alt', 
+        yield MenuItem::linkToCrud('Workshop Speakers', 'fas fa-microphone', 
         WorkshopSpeaker::class);
     }
 }
