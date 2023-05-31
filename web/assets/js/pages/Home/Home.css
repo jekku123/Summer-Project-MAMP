@@ -12,12 +12,20 @@
 }
 
 .homepage-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 4rem;
+}
+
+/* .homepage-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
     padding: 0 2em 6em;
-}
+} */
+
+
 
 /* DESKTOP VERSION */
 /* @media (min-width: 1200px) {
