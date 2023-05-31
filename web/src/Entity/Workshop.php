@@ -45,6 +45,10 @@ class Workshop
         $this->workshopSpeakers = new ArrayCollection();
         $this->workshopAttendees = new ArrayCollection();
     }
+    public function __toString(): string
+    {
+        return $this->title;
+    }
 
     public function getId(): ?int
     {

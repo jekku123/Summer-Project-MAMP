@@ -19,6 +19,7 @@ class BoothCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('exhibition');
+        yield AssociationField::new('company');
         yield TextField::new('title');
         yield TextField::new('booth_number');
         yield TextareaField::new('description');

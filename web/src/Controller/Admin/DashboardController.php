@@ -11,6 +11,7 @@ use App\Entity\Company;
 use App\Entity\Workshop;
 use App\Entity\Speaker;
 use App\Entity\SessionSpeaker;
+use App\Entity\WorkshopSpeaker;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 
@@ -51,5 +52,7 @@ class DashboardController extends AbstractDashboardController
         Speaker::class);
         yield MenuItem::linkToCrud('Session Speakers', 'fas fa-map-marker-alt', 
         SessionSpeaker::class);
+        yield MenuItem::linkToCrud('Workshop Speakers', 'fas fa-map-marker-alt', 
+        WorkshopSpeaker::class);
     }
 }
