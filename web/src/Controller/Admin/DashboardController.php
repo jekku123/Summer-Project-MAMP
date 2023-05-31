@@ -8,6 +8,9 @@ use App\Entity\Session;
 use App\Entity\Exhibition;
 use App\Entity\Booth;
 use App\Entity\Company;
+use App\Entity\Workshop;
+use App\Entity\Speaker;
+use App\Entity\SessionSpeaker;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 
@@ -42,5 +45,11 @@ class DashboardController extends AbstractDashboardController
         Booth::class);
         yield MenuItem::linkToCrud('Companies', 'fas fa-map-marker-alt', 
         Company::class);
+        yield MenuItem::linkToCrud('Workshops', 'fas fa-map-marker-alt', 
+        Workshop::class);
+        yield MenuItem::linkToCrud('Speakers', 'fas fa-map-marker-alt', 
+        Speaker::class);
+        yield MenuItem::linkToCrud('Session Speakers', 'fas fa-map-marker-alt', 
+        SessionSpeaker::class);
     }
 }
