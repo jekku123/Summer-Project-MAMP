@@ -28,17 +28,14 @@ class Speaker
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $organization = null;
 
-    #[ORM\ManyToOne(inversedBy: 'speakers')]
-    private ?Conference $conference = null;
-
-    #[ORM\ManyToOne(inversedBy: 'speakers')]
-    private ?Seminar $seminar = null;
-
     #[ORM\OneToMany(mappedBy: 'speaker', targetEntity: SessionSpeaker::class)]
     private Collection $sessionSpeakers;
 
     #[ORM\OneToMany(mappedBy: 'speaker', targetEntity: WorkshopSpeaker::class)]
     private Collection $workshopSpeakers;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $photo = null;
 
     public function __construct()
     {
@@ -99,30 +96,6 @@ class Speaker
         return $this;
     }
 
-    public function getConference(): ?Conference
-    {
-        return $this->conference;
-    }
-
-    public function setConference(?Conference $conference): self
-    {
-        $this->conference = $conference;
-
-        return $this;
-    }
-
-    public function getSeminar(): ?Seminar
-    {
-        return $this->seminar;
-    }
-
-    public function setSeminar(?Seminar $seminar): self
-    {
-        $this->seminar = $seminar;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, SessionSpeaker>
      */
@@ -179,6 +152,18 @@ class Speaker
                 $workshopSpeaker->setSpeaker(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

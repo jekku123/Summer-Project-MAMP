@@ -4,9 +4,9 @@
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)no-repeat center/cover;
+    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+        no-repeat center/cover;
     font-family: 'Roboto Slab', serif;
-
 }
 
 .header {
@@ -36,14 +36,13 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
-
-
 }
 
 .section1-main {
     background-color: rgb(250, 233, 227);
     border-radius: 8px;
     width: 50%;
+    padding: 20px;
 }
 
 .section {
@@ -52,7 +51,6 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
 }
 
 .section-title {
@@ -156,26 +154,21 @@
     color: #666;
 }
 
-
 /* mobile version */
 
 @media (max-width: 767px) {
-
     .section1 {
-        display:
-            block;
+        display: block;
     }
 
     .section1-main {
         width: 100%;
         background-color: white;
-
     }
 
     .event-image {
         height: 280px;
         width: 100%;
-
     }
 
     .section-title {
@@ -185,5 +178,4 @@
     .section-content p {
         font-size: 14px;
     }
-
 }

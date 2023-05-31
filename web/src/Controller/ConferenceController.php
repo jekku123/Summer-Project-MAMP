@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/api', name: 'api')]
-class ApiController extends AbstractController
+class ConferenceController extends AbstractController
 {
     private $conferences;
 
@@ -21,7 +21,7 @@ class ApiController extends AbstractController
         $this->conferences = $conferences;
     }
 
-    #[Route('/conferences', name: 'api_all', methods: ['GET'])]
+    #[Route('/conferences', name: '_all_conferences', methods: ['GET'])]
     public function getAllConferences(): JsonResponse
     {
         $conferences = $this->conferences->findAll();
@@ -47,7 +47,7 @@ class ApiController extends AbstractController
         return $this->json($response);
     }
 
-    #[Route('/conferences/{id}', name: 'api_one', methods: ['GET'])]
+    #[Route('/conferences/{id}', name: '_one_conference', methods: ['GET'])]
     public function getOneConfrence($id): JsonResponse
     {
         $conference = $this->conferences->find($id);
@@ -188,14 +188,8 @@ class ApiController extends AbstractController
     {
         $speakers = [];
 
-        foreach ($conference->getSpeakers() as $speaker) {
-            $speakers[] = [
-                'id' => $speaker->getId(),
-                'firstname' => $speaker->getFirstname(),
-                'lastname' => $speaker->getLastname(),
-                'bio' => $speaker->getBio(),
-                'organization' => $speaker->getOrganization(),
-            ];
+        foreach ($conference->getSessions() as $session) {
+            $speakers[] = $this->getSpeakersBySession($session);
         }
 
         return $speakers;

@@ -26,6 +26,9 @@ const Faq = () => {
 
         </div>
     );
+
+    return <h1>Faq here</h1>;
+
 };
 
 export default Faq;
