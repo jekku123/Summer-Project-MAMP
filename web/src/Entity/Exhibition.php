@@ -37,6 +37,11 @@ class Exhibition
     #[ORM\OneToMany(mappedBy: 'exhibition', targetEntity: Booth::class)]
     private Collection $booths;
 
+    public function __toString(): string
+    {
+        return $this->title;
+    }
+
     public function __construct()
     {
         $this->booths = new ArrayCollection();

@@ -28,6 +28,11 @@ class Booth
 
     #[ORM\ManyToOne(inversedBy: 'booths')]
     private ?Exhibition $exhibition = null;
+    
+    public function __toString(): string
+    {
+        return $this->title;
+    }
 
     public function getId(): ?int
     {

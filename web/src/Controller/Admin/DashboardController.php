@@ -6,6 +6,8 @@ use App\Entity\Conference;
 use App\Entity\Seminar;
 use App\Entity\Session;
 use App\Entity\Exhibition;
+use App\Entity\Booth;
+use App\Entity\Company;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 
@@ -36,5 +38,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Conferences', 'fas fa-map-marker-alt', Conference::class);
         yield MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class);
         yield MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class);
+        yield MenuItem::linkToCrud('Booths', 'fas fa-map-marker-alt', 
+        Booth::class);
+        yield MenuItem::linkToCrud('Companies', 'fas fa-map-marker-alt', 
+        Company::class);
     }
 }
