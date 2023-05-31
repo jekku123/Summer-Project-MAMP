@@ -20,6 +20,7 @@ class SessionCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('conference');
+        yield AssociationField::new('seminar');
         yield TextField::new('title');
         yield TextareaField::new('description');
         yield TextField::new('location');
