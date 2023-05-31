@@ -50,7 +50,7 @@ final class SeminarFactory extends ModelFactory
         return [
             'description' => self::faker()->paragraph(),
             'location' => self::faker()->address(),
-            'image' => self::faker()->image(),
+            'image' => self::faker()->imageUrl(),
             'start_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'end_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
