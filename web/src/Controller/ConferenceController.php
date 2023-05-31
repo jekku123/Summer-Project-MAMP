@@ -21,7 +21,7 @@ class ConferenceController extends AbstractController
         $this->conferences = $conferences;
     }
 
-    #[Route('/conferences', name: 'api_all', methods: ['GET'])]
+    #[Route('/conferences', name: '_all_conferences', methods: ['GET'])]
     public function getAllConferences(): JsonResponse
     {
         $conferences = $this->conferences->findAll();
@@ -47,7 +47,7 @@ class ConferenceController extends AbstractController
         return $this->json($response);
     }
 
-    #[Route('/conferences/{id}', name: 'api_one', methods: ['GET'])]
+    #[Route('/conferences/{id}', name: '_one_conference', methods: ['GET'])]
     public function getOneConfrence($id): JsonResponse
     {
         $conference = $this->conferences->find($id);
