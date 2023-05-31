@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Home from './pages/Home/Home';
 import Layout from './components/UI/Layout';
-import Event from './pages/Event/Event';
+import Conference from './pages/Event/Conference';
 import Helsinki from './pages/Helsinki/Helsinki';
 import Faq from './pages/Faq/Faq';
 import EventList from './pages/EventList/EventList';
@@ -18,7 +18,7 @@ function App() {
                         <Route index element={<Home />} />
                         <Route path='helsinki' element={<Helsinki />} />
                         <Route path='events' element={<EventList />} />
-                        <Route path='event' element={<Event />} />
+                        <Route path='conference' element={<Conference />} />
                         <Route path='faq' element={<Faq />} />
                     </Route>
                 </Routes>

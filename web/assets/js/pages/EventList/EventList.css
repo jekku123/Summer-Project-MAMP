@@ -1,3 +1,48 @@
-.loading {
+/* .loading {
     text-align: center;
+} */
+
+.events {
+    margin: 2rem 0 4rem 0;
+}
+
+.events h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+
+.eventlist {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.radio-options {
+    background-color: white;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.radio-options input[type="radio"] {
+    display: none;
+}
+
+.radio-options label {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.radio-options input[type="radio"]:checked+label {
+    background-color: var(--main-bg-color);
+    color: rgba(242, 216, 206, 1);
 }

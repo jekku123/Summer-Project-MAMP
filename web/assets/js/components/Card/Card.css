@@ -1,7 +1,8 @@
 .event-card {
-    width: 340px;
-    height: 360px;
+    width: 450px;
+    height: 420px;
     margin: auto;
+    margin-bottom: 1.5rem;
     background: rgb(250, 233, 227);
     padding: 0.5em;
     border-radius: 6px;
@@ -11,6 +12,23 @@
 .event-card img {
     width: 100%;
 }
+
+.event-card h5 {
+    text-align: center;
+}
+
+.event-card a {
+    text-decoration: none;
+}
+
+#more-info {
+    font-size: small;
+    color: rgb(245, 11, 163);
+    margin: 0.4rem 0 0.2rem 0;
+    text-align: center;
+    text-decoration: none;
+}
+
 
 /* #more-info {
     font-size: small;
