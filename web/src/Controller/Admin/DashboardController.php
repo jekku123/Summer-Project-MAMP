@@ -34,7 +34,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Events');
+            ->setTitle('BC Helsinki events');
     }
 
     public function configureMenuItems(): iterable
@@ -49,11 +49,13 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Conferences')->setSubItems([
           MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class),
           MenuItem::linkToCrud('Session Speakers', 'fas fa-microphone', SessionSpeaker::class),
+          MenuItem::section(''),
           MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class),
           MenuItem::linkToCrud('Companies', 'fas fa-map-marker-alt', 
           Company::class),
           MenuItem::linkToCrud('Booths', 'fas fa-map-marker-alt', 
           Booth::class),
+          MenuItem::section(''),
           MenuItem::linkToCrud('Workshops', 'fas fa-map-marker-alt', 
           Workshop::class),
           MenuItem::linkToCrud('Workshop Speakers', 'fas fa-microphone', 
