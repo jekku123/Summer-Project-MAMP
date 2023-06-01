@@ -1,4 +1,43 @@
 .helsinki-info {
-    background-color: khaki;
-    text-align: center;
+    background-color: black;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+        no-repeat center/cover;
+    font-family: "Roboto Slab", serif;
+}
+
+.info-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-section p {
+    margin-bottom: 1rem;
+}
+
+.info-section a {
+    color: black;
+}
+
+.info-text {
+    width: 50vw;
+    margin: 0 1.5rem;
+}
+
+a.info-link {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--main-bg-color);
+    border-radius: 3px;
+    color: #f9f9f9;
+    text-decoration: none;
+}
+
+.tram-img {
+    width: 400px;
+    height: auto;
 }
