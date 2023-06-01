@@ -5,6 +5,13 @@ namespace App\Controller\Admin;
 use App\Entity\Conference;
 use App\Entity\Seminar;
 use App\Entity\Session;
+use App\Entity\Exhibition;
+use App\Entity\Booth;
+use App\Entity\Company;
+use App\Entity\Workshop;
+use App\Entity\Speaker;
+use App\Entity\SessionSpeaker;
+use App\Entity\WorkshopSpeaker;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 
@@ -33,6 +40,20 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToCrud('Conferences', 'fas fa-map-marker-alt', Conference::class);
+        yield MenuItem::linkToCrud('Seminars', 'fas fa-map-marker-alt', Seminar::class);
         yield MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class);
+        yield MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class);
+        yield MenuItem::linkToCrud('Booths', 'fas fa-map-marker-alt', 
+        Booth::class);
+        yield MenuItem::linkToCrud('Companies', 'fas fa-map-marker-alt', 
+        Company::class);
+        yield MenuItem::linkToCrud('Workshops', 'fas fa-map-marker-alt', 
+        Workshop::class);
+        yield MenuItem::linkToCrud('Speakers', 'fas fa-microphone', 
+        Speaker::class);
+        yield MenuItem::linkToCrud('Session Speakers', 'fas fa-microphone', 
+        SessionSpeaker::class);
+        yield MenuItem::linkToCrud('Workshop Speakers', 'fas fa-microphone', 
+        WorkshopSpeaker::class);
     }
 }

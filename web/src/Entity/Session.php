@@ -45,6 +45,11 @@ class Session
     {
         $this->sessionSpeakers = new ArrayCollection();
     }
+    
+    public function __toString(): string
+    {
+        return $this->title;
+    }
 
     public function getId(): ?int
     {
