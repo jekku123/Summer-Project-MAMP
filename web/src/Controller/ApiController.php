@@ -4,45 +4,47 @@ namespace App\Controller;
 
 use App\Entity\Conference;
 use App\Entity\Exhibition;
+use App\Entity\Seminar;
 use App\Entity\Session;
 use App\Entity\Workshop;
 use App\Repository\ConferenceRepository;
+use App\Repository\SeminarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/api', name: 'api')]
-class ConferenceController extends AbstractController implements SeminarController
+class ApiController extends AbstractController
 {
     private $conferences;
+    private $seminars;
 
-    public function __construct(ConferenceRepository $conferences)
+    public function __construct(ConferenceRepository $conferences, SeminarRepository $seminars)
     {
         $this->conferences = $conferences;
+        $this->seminars = $seminars;
     }
+
+    #[Route('/', name: '_all', methods: ['GET'])]
+    public function getAll(): JsonResponse
+    {
+        $conferences = $this->conferences->findAll();
+        $seminars = $this->seminars->findAll();
+
+        $conferences_response = $this->getConferences($conferences);
+        $seminars_response = $this->getSeminars($seminars);
+
+        $response = ['conferences' => $conferences_response, 'seminars' => $seminars_response];
+
+        return $this->json($response);
+    }
+
 
     #[Route('/conferences', name: '_all_conferences', methods: ['GET'])]
     public function getAllConferences(): JsonResponse
     {
         $conferences = $this->conferences->findAll();
-        $response = [];
-
-        foreach ($conferences as $conference) {
-            $response[] = [
-                'id' => $conference->getId(),
-                'title' => $conference->getTitle(),
-                'description' => $conference->getDescription(),
-                'location' => $conference->getLocation(),
-                'image' => $conference->getImage(),
-                'start_at' => $conference->getStartAt()->format('Y-m-d H:i:s'),
-                'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
-                'speakers' => $this->getSpeakersByConference($conference),
-                'sessions' => $this->getSessionsByConference($conference),
-                'workshops' => $this->getWorkshopsByConference($conference),
-                'exhibitions' => $this->getExhibitionsByConference($conference),
-                'attendees' => $this->getAttendeesByConference($conference),
-            ];
-        }
+        $response = $this->getConferences($conferences);
 
         return $this->json($response);
     }
@@ -72,6 +74,84 @@ class ConferenceController extends AbstractController implements SeminarControll
         ];
 
         return $this->json($response);
+    }
+
+    #[Route('/seminars', name: 'api_seminars_all', methods: ['GET'])]
+    public function getAllSeminars(): JsonResponse
+    {
+        $seminars = $this->seminars->findAll();
+        $response = $this->getSeminars($seminars);
+
+        return $this->json($response);
+    }
+
+    #[Route('/seminars/{id}', name: 'api_one', methods: ['GET'])]
+    public function oneSeminar($id): JsonResponse
+    {
+        $seminar = $this->seminars->find($id);
+
+        if (!$seminar) {
+            return $this->json('Nothing found with id: ' . $id, 400);
+        }
+
+        $response[] = [
+            'id' => $seminar->getId(),
+            'title' => $seminar->getTitle(),
+            'description' => $seminar->getDescription(),
+            'location' => $seminar->getLocation(),
+            'image' => $seminar->getImage(),
+            'start_at' => $seminar->getStartAt()->format('Y-m-d H:i:s'),
+            'end_at' => $seminar->getEndAt()->format('Y-m-d H:i:s'),
+            'speakers' => $this->getSpeakersBySeminar($seminar),
+            'sessions' => $this->getSessionsByseminar($seminar)
+        ];
+
+        return $this->json($response);
+    }
+
+    private function getConferences($conferences)
+    {
+        $response = [];
+
+        foreach ($conferences as $conference) {
+            $response[] = [
+                'id' => $conference->getId(),
+                'title' => $conference->getTitle(),
+                'description' => $conference->getDescription(),
+                'location' => $conference->getLocation(),
+                'image' => $conference->getImage(),
+                'start_at' => $conference->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
+                'speakers' => $this->getSpeakersByConference($conference),
+                'sessions' => $this->getSessionsByConference($conference),
+                'workshops' => $this->getWorkshopsByConference($conference),
+                'exhibitions' => $this->getExhibitionsByConference($conference),
+                'attendees' => $this->getAttendeesByConference($conference),
+            ];
+        }
+
+        return $response;
+    }
+
+    private function getSeminars($seminars)
+    {
+        $response = [];
+
+        foreach ($seminars as $seminar) {
+            $response[] = [
+                'id' => $seminar->getId(),
+                'title' => $seminar->getTitle(),
+                'description' => $seminar->getDescription(),
+                'location' => $seminar->getLocation(),
+                'image' => $seminar->getImage(),
+                'start_at' => $seminar->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $seminar->getEndAt()->format('Y-m-d H:i:s'),
+                'speakers' => $this->getSpeakersBySeminar($seminar),
+                'sessions' => $this->getSessionsBySeminar($seminar),
+            ];
+        }
+
+        return $response;
     }
 
     private function getSessionsByConference(Conference $conference)
@@ -105,11 +185,30 @@ class ConferenceController extends AbstractController implements SeminarControll
                 'location' => $workshop->getLocation(),
                 'start_at' => $workshop->getStartAt()->format('Y-m-d H:i:s'),
                 'end_at' => $workshop->getEndAt()->format('Y-m-d H:i:s'),
-                'speakers' => $this->getSpeakersByWorkshop($workshop)
+                'speakers' => $this->getSpeakersByWorkshop($workshop),
+                'attendees' => $this->getAttendeesByWorkshop($workshop)
             ];
         }
 
         return $workshops;
+    }
+
+    private function getAttendeesByWorkshop(Workshop $workshop)
+    {
+        $attendees = [];
+
+        foreach ($workshop->getWorkshopAttendees() as $workshopAttendee) {
+            $attendee = $workshopAttendee->getAttendee();
+            $attendees[] = [
+                'id' => $attendee->getId(),
+                'firstname' => $attendee->getFirstname(),
+                'lastname' => $attendee->getLastname(),
+                'email' => $attendee->getEmail(),
+                'phone' => $attendee->getPhone(),
+            ];
+        }
+
+        return $attendees;
     }
 
     private function getAttendeesByConference(Conference $conference)
@@ -216,5 +315,35 @@ class ConferenceController extends AbstractController implements SeminarControll
         }
 
         return $booths;
+    }
+
+    private function getSpeakersBySeminar(Seminar $seminar)
+    {
+        $speakers = [];
+
+        foreach ($seminar->getSessions() as $session) {
+            $speakers[] = $this->getSpeakersBySession($session);
+        }
+
+        return $speakers;
+    }
+
+    private function getSessionsBySeminar(Seminar $seminar)
+    {
+        $sessions = [];
+
+        foreach ($seminar->getSessions() as $session) {
+            $sessions[] = [
+                'id' => $session->getId(),
+                'title' => $session->getTitle(),
+                'description' => $session->getDescription(),
+                'location' => $session->getLocation(),
+                'start_at' => $session->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $session->getEndAt()->format('Y-m-d H:i:s'),
+                'speakers' => $this->getSpeakersBySession($session),
+            ];
+        }
+
+        return $sessions;
     }
 }
