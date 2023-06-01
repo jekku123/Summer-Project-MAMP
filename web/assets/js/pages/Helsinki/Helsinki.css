@@ -7,7 +7,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
         no-repeat center/cover;
-    font-family: "Roboto Slab", serif;
+    font-family: 'Roboto Slab', serif;
 }
 
 .info-section {

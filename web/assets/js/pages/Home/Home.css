@@ -17,18 +17,7 @@
     margin-bottom: 4rem;
 }
 
-/* .homepage-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding: 0 2em 6em;
-} */
-
-
-
-/* DESKTOP VERSION */
-/* @media (min-width: 1200px) {
+@media only screen and (max-width: 700px) {
     .home {
         min-height: 100%;
     }
@@ -50,16 +39,14 @@
         padding: 0.4rem;
     }
 
-    .events {
-        width: 98%;
-        margin: auto;
-        margin-bottom: 0.5rem;
+    .homepage-cards {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0.5rem;
+        grid-template-columns: none;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 20px;
     }
 }
-
+/*
 .datepicker {
     padding: 0.4rem;
 } */
