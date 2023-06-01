@@ -4,7 +4,7 @@ import Home from './pages/Home/Home';
 import Layout from './components/UI/Layout';
 import Conference from './pages/Event/Conference';
 import Helsinki from './pages/Helsinki/Helsinki';
-import Faq from './pages/Faq/Faq';
+import FaqInfo from './pages/Faq/FaqInfo';
 import EventList from './pages/EventList/EventList';
 import './App.css';
 
@@ -19,7 +19,7 @@ function App() {
                         <Route path='helsinki' element={<Helsinki />} />
                         <Route path='events' element={<EventList />} />
                         <Route path='conference' element={<Conference />} />
-                        <Route path='faq' element={<Faq />} />
+                        <Route path='faq' element={<FaqInfo />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
