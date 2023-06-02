@@ -7,13 +7,63 @@ nav ul {
 nav ul li a {
     text-decoration: none;
     color: rgba(242, 216, 206, 1);
-    transition: 0.5s ease;
 }
 
 nav ul li a:hover {
-    color: white;
+    color: rgb(221, 129, 1);
+    transition: 0.3s ease;
 }
 
 [aria-current='page'] {
-    color: rgb(255, 255, 255);
+    color: rgb(221, 129, 1);
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+}
+
+@media only screen and (max-width: 700px) {
+    .burger {
+        display: block;
+    }
+
+    .burger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .burger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .burger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    nav {
+        position: fixed;
+        visibility: hidden;
+    }
+
+    nav ul {
+        justify-content: center;
+    }
+
+    nav.active {
+        visibility: visible;
+        width: 100%;
+        right: 0;
+        top: 100px;
+        padding: 0 2em 1em;
+        background-color: var(--main-bg-color);
+    }
 }
