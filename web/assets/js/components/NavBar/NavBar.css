@@ -54,17 +54,11 @@ nav ul li a:hover {
         visibility: hidden;
     }
 
-    nav ul {
-        justify-content: center;
-    }
-
     nav.active {
         visibility: visible;
         width: 100%;
         right: 0;
         top: 100px;
         padding: 0 2em 1em;
-        background-color: var(--main-bg-color);
     }
 }
-
