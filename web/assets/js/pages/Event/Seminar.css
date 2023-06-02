@@ -1,6 +1,8 @@
 .seminar {
     padding: 20px;
-    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)no-repeat center/cover;
+    margin-bottom: 40px;
+    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+        no-repeat center/cover;
 }
 
 .header {
@@ -30,8 +32,6 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
-
-
 }
 
 .section1-main {
@@ -46,7 +46,6 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
 }
 
 .section-title {
@@ -93,22 +92,18 @@
 /* mobile version */
 
 @media (max-width: 767px) {
-
     .section1 {
-        display:
-            block;
+        display: block;
     }
 
     .section1-main {
         width: 100%;
         background-color: white;
-
     }
 
     .event-image {
         height: 280px;
         width: 100%;
-
     }
 
     .section-title {
@@ -118,5 +113,4 @@
     .section-content p {
         font-size: 14px;
     }
-
 }

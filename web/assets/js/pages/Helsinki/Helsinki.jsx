@@ -8,10 +8,7 @@ const Helsinki = () => {
 
     return (
         <div className="helsinki-info">
-            <div className="header">
-                <h1 className="title">Helsinki Info</h1>
-            </div>
-
+            <h1 className="title">Helsinki Info</h1>
             <div className="section info-section">
                 <div className="info-text">
                     <h2>Welcome to Helsinki and Pasila</h2>

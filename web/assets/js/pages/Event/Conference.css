@@ -1,6 +1,8 @@
 .conference {
     padding: 20px;
-    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat center/cover;
+    margin-bottom: 40px;
+    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+        no-repeat center/cover;
 }
 
 .header {
