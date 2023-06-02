@@ -10,9 +10,6 @@ nav ul li a {
     transition: 0.5s ease;
 }
 
-nav ul li a:hover {
-    color: white;
-}
 
 [aria-current='page'] {
     color: rgb(255, 255, 255);
