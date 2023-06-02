@@ -16,10 +16,10 @@ function App() {
                 <Routes>
                     <Route path='/' element={<Layout />}>
                         <Route index element={<Home />} />
-                        <Route path='helsinki' element={<Helsinki />} />
-                        <Route path='events' element={<EventList />} />
-                        <Route path='conference' element={<Conference />} />
-                        <Route path='faq' element={<FaqInfo />} />
+                        <Route path='/helsinki' element={<Helsinki />} />
+                        <Route path='/events' element={<EventList />} />
+                        <Route path='/conference' element={<Conference />} />
+                        <Route path='/faq' element={<FaqInfo />} />
                     </Route>
                 </Routes>
                 <ScrollTopBtn />

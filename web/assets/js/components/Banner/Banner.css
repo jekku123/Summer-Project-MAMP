@@ -10,14 +10,12 @@
     color: white;
     height: 100vh;
     position: relative;
-    z-index: -5;
 }
 
 .banner-content {
     display: flex;
     flex-direction: column;
     padding-left: 100px;
-    z-index: 5;
     position: relative;
     gap: 100px;
 }
