@@ -3,12 +3,14 @@
 } */
 
 .events {
-    margin: 2rem 0 4rem 0;
+    margin: 0 0 3rem 0;
+    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat center/cover;
 }
 
-.events h3 {
+.events h2 {
+    color: white;
     text-align: center;
-    margin-bottom: 2rem;
+    padding: 2rem 0 1.5rem 0;
 }
 
 
@@ -27,6 +29,10 @@
     padding: 5px;
 }
 
+.search-area input[type="date"] {
+    cursor: pointer;
+}
+
 .radio-options input[type="radio"] {
     display: none;
 }
@@ -42,7 +48,21 @@
     margin-right: 4px;
 }
 
+.radio-options label:hover {
+    background-color: var(--main-bg-color);
+    color: rgba(242, 216, 206, 1);
+}
+
 .radio-options input[type="radio"]:checked+label {
     background-color: var(--main-bg-color);
     color: rgba(242, 216, 206, 1);
+}
+
+
+/* mobile version */
+@media (max-width: 767px) {
+    .eventlist {
+        display: flex;
+        flex-direction: column;
+    }
 }

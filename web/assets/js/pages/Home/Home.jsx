@@ -7,17 +7,19 @@ const Home = () => {
     return (
         <div className='home'>
             <Banner />
-            <h3>Upcoming Events</h3>
+            <div className='home-content'>
+                <h2>Upcoming Events</h2>
 
-            <div className='search-area'>
-                <input placeholder='search by name' type='search' />
-                <input type='date' />
-            </div>
+                <div className='search-area'>
+                    <input placeholder='search by name' type='search' />
+                    <input type='date' />
+                </div>
 
-            <div className='homepage-cards'>
-                <Card />
-                <Card />
-                <Card />
+                <div className='homepage-cards'>
+                    <Card />
+                    <Card />
+                    <Card />
+                </div>
             </div>
         </div>
     );
