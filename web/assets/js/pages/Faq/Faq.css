@@ -1,13 +1,16 @@
 /* FaqInfo component */
 
 .faq-background {
-    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)no-repeat center/cover;
+    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+        no-repeat center/cover;
     padding: 1rem 0.6rem 2rem 0.6rem;
 }
 
 .faqinfo {
     width: 95%;
     margin: 2rem auto 10rem auto;
+    margin-top: 100px;
+
     border-radius: 8px;
     box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
     background-color: white;
@@ -28,7 +31,6 @@ hr {
 .faqinfo p {
     text-align: justify;
 }
-
 
 /* Faq component */
 .faq {
