@@ -1,25 +1,18 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Layout from './components/UI/Layout';
 import Conference from './pages/Event/Conference';
 import Helsinki from './pages/Helsinki/Helsinki';
 import FaqInfo from './pages/Faq/FaqInfo';
 import EventList from './pages/EventList/EventList';
-import './App.css';
 import ScrollTopBtn from './components/ScrollTopBtn/ScrollTopBtn';
+import './App.css';
 
 function App() {
-    const { pathname } = useLocation();
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
-
     return (
         <div className='App'>
             <BrowserRouter>
-                <ScrollToTop />
                 <Routes>
                     <Route path='/' element={<Layout />}>
                         <Route index element={<Home />} />
