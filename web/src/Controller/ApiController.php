@@ -38,6 +38,52 @@ class ApiController extends AbstractController
 
         return $this->json($response);
     }
+    //Api endpoint for the front page
+    #[Route('/front', name: 'api_front', methods: ['GET'])]
+    public function getFrontData(): JsonResponse
+    {
+        $conferences = $this->conferences->findAll();
+        $seminars = $this->seminars->findAll();
+
+        $conferences_response = $this->getConferencesFrontData($conferences);
+        $seminars_response = $this->getSeminarsFrontData($seminars);
+
+        $response = ['conferences' => $conferences_response, 'seminars' => $seminars_response];
+
+        return $this->json($response);
+    }
+
+    private function getConferencesFrontData($conferences)
+    {
+        $response = [];
+
+        foreach ($conferences as $conference) {
+            $response[] = [
+                'id' => $conference->getId(),
+                'title' => $conference->getTitle(),
+                'start_at' => $conference->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $conference->getEndAt()->format('Y-m-d H:i:s'),
+            ];
+        }
+
+        return $response;
+    }
+
+    private function getSeminarsFrontData($seminars)
+    {
+        $response = [];
+
+        foreach ($seminars as $seminar) {
+            $response[] = [
+                'id' => $seminar->getId(),
+                'title' => $seminar->getTitle(),
+                'start_at' => $seminar->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $seminar->getEndAt()->format('Y-m-d H:i:s'),
+            ];
+        }
+
+        return $response;
+    }
 
 
     #[Route('/conferences', name: '_all_conferences', methods: ['GET'])]
