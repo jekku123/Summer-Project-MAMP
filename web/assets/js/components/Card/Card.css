@@ -34,7 +34,6 @@
     text-decoration: none;
 }
 
-
 /* #more-info {
     font-size: small;
     color: rgb(245, 11, 163);
@@ -42,7 +41,7 @@
 } */
 
 /* DESKTOP VERSION */
-/* @media (min-width: 1200px) {
+@media only screen and (max-width: 700px) {
     .event-card {
         width: 300px;
         height: 350px;
@@ -50,8 +49,6 @@
         padding: 0.5em;
         border-radius: 6px;
         box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
-
-
     }
 
     .event-card img {
@@ -63,4 +60,4 @@
         color: rgb(245, 11, 163);
         margin-bottom: 0.4rem;
     }
-} */
+}
