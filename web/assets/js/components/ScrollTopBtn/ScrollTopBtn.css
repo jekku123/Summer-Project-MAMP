@@ -1,0 +1,15 @@
+.scrolltop {
+    width: 70px;
+    height: 70px;
+    background-color: var(--main-bg-color);
+    color: white;
+    position: fixed;
+    right: 20px;
+    bottom: 50px;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -7,7 +7,7 @@ import Helsinki from './pages/Helsinki/Helsinki';
 import FaqInfo from './pages/Faq/FaqInfo';
 import EventList from './pages/EventList/EventList';
 import './App.css';
-
+import ScrollTopBtn from './components/ScrollTopBtn/ScrollTopBtn';
 
 function App() {
     return (
@@ -22,6 +22,7 @@ function App() {
                         <Route path='faq' element={<FaqInfo />} />
                     </Route>
                 </Routes>
+                <ScrollTopBtn />
             </BrowserRouter>
         </div>
     );
