@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa";
 import "./Helsinki.css";
 
 const Helsinki = () => {
@@ -21,10 +22,24 @@ const Helsinki = () => {
                         University of Applied Sciences and Helsinki Expo and
                         Convention Centre Messukeskus.
                     </p>
+                    <p>
+                        <Link
+                            className="info-link"
+                            to="https://www.visitfinland.com/en/places-to-go/helsinki-region/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            {" "}
+                            <span className="arrow-icon">
+                                <FaArrowRight />
+                            </span>
+                            Visit Finland | Helsinki region
+                        </Link>
+                    </p>
                 </div>
                 <iframe
                     width={500}
-                    height={400}
+                    height={350}
                     style={{ border: 0 }}
                     loading="lazy"
                     allowFullScreen
@@ -62,6 +77,10 @@ const Helsinki = () => {
                             rel="noreferrer"
                             className="info-link"
                         >
+                            {" "}
+                            <span className="arrow-icon">
+                                <FaArrowRight />
+                            </span>
                             HSL Route Search | Business College Helsinki
                         </Link>
                     </p>
@@ -77,32 +96,66 @@ const Helsinki = () => {
                     <h2>Explore Helsinki</h2>
                     <p>
                         <Link
-                            to="https://www.visitfinland.com/en/places-to-go/helsinki-region/"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            Visit Finland - Helsinki region
-                        </Link>
-                    </p>
-                    <p>
-                        <Link
+                            className="info-link"
                             to="https://www.myhelsinki.fi/your-local-guide-to-helsinki"
                             target="_blank"
                             rel="noreferrer"
                         >
+                            {" "}
+                            <span className="arrow-icon">
+                                <FaArrowRight />
+                            </span>
                             MyHelsinki.fi
                         </Link>
                     </p>
                     <p>
                         <Link
+                            className="info-link"
                             to="https://www.myhelsinki.fi/en/see-and-do/events"
                             target="_blank"
                             rel="noreferrer"
                         >
-                            MyHelsinki.fi - Events
+                            {" "}
+                            <span className="arrow-icon">
+                                <FaArrowRight />
+                            </span>
+                            MyHelsinki.fi | Events
+                        </Link>
+                    </p>
+                    <p>
+                        <Link
+                            className="info-link"
+                            to="https://www.myhelsinki.fi/see-and-do/sights/top-15-sights-in-helsinki"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            {" "}
+                            <span className="arrow-icon">
+                                <FaArrowRight />
+                            </span>
+                            Top 15 Sights in Helsinki
+                        </Link>
+                    </p>
+                    <p>
+                        <Link
+                            className="info-link"
+                            to="https://www.visitfinland.com/en/articles/top-10-must-see-museums-in-helsinki-region/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            {" "}
+                            <span className="arrow-icon">
+                                <FaArrowRight />
+                            </span>
+                            Top 10 Museums in Helsinki
                         </Link>
                     </p>
                 </div>
+                <img
+                    className="helsinki-img"
+                    src="https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    alt="Helsinki cathedral"
+                />
             </div>
         </div>
     );
