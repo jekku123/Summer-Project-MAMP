@@ -17,7 +17,7 @@ const EventList = () => {
 
     return (
         <div className='events'>
-            <h3>All Events</h3>
+            <h2>All Events</h2>
 
             <div className='search-area'>
                 <input placeholder='search by name' type='search' />

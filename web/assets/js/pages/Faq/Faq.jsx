@@ -15,15 +15,18 @@ const Faq = ({ info }) => {
     return (
         <div>
             {info.map((item, index) => (
-                <div className='faq' key={index}>
+                <div
+                    className='faq'
+                    key={index}
+                >
                     <div className='faq-btns'>
-                        <button onClick={() => handleToggle(index)}>
-                            {expandedIndex === index ? '-' : '+'}
-                        </button>
+                        <button onClick={() => handleToggle(index)}>{expandedIndex === index ? '-' : '+'}</button>
                     </div>
                     <div className='faq-qa'>
-                        <h3>{item.question}</h3>
-                        {expandedIndex === index && <p className='answer'>{item.answer}</p>}
+                        <h3 onClick={() => handleToggle(index)}>{item.question}</h3>
+                        {expandedIndex === index && (
+                            <p className='answer'>{item.answer}</p>
+                        )}
                     </div>
                 </div>
             ))}

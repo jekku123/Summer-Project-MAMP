@@ -39,13 +39,15 @@ function FaqInfo() {
     ];
 
     return (
-        <div className='faqinfo'>
-            <h1>Frequently Asked Questions</h1>
+        <div className='faq-background'>
+            <div className='faqinfo'>
+                <h1>Frequently Asked Questions</h1>
 
-            <hr />
-            <p>Here are some answers to frequently asked questions about seminars and conferences organized by Business College Helsinki.</p>
+                <hr />
+                <p>Here are some answers to frequently asked questions about seminars and conferences organized by Business College Helsinki.</p>
 
-            <Faq info={faqData} />
+                <Faq info={faqData} />
+            </div>
         </div>
     )
 }

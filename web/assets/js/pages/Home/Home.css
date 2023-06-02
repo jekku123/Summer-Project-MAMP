@@ -1,7 +1,11 @@
-.home h3 {
-    font-size: 1rem;
+.home-content {
+    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)no-repeat center/cover;
+}
+
+.home-content h2 {
+    color: white;
     text-align: center;
-    margin: 10px;
+    padding: 1rem 0 1rem 0;
 }
 
 .search-area {
@@ -14,7 +18,15 @@
 .homepage-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
+}
+
+/* mobile version */
+@media (max-width: 767px) {
+    .homepage-cards {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 @media only screen and (max-width: 700px) {

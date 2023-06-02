@@ -13,6 +13,11 @@
     width: 100%;
 }
 
+.event-card h3 {
+    text-align: center;
+    margin-bottom: 0.8rem;
+}
+
 .event-card h5 {
     text-align: center;
 }
