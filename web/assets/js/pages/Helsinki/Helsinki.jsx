@@ -6,25 +6,6 @@ import './Helsinki.css';
 const Helsinki = () => {
     const NOT_SO_SECRET_MAP_API_KEY = 'AIzaSyAN2Zeuaj28IMYNMg7o2kcixZq8CqVKtjM';
 
-    const LinkButton = ({ children, url }) => {
-        return (
-            <p>
-                <Link
-                    to={url}
-                    target='_blank'
-                    rel='noreferrer'
-                    className='info-link'
-                >
-                    {' '}
-                    <span className='arrow-icon'>
-                        <FaArrowRight />
-                    </span>
-                    {children}
-                </Link>
-            </p>
-        );
-    };
-
     return (
         <div className='helsinki-info'>
             <h1 className='title'>Helsinki Info</h1>
@@ -38,13 +19,20 @@ const Helsinki = () => {
                         University of Applied Sciences and Helsinki Expo and
                         Convention Centre Messukeskus.
                     </p>
-                    <LinkButton
-                        url={
-                            'https://www.visitfinland.com/en/places-to-go/helsinki-region/'
-                        }
-                    >
-                        Visit Finland | Helsinki region
-                    </LinkButton>
+                    <p>
+                        <Link
+                            className='info-link'
+                            to='https://www.visitfinland.com/en/places-to-go/helsinki-region/'
+                            target='_blank'
+                            rel='noreferrer'
+                        >
+                            {' '}
+                            <span className='arrow-icon'>
+                                <FaArrowRight />
+                            </span>
+                            Visit Finland | Helsinki region
+                        </Link>
+                    </p>
                 </div>
                 <iframe
                     width={500}

@@ -14,6 +14,9 @@ composer install
 npm install
 docker-compose up --build
 npm run watch
+docker ps
+docker exec -it <Fill me> /bin/sh
+bin/console doctrine:fixtures:load
 ```
 
 -   Symfony 6 will run on [http://localhost:8007](http://localhost:8007)
