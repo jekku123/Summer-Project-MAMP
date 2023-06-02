@@ -1,5 +1,6 @@
 .home-content {
-    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)no-repeat center/cover;
+    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+        no-repeat center/cover;
 }
 
 .home-content h2 {
@@ -13,7 +14,6 @@
     padding: 1rem;
     gap: 1rem;
     margin-bottom: 3rem;
-
 }
 
 @media only screen and (max-width: 767px) {

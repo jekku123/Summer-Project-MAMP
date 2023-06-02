@@ -5,8 +5,7 @@
 .events {
     margin: 0 0 3rem 0;
     margin-top: 100px;
-
-    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)
+    background: url(https://images.unsplash.com/photo-1533135175465-90ac0c0e030f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1655&q=80)
         no-repeat center/cover;
 }
 
@@ -39,13 +38,11 @@
     padding: 5px;
 }
 
-
 .search-area input[type='date'] {
     cursor: pointer;
 }
 
-.radio-options input[type="radio"] {
-
+.radio-options input[type='radio'] {
     display: none;
 }
 
@@ -81,4 +78,3 @@
         padding: 2px 8px;
     }
 }
-
