@@ -15,8 +15,16 @@
 
 
 .eventlist {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+}
+
+.search-area {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0 30px;
 }
 
 .radio-options {
@@ -27,10 +35,6 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px;
-}
-
-.search-area input[type="date"] {
-    cursor: pointer;
 }
 
 .radio-options input[type="radio"] {
@@ -64,5 +68,9 @@
     .eventlist {
         display: flex;
         flex-direction: column;
+    }
+
+    .radio-options label {
+        padding: 2px 8px;
     }
 }

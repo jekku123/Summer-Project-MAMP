@@ -9,12 +9,6 @@ const Home = () => {
             <Banner />
             <div className='home-content'>
                 <h2>Upcoming Events</h2>
-
-                <div className='search-area'>
-                    <input placeholder='search by name' type='search' />
-                    <input type='date' />
-                </div>
-
                 <div className='homepage-cards'>
                     <Card />
                     <Card />

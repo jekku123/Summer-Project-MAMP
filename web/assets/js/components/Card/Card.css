@@ -1,6 +1,6 @@
 .event-card {
     width: 450px;
-    height: 420px;
+    height: 410px;
     margin: auto;
     margin-bottom: 1.5rem;
     background: rgb(250, 233, 227);
@@ -34,17 +34,11 @@
     text-decoration: none;
 }
 
-/* #more-info {
-    font-size: small;
-    color: rgb(245, 11, 163);
-    margin-bottom: 0.8rem;
-} */
 
-/* DESKTOP VERSION */
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 767px) {
     .event-card {
         width: 300px;
-        height: 350px;
+        height: 320px;
         background: rgb(250, 233, 227);
         padding: 0.5em;
         border-radius: 6px;
@@ -58,6 +52,5 @@
     #more-info {
         font-size: small;
         color: rgb(245, 11, 163);
-        margin-bottom: 0.4rem;
     }
 }
