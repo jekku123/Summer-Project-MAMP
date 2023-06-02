@@ -20,7 +20,7 @@ class SessionCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield FormField::addPanel('Select which conference or seminar this session belongs to :))');
+        yield FormField::addPanel('Select the conference or seminar');
         yield AssociationField::new('conference');
         yield AssociationField::new('seminar');
         yield FormField::addPanel('Session details');
