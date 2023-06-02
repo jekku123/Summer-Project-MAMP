@@ -1,16 +1,16 @@
 .helsinki-info {
-    background-color: black;
-    margin: 0 auto;
+    margin-bottom: 40px;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background: url(https://images.unsplash.com/photo-1533135175465-90ac0c0e030f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1655&q=80)
         no-repeat center/cover;
-    font-family: "Roboto Slab", serif;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.title {
+    padding-bottom: 20px;
 }
 
 .info-section {
