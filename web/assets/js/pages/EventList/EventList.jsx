@@ -21,7 +21,6 @@ const EventList = () => {
 
             <div className='search-area'>
                 <input placeholder='search by name' type='search' />
-                <input type='date' />
                 <div className='radio-options'>
                     <input type="radio" id="seminar" name="event-type" value="seminar"></input>
                     <label htmlFor="seminar">Seminar</label>
