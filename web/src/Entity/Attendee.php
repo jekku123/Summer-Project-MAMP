@@ -27,21 +27,22 @@ class Attendee
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $phone = null;
 
-    #[ORM\Column(nullable: false, options: ["default" => 0])]
-    private ?bool $is_attending = null;
-
     #[ORM\ManyToOne(inversedBy: 'attendees')]
-    private ?Conference $conference = null;
+    private ?Event $event = null;
 
-    #[ORM\ManyToOne(inversedBy: 'attendees')]
-    private ?Seminar $seminar = null;
+    #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'attendees')]
+    private Collection $workshops;
 
-    #[ORM\OneToMany(mappedBy: 'attendee', targetEntity: WorkshopAttendee::class)]
-    private Collection $workshopAttendees;
+    #[ORM\OneToMany(mappedBy: 'attendee', targetEntity: Feedback::class)]
+    private Collection $feedback;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $registered_at = null;
 
     public function __construct()
     {
-        $this->workshopAttendees = new ArrayCollection();
+        $this->workshops = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -97,68 +98,83 @@ class Attendee
         return $this;
     }
 
-    public function isIsAttending(): ?bool
+    public function getEvent(): ?Event
     {
-        return $this->is_attending;
+        return $this->event;
     }
 
-    public function setIsAttending(?bool $is_attending): self
+    public function setEvent(?Event $event): self
     {
-        $this->is_attending = $is_attending;
-
-        return $this;
-    }
-
-    public function getConference(): ?Conference
-    {
-        return $this->conference;
-    }
-
-    public function setConference(?Conference $conference): self
-    {
-        $this->conference = $conference;
-
-        return $this;
-    }
-
-    public function getSeminar(): ?Seminar
-    {
-        return $this->seminar;
-    }
-
-    public function setSeminar(?Seminar $seminar): self
-    {
-        $this->seminar = $seminar;
+        $this->event = $event;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, WorkshopAttendee>
+     * @return Collection<int, Workshop>
      */
-    public function getWorkshopAttendees(): Collection
+    public function getWorkshops(): Collection
     {
-        return $this->workshopAttendees;
+        return $this->workshops;
     }
 
-    public function addWorkshopAttendee(WorkshopAttendee $workshopAttendee): self
+    public function addWorkshop(Workshop $workshop): self
     {
-        if (!$this->workshopAttendees->contains($workshopAttendee)) {
-            $this->workshopAttendees->add($workshopAttendee);
-            $workshopAttendee->setAttendee($this);
+        if (!$this->workshops->contains($workshop)) {
+            $this->workshops->add($workshop);
+            $workshop->addAttendee($this);
         }
 
         return $this;
     }
 
-    public function removeWorkshopAttendee(WorkshopAttendee $workshopAttendee): self
+    public function removeWorkshop(Workshop $workshop): self
     {
-        if ($this->workshopAttendees->removeElement($workshopAttendee)) {
+        if ($this->workshops->removeElement($workshop)) {
+            $workshop->removeAttendee($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setAttendee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedback->removeElement($feedback)) {
             // set the owning side to null (unless already changed)
-            if ($workshopAttendee->getAttendee() === $this) {
-                $workshopAttendee->setAttendee(null);
+            if ($feedback->getAttendee() === $this) {
+                $feedback->setAttendee(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRegisteredAt(): ?\DateTimeImmutable
+    {
+        return $this->registered_at;
+    }
+
+    public function setRegisteredAt(\DateTimeImmutable $registered_at): self
+    {
+        $this->registered_at = $registered_at;
 
         return $this;
     }

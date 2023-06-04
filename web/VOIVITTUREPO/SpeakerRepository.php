@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\SessionSpeaker;
+use App\Entity\Speaker;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<SessionSpeaker>
+ * @extends ServiceEntityRepository<Speaker>
  *
- * @method SessionSpeaker|null find($id, $lockMode = null, $lockVersion = null)
- * @method SessionSpeaker|null findOneBy(array $criteria, array $orderBy = null)
- * @method SessionSpeaker[]    findAll()
- * @method SessionSpeaker[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Speaker|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Speaker|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Speaker[]    findAll()
+ * @method Speaker[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SessionSpeakerRepository extends ServiceEntityRepository
+class SpeakerRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SessionSpeaker::class);
+        parent::__construct($registry, Speaker::class);
     }
 
-    public function save(SessionSpeaker $entity, bool $flush = false): void
+    public function save(Speaker $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class SessionSpeakerRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(SessionSpeaker $entity, bool $flush = false): void
+    public function remove(Speaker $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class SessionSpeakerRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return SessionSpeaker[] Returns an array of SessionSpeaker objects
+//     * @return Speaker[] Returns an array of Speaker objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class SessionSpeakerRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?SessionSpeaker
+//    public function findOneBySomeField($value): ?Speaker
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')

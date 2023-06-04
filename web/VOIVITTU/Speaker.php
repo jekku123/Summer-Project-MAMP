@@ -25,31 +25,18 @@ class Speaker
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bio = null;
 
-    #[ORM\Column(length: 30, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $organization = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $photo = null;
 
-    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'speakers')]
+    #[ORM\ManyToMany(targetEntity: Session::class, inversedBy: 'speakers')]
     private Collection $sessions;
-
-    #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'speakers')]
-    private Collection $workshops;
-
-    #[ORM\ManyToOne(inversedBy: 'speakers')]
-    private ?Event $event = null;
 
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
-        $this->workshops = new ArrayCollection();
-    }
-
-
-    public function __toString(): string
-    {
-        return $this->firstname . ' ' . $this->lastname;
     }
 
     public function getId(): ?int
@@ -129,7 +116,6 @@ class Speaker
     {
         if (!$this->sessions->contains($session)) {
             $this->sessions->add($session);
-            $session->addSpeaker($this);
         }
 
         return $this;
@@ -137,48 +123,7 @@ class Speaker
 
     public function removeSession(Session $session): self
     {
-        if ($this->sessions->removeElement($session)) {
-            $session->removeSpeaker($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Workshop>
-     */
-    public function getWorkshops(): Collection
-    {
-        return $this->workshops;
-    }
-
-    public function addWorkshop(Workshop $workshop): self
-    {
-        if (!$this->workshops->contains($workshop)) {
-            $this->workshops->add($workshop);
-            $workshop->addSpeaker($this);
-        }
-
-        return $this;
-    }
-
-    public function removeWorkshop(Workshop $workshop): self
-    {
-        if ($this->workshops->removeElement($workshop)) {
-            $workshop->removeSpeaker($this);
-        }
-
-        return $this;
-    }
-
-    public function getEvent(): ?Event
-    {
-        return $this->event;
-    }
-
-    public function setEvent(?Event $event): self
-    {
-        $this->event = $event;
+        $this->sessions->removeElement($session);
 
         return $this;
     }
