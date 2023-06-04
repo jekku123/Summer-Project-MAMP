@@ -47,9 +47,8 @@ final class SpeakerFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'firstname' => self::faker()->firstNameMale(),
-            'lastname' => self::faker()->lastName(),
-            'bio' => self::faker()->sentence(),
+            'firstname' => self::faker()->text(30),
+            'lastname' => self::faker()->text(30),
         ];
     }
 

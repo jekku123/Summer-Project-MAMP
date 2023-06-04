@@ -2,27 +2,26 @@
 
 namespace App\Entity;
 
-use App\Repository\ExhibitionRepository;
+use App\Repository\SessionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ExhibitionRepository::class)]
-class Exhibition
+#[ORM\Entity(repositoryClass: SessionRepository::class)]
+class Session
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255)]
     private ?string $location = null;
 
     #[ORM\Column]
@@ -31,20 +30,15 @@ class Exhibition
     #[ORM\Column]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'exhibition', targetEntity: Booth::class)]
-    private Collection $booths;
-
-    #[ORM\ManyToOne(inversedBy: 'exhibitions')]
+    #[ORM\ManyToOne(inversedBy: 'sessions')]
     private ?Event $event = null;
 
-    public function __toString(): string
-    {
-        return $this->title;
-    }
+    #[ORM\ManyToMany(targetEntity: Speaker::class, mappedBy: 'sessions')]
+    private Collection $speakers;
 
     public function __construct()
     {
-        $this->booths = new ArrayCollection();
+        $this->speakers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,36 +106,6 @@ class Exhibition
         return $this;
     }
 
-    /**
-     * @return Collection<int, Booth>
-     */
-    public function getBooths(): Collection
-    {
-        return $this->booths;
-    }
-
-    public function addBooth(Booth $booth): self
-    {
-        if (!$this->booths->contains($booth)) {
-            $this->booths->add($booth);
-            $booth->setExhibition($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBooth(Booth $booth): self
-    {
-        if ($this->booths->removeElement($booth)) {
-            // set the owning side to null (unless already changed)
-            if ($booth->getExhibition() === $this) {
-                $booth->setExhibition(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getEvent(): ?Event
     {
         return $this->event;
@@ -150,6 +114,33 @@ class Exhibition
     public function setEvent(?Event $event): self
     {
         $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Speaker>
+     */
+    public function getSpeakers(): Collection
+    {
+        return $this->speakers;
+    }
+
+    public function addSpeaker(Speaker $speaker): self
+    {
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers->add($speaker);
+            $speaker->addSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpeaker(Speaker $speaker): self
+    {
+        if ($this->speakers->removeElement($speaker)) {
+            $speaker->removeSession($this);
+        }
 
         return $this;
     }

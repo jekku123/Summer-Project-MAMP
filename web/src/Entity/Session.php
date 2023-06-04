@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: SessionRepository::class)]
 class Session
@@ -17,35 +19,37 @@ class Session
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['event:read'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['event:read'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['event:read'])]
     private ?string $location = null;
 
     #[ORM\Column]
+    #[Groups(['event:read'])]
     private ?\DateTimeImmutable $start_at = null;
 
     #[ORM\Column]
+    #[Groups(['event:read'])]
     private ?\DateTimeImmutable $end_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
-    private ?Conference $conference = null;
+    private ?Event $event = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
-    private ?Seminar $seminar = null;
+    #[ORM\ManyToMany(targetEntity: Speaker::class, inversedBy: 'sessions')]
+    #[Groups(['event:read'])]
+    private Collection $speakers;
 
-    #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionSpeaker::class)]
-    private Collection $sessionSpeakers;
-
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
     public function __construct()
     {
-        $this->sessionSpeakers = new ArrayCollection();
+        $this->speakers = new ArrayCollection();
     }
-    
+
     public function __toString(): string
     {
         return $this->title;
@@ -116,56 +120,38 @@ class Session
         return $this;
     }
 
-    public function getConference(): ?Conference
+    public function getEvent(): ?Event
     {
-        return $this->conference;
+        return $this->event;
     }
 
-    public function setConference(?Conference $conference): self
+    public function setEvent(?Event $event): self
     {
-        $this->conference = $conference;
-
-        return $this;
-    }
-
-    public function getSeminar(): ?Seminar
-    {
-        return $this->seminar;
-    }
-
-    public function setSeminar(?Seminar $seminar): self
-    {
-        $this->seminar = $seminar;
+        $this->event = $event;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, SessionSpeaker>
+     * @return Collection<int, Speaker>
      */
-    public function getSessionSpeakers(): Collection
+    public function getSpeakers(): Collection
     {
-        return $this->sessionSpeakers;
+        return $this->speakers;
     }
 
-    public function addSessionSpeaker(SessionSpeaker $sessionSpeaker): self
+    public function addSpeaker(Speaker $speaker): self
     {
-        if (!$this->sessionSpeakers->contains($sessionSpeaker)) {
-            $this->sessionSpeakers->add($sessionSpeaker);
-            $sessionSpeaker->setSession($this);
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers->add($speaker);
         }
 
         return $this;
     }
 
-    public function removeSessionSpeaker(SessionSpeaker $sessionSpeaker): self
+    public function removeSpeaker(Speaker $speaker): self
     {
-        if ($this->sessionSpeakers->removeElement($sessionSpeaker)) {
-            // set the owning side to null (unless already changed)
-            if ($sessionSpeaker->getSession() === $this) {
-                $sessionSpeaker->setSession(null);
-            }
-        }
+        $this->speakers->removeElement($speaker);
 
         return $this;
     }

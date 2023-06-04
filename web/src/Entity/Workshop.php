@@ -32,19 +32,20 @@ class Workshop
     private ?\DateTimeImmutable $end_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'workshops')]
-    private ?Conference $conference = null;
+    private ?Event $event = null;
 
-    #[ORM\OneToMany(mappedBy: 'workshop', targetEntity: WorkshopSpeaker::class)]
-    private Collection $workshopSpeakers;
+    #[ORM\ManyToMany(targetEntity: Speaker::class, inversedBy: 'workshops')]
+    private Collection $speakers;
 
-    #[ORM\OneToMany(mappedBy: 'workshop', targetEntity: WorkshopAttendee::class)]
-    private Collection $workshopAttendees;
+    #[ORM\ManyToMany(targetEntity: Attendee::class, inversedBy: 'workshops')]
+    private Collection $attendees;
 
     public function __construct()
     {
-        $this->workshopSpeakers = new ArrayCollection();
-        $this->workshopAttendees = new ArrayCollection();
+        $this->speakers = new ArrayCollection();
+        $this->attendees = new ArrayCollection();
     }
+
     public function __toString(): string
     {
         return $this->title;
@@ -115,74 +116,62 @@ class Workshop
         return $this;
     }
 
-    public function getConference(): ?Conference
+    public function getEvent(): ?Event
     {
-        return $this->conference;
+        return $this->event;
     }
 
-    public function setConference(?Conference $conference): self
+    public function setEvent(?Event $event): self
     {
-        $this->conference = $conference;
+        $this->event = $event;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, WorkshopSpeaker>
+     * @return Collection<int, Speaker>
      */
-    public function getWorkshopSpeakers(): Collection
+    public function getSpeakers(): Collection
     {
-        return $this->workshopSpeakers;
+        return $this->speakers;
     }
 
-    public function addWorkshopSpeaker(WorkshopSpeaker $workshopSpeaker): self
+    public function addSpeaker(Speaker $speaker): self
     {
-        if (!$this->workshopSpeakers->contains($workshopSpeaker)) {
-            $this->workshopSpeakers->add($workshopSpeaker);
-            $workshopSpeaker->setWorkshop($this);
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers->add($speaker);
         }
 
         return $this;
     }
 
-    public function removeWorkshopSpeaker(WorkshopSpeaker $workshopSpeaker): self
+    public function removeSpeaker(Speaker $speaker): self
     {
-        if ($this->workshopSpeakers->removeElement($workshopSpeaker)) {
-            // set the owning side to null (unless already changed)
-            if ($workshopSpeaker->getWorkshop() === $this) {
-                $workshopSpeaker->setWorkshop(null);
-            }
-        }
+        $this->speakers->removeElement($speaker);
 
         return $this;
     }
 
     /**
-     * @return Collection<int, WorkshopAttendee>
+     * @return Collection<int, Attendee>
      */
-    public function getWorkshopAttendees(): Collection
+    public function getAttendees(): Collection
     {
-        return $this->workshopAttendees;
+        return $this->attendees;
     }
 
-    public function addWorkshopAttendee(WorkshopAttendee $workshopAttendee): self
+    public function addAttendee(Attendee $attendee): self
     {
-        if (!$this->workshopAttendees->contains($workshopAttendee)) {
-            $this->workshopAttendees->add($workshopAttendee);
-            $workshopAttendee->setWorkshop($this);
+        if (!$this->attendees->contains($attendee)) {
+            $this->attendees->add($attendee);
         }
 
         return $this;
     }
 
-    public function removeWorkshopAttendee(WorkshopAttendee $workshopAttendee): self
+    public function removeAttendee(Attendee $attendee): self
     {
-        if ($this->workshopAttendees->removeElement($workshopAttendee)) {
-            // set the owning side to null (unless already changed)
-            if ($workshopAttendee->getWorkshop() === $this) {
-                $workshopAttendee->setWorkshop(null);
-            }
-        }
+        $this->attendees->removeElement($attendee);
 
         return $this;
     }

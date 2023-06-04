@@ -47,11 +47,11 @@ final class ExhibitionFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'title' => self::faker()->words(5, true),
-            'description' => self::faker()->paragraph(),
-            'location' => self::faker()->address(),
-            'start_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'description' => self::faker()->text(),
             'end_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'location' => self::faker()->text(100),
+            'start_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'title' => self::faker()->text(100),
         ];
     }
 

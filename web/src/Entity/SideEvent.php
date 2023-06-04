@@ -33,10 +33,7 @@ class SideEvent
     private ?\DateTimeImmutable $end_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'sideEvents')]
-    private ?Conference $conference = null;
-
-    #[ORM\ManyToOne(inversedBy: 'sideEvents')]
-    private ?Seminar $seminar = null;
+    private ?Event $event = null;
 
     public function getId(): ?int
     {
@@ -115,26 +112,14 @@ class SideEvent
         return $this;
     }
 
-    public function getConference(): ?Conference
+    public function getEvent(): ?Event
     {
-        return $this->conference;
+        return $this->event;
     }
 
-    public function setConference(?Conference $conference): self
+    public function setEvent(?Event $event): self
     {
-        $this->conference = $conference;
-
-        return $this;
-    }
-
-    public function getSeminar(): ?Seminar
-    {
-        return $this->seminar;
-    }
-
-    public function setSeminar(?Seminar $seminar): self
-    {
-        $this->seminar = $seminar;
+        $this->event = $event;
 
         return $this;
     }

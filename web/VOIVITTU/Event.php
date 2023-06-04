@@ -2,30 +2,32 @@
 
 namespace App\Entity;
 
-use App\Repository\SeminarRepository;
+use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 
-#[ORM\Entity(repositoryClass: SeminarRepository::class)]
-class Seminar
+#[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ApiResource]
+class Event
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255)]
     private ?string $location = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 255)]
     private ?string $image = null;
 
     #[ORM\Column]
@@ -34,26 +36,14 @@ class Seminar
     #[ORM\Column]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: SideEvent::class)]
-    private Collection $sideEvents;
-
-    #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: Session::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Session::class)]
     private Collection $sessions;
-
-    #[ORM\OneToMany(mappedBy: 'seminar', targetEntity: Attendee::class)]
-    private Collection $attendees;
 
     public function __construct()
     {
-        $this->sideEvents = new ArrayCollection();
         $this->sessions = new ArrayCollection();
-        $this->attendees = new ArrayCollection();
     }
 
-    public function __toString(): string
-    {
-        return $this->title;
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -132,36 +122,6 @@ class Seminar
     }
 
     /**
-     * @return Collection<int, SideEvent>
-     */
-    public function getSideEvents(): Collection
-    {
-        return $this->sideEvents;
-    }
-
-    public function addSideEvent(SideEvent $sideEvent): self
-    {
-        if (!$this->sideEvents->contains($sideEvent)) {
-            $this->sideEvents->add($sideEvent);
-            $sideEvent->setSeminar($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSideEvent(SideEvent $sideEvent): self
-    {
-        if ($this->sideEvents->removeElement($sideEvent)) {
-            // set the owning side to null (unless already changed)
-            if ($sideEvent->getSeminar() === $this) {
-                $sideEvent->setSeminar(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Session>
      */
     public function getSessions(): Collection
@@ -173,7 +133,7 @@ class Seminar
     {
         if (!$this->sessions->contains($session)) {
             $this->sessions->add($session);
-            $session->setSeminar($this);
+            $session->setEvent($this);
         }
 
         return $this;
@@ -183,38 +143,8 @@ class Seminar
     {
         if ($this->sessions->removeElement($session)) {
             // set the owning side to null (unless already changed)
-            if ($session->getSeminar() === $this) {
-                $session->setSeminar(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Attendee>
-     */
-    public function getAttendees(): Collection
-    {
-        return $this->attendees;
-    }
-
-    public function addAttendee(Attendee $attendee): self
-    {
-        if (!$this->attendees->contains($attendee)) {
-            $this->attendees->add($attendee);
-            $attendee->setSeminar($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAttendee(Attendee $attendee): self
-    {
-        if ($this->attendees->removeElement($attendee)) {
-            // set the owning side to null (unless already changed)
-            if ($attendee->getSeminar() === $this) {
-                $attendee->setSeminar(null);
+            if ($session->getEvent() === $this) {
+                $session->setEvent(null);
             }
         }
 
