@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: WorkshopRepository::class)]
 class Workshop
@@ -17,24 +18,30 @@ class Workshop
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['event:read'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['event:read'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['event:read'])]
     private ?string $location = null;
 
     #[ORM\Column]
+    #[Groups(['event:read'])]
     private ?\DateTimeImmutable $start_at = null;
 
     #[ORM\Column]
+    #[Groups(['event:read'])]
     private ?\DateTimeImmutable $end_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'workshops')]
     private ?Event $event = null;
 
     #[ORM\ManyToMany(targetEntity: Speaker::class, inversedBy: 'workshops')]
+    #[Groups(['event:read'])]
     private Collection $speakers;
 
     #[ORM\ManyToMany(targetEntity: Attendee::class, inversedBy: 'workshops')]

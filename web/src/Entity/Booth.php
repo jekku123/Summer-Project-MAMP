@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BoothRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BoothRepository::class)]
 class Booth
@@ -15,20 +16,24 @@ class Booth
     private ?int $id = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups(['event:read'])]
     private ?string $booth_number = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['event:read'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['event:read'])]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'booths')]
+    #[Groups(['event:read'])]
     private ?Company $company = null;
 
     #[ORM\ManyToOne(inversedBy: 'booths')]
     private ?Exhibition $exhibition = null;
-    
+
     public function __toString(): string
     {
         return $this->title;

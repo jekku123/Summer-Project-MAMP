@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SpeakerRepository::class)]
 class Speaker
@@ -17,18 +18,23 @@ class Speaker
     private ?int $id = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['event:read'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['event:read'])]
     private ?string $lastname = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['event:read'])]
     private ?string $bio = null;
 
     #[ORM\Column(length: 30, nullable: true)]
+    #[Groups(['event:read'])]
     private ?string $organization = null;
 
     #[ORM\Column(length: 100, nullable: true)]
+    #[Groups(['event:read'])]
     private ?string $photo = null;
 
     #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'speakers')]

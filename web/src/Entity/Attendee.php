@@ -6,8 +6,28 @@ use App\Repository\AttendeeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AttendeeRepository::class)]
+#[ApiResource(
+    operations: [
+        new Post(),
+        new GetCollection(),
+        new Get(),
+        new Put(),
+        new Patch()
+    ],
+    normalizationContext: [
+        'groups' => ['attendee:read']
+    ],
+    denormalizationContext: ['groups' => ['attendee:write']],
+)]
 class Attendee
 {
     #[ORM\Id]
@@ -16,31 +36,40 @@ class Attendee
     private ?int $id = null;
 
     #[ORM\Column(length: 30, nullable: true)]
+    #[Groups(['attendee:read', 'attendee:write'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 30, nullable: true)]
+    #[Groups(['attendee:read', 'attendee:write'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['attendee:read', 'attendee:write'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 30, nullable: true)]
+    #[Groups(['attendee:read', 'attendee:write'])]
     private ?string $phone = null;
 
     #[ORM\ManyToOne(inversedBy: 'attendees')]
+    #[Groups(['attendee:read'])]
     private ?Event $event = null;
 
     #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'attendees')]
+    #[Groups(['attendee:read'])]
     private Collection $workshops;
 
     #[ORM\OneToMany(mappedBy: 'attendee', targetEntity: Feedback::class)]
+    #[Groups(['attendee:read'])]
     private Collection $feedback;
 
     #[ORM\Column]
+    #[Groups(['attendee:read'])]
     private ?\DateTimeImmutable $registered_at = null;
 
     public function __construct()
     {
+        $this->registered_at = new \DateTimeImmutable();
         $this->workshops = new ArrayCollection();
         $this->feedback = new ArrayCollection();
     }

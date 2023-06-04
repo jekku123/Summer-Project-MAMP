@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiFilter;
 use App\Entity\Invite;
 use App\Entity\Attendee;
 use App\Entity\Exhibition;
@@ -10,6 +11,7 @@ use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventRepository;
 use ApiPlatform\Metadata\ApiResource;
@@ -28,20 +30,16 @@ enum EventType: string
 #[ApiResource(
     operations: [
         new Get(),
-        new GetCollection(),
-        new Post(),
-        new Put(),
-        new Patch(),
+        new GetCollection()
     ],
     normalizationContext: [
-        'groups' => ['event:read'],
-    ],
-    denormalizationContext: [
-        'groups' => ['event:write'],
+        'groups' => ['event:read']
     ],
     order: ['start_at' => 'DESC'],
+    paginationEnabled: false,
 
 )]
+#[ApiFilter(SearchFilter::class, properties: ['type' => 'exact'])]
 class Event
 {
     #[ORM\Id]
@@ -50,6 +48,7 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', enumType: EventType::class)]
+    #[Groups(['event:read'])]
     private ?EventType $type = null;
 
     #[ORM\Column(length: 255)]
