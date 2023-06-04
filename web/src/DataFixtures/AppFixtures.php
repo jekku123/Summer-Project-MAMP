@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\EventType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -28,8 +27,8 @@ class AppFixtures extends Fixture
 
         EventFactory::createMany(3, static function (int $i) {
             return [
-                'type' => EventType::CONFERENCE,
-                'title' => "Conference $i",
+              'type' => 'conference', // Set the type as a string value
+              'title' => "Conference $i",
                 'invites' => InviteFactory::createMany(70),
                 'attendees' => AttendeeFactory::createMany(50),
                 'speakers' => SpeakerFactory::createMany(12),
@@ -58,7 +57,7 @@ class AppFixtures extends Fixture
 
         EventFactory::createMany(3, static function (int $i) {
             return [
-                'type' => EventType::SEMINAR,
+                'type' => 'seminar',
                 'title' => "Seminar $i",
                 'attendees' => AttendeeFactory::createMany(30),
                 'sessions' => SessionFactory::createMany(3, function () {
