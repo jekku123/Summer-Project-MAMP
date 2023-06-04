@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class EventCrudController extends AbstractCrudController
 {
@@ -17,6 +18,14 @@ class EventCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+
+          yield ChoiceField::new('type')
+          ->setChoices([
+              'Conference' => 'conference',
+              'Seminar' => 'seminar',
+          ])
+          ->allowMultipleChoices(false);
+
           yield TextField::new('title');
           yield TextareaField::new('description');
           yield TextField::new('location');
