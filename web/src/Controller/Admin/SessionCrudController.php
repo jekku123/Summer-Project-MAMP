@@ -3,7 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Session;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 
 class SessionCrudController extends AbstractCrudController
 {
@@ -12,14 +17,25 @@ class SessionCrudController extends AbstractCrudController
         return Session::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        yield AssociationField::new('event');
+        yield AssociationField::new('speakers')
+            ->autocomplete()
+            ->setFormTypeOption('multiple', true)
+            ->setFormTypeOption('by_reference', false);
+        yield TextField::new('title');
+        yield TextareaField::new('description');
+        yield TextField::new('location');
+        yield DateTimeField::new('start_at')->setFormTypeOptions([
+          'years' => range(date('Y'), date('Y') + 5),
+          'widget' => 'single_text',
+        ]);
+        yield DateTimeField::new('end_at')->setFormTypeOptions([
+          'years' => range(date('Y'), date('Y') + 5),
+          'widget' => 'single_text',
+        ]);
     }
-    */
+
 }
