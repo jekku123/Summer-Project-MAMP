@@ -52,6 +52,8 @@ class Event
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $type = null;
 
+    public const CONFERENCE = 'conference';
+
     #[ORM\Column(length: 255)]
     #[Groups(['event:read'])]
     private ?string $title = null;

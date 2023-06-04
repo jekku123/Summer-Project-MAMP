@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Event;
+use App\Entity\Exhibition;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 
@@ -34,6 +35,7 @@ class DashboardController extends AbstractDashboardController
     {   
     
       yield MenuItem::linkToCrud('Events', 'fas fa-map-marker-alt', Event::class);
+      yield MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class);
         
     }
 }
