@@ -47,9 +47,11 @@ class Event
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'string', enumType: EventType::class)]
+    #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['event:read'])]
-    private ?EventType $type = null;
+    private ?string $type = null;
+
+    public const CONFERENCE = 'conference';
 
     #[ORM\Column(length: 255)]
     #[Groups(['event:read'])]
@@ -114,6 +116,11 @@ class Event
         $this->workshops = new ArrayCollection();
         $this->feedback = new ArrayCollection();
         $this->speakers = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
     }
 
     public function getId(): ?int
@@ -433,15 +440,15 @@ class Event
         return $this;
     }
 
-    public function getType(): ?EventType
+    public function getType(): ?string
     {
         return $this->type;
     }
-
-    public function setType(EventType $type): self
+    
+    public function setType(?string $type): self
     {
         $this->type = $type;
-
         return $this;
     }
+
 }

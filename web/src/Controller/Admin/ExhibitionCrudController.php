@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use Doctrine\ORM\EntityRepository;
+use App\Entity\Event;
 use App\Entity\Exhibition;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -18,7 +20,15 @@ class ExhibitionCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield AssociationField::new('conference');
+      yield AssociationField::new('event')
+      ->setFormTypeOptions([
+          'query_builder' => function (EntityRepository $er) {
+              return $er->createQueryBuilder('e')
+                  ->andWhere('e.type = :type')
+                  ->setParameter('type', Event::CONFERENCE);
+          },
+          'choice_label' => 'title',
+      ]);
         yield TextField::new('title');
         yield TextareaField::new('description');
         yield TextField::new('location');

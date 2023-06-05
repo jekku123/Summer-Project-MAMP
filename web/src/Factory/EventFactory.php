@@ -3,7 +3,6 @@
 namespace App\Factory;
 
 use App\Entity\Event;
-use App\Entity\EventType;
 use App\Repository\EventRepository;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -54,7 +53,7 @@ final class EventFactory extends ModelFactory
             'location' => self::faker()->text(255),
             'start_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'title' => self::faker()->text(255),
-            'type' => self::faker()->randomElement(EventType::cases()),
+            'type' => self::faker()->randomElement(['seminar', 'conference']),
         ];
     }
 
