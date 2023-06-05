@@ -77,4 +77,9 @@ a.hsl-link {
     .helsinki-img {
         margin: 0;
     }
+
+    .tram-img,
+    .helsinki-img {
+        width: 100%;
+    }
 }
