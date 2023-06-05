@@ -33,18 +33,22 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('BC Helsinki events');
+            ->setTitle('BC Helsinki events!');
     }
 
     public function configureMenuItems(): iterable
-    {   
-    
+    {
       yield MenuItem::linkToCrud('Events', 'fas fa-map-marker-alt', Event::class);
+      yield MenuItem::section('Manage speakers');
       yield MenuItem::linkToCrud('Speakers', 'fas fa-microphone', Speaker::class);
+      yield MenuItem::section('Event details');
       yield MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class);
-      yield MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class);
-      yield MenuItem::linkToCrud('Companies', 'fas fa-map-marker-alt', Company::class);
-      yield MenuItem::linkToCrud('Booths', 'fas fa-map-marker-alt', Booth::class);
-      yield MenuItem::linkToCrud('Workshops', 'fas fa-map-marker-alt', Workshop::class);
-    }
+      yield MenuItem::linkToCrud('Workshops', 'fa-solid fa-star', Workshop::class);
+      yield MenuItem::subMenu('Exhibitions', 'fas fa-map-marker-alt')
+        ->setSubItems([
+      MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class),
+      MenuItem::linkToCrud('Booths', 'fa-sharp fa-solid fa-table', Booth::class),
+      MenuItem::linkToCrud('Companies', 'fa-solid fa-suitcase', Company::class),
+        ]);
+  }
 }
