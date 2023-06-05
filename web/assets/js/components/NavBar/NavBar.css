@@ -1,3 +1,4 @@
+/* Shared styles */
 nav ul {
     list-style: none;
     display: flex;
@@ -32,6 +33,25 @@ nav ul li a:hover {
     background-color: white;
 }
 
+/* Mobile version styles */
+.mobile-nav {
+    position: fixed;
+    top: 100px;
+    right: 0;
+    width: 100%;
+    /* background-color: #fff; */
+    padding: 0 2em 1em;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-nav.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Burger menu styles */
 @media only screen and (max-width: 700px) {
     .burger {
         display: block;
@@ -49,16 +69,34 @@ nav ul li a:hover {
         transform: translateY(-8px) rotate(-45deg);
     }
 
+    /* Adjust mobile navbar positioning */
     nav {
         position: fixed;
         visibility: hidden;
+        top: 100px;
+        right: 0;
+        width: 100%;
+        padding: 0 2em 1em;
     }
 
     nav.active {
         visibility: visible;
-        width: 100%;
-        right: 0;
-        top: 100px;
-        padding: 0 2em 1em;
+    }
+}
+
+/* Desktop version styles */
+.desktop-nav {
+    display: none; /* Hide by default on mobile */
+}
+
+@media only screen and (min-width: 701px) {
+    /* Show desktop version */
+    .desktop-nav {
+        display: block;
+    }
+
+    /* Hide burger menu icon on desktop */
+    .burger {
+        display: none;
     }
 }
