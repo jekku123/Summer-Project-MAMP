@@ -37,14 +37,27 @@ class DashboardController extends AbstractDashboardController
     }
 
     public function configureMenuItems(): iterable
-    {   
-    
-      yield MenuItem::linkToCrud('Events', 'fas fa-map-marker-alt', Event::class);
+    {
+      // Create the conferences submenu
+      yield MenuItem::subMenu('Conferences', 'fas fa-map-marker-alt')
+          ->setSubItems([
+              MenuItem::linkToCrud('Events', 'fas fa-map-marker-alt', Event::class),
+              MenuItem::section(''),
+              MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class),
+              MenuItem::section(''),
+              MenuItem::linkToCrud('Workshops', 'fas fa-map-marker-alt', Workshop::class),
+              MenuItem::section(''),
+              MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class),
+              MenuItem::linkToCrud('Companies', 'fas fa-map-marker-alt', Company::class),
+              MenuItem::linkToCrud('Booths', 'fas fa-map-marker-alt', Booth::class),
+          ]);
+  
+      // Create the seminars submenu
+      yield MenuItem::subMenu('Seminars', 'fas fa-map-marker-alt')
+          ->setSubItems([
+              MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class),
+          ]);
+      yield  MenuItem::section('Manage speakers');
       yield MenuItem::linkToCrud('Speakers', 'fas fa-microphone', Speaker::class);
-      yield MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class);
-      yield MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class);
-      yield MenuItem::linkToCrud('Companies', 'fas fa-map-marker-alt', Company::class);
-      yield MenuItem::linkToCrud('Booths', 'fas fa-map-marker-alt', Booth::class);
-      yield MenuItem::linkToCrud('Workshops', 'fas fa-map-marker-alt', Workshop::class);
-    }
+  }
 }
