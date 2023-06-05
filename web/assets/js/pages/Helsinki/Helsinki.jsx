@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
+import LinkButton from '../../components/LinkButton/LinkButton';
 import './Helsinki.css';
 
 const Helsinki = () => {
@@ -19,20 +20,9 @@ const Helsinki = () => {
                         University of Applied Sciences and Helsinki Expo and
                         Convention Centre Messukeskus.
                     </p>
-                    <p>
-                        <Link
-                            className='info-link'
-                            to='https://www.visitfinland.com/en/places-to-go/helsinki-region/'
-                            target='_blank'
-                            rel='noreferrer'
-                        >
-                            {' '}
-                            <span className='arrow-icon'>
-                                <FaArrowRight />
-                            </span>
-                            Visit Finland | Helsinki region
-                        </Link>
-                    </p>
+                    <LinkButton url='https://www.visitfinland.com/en/places-to-go/helsinki-region/'>
+                        Visit Finland | Helsinki region
+                    </LinkButton>
                 </div>
                 <iframe
                     width={500}
@@ -56,6 +46,7 @@ const Helsinki = () => {
                     <p>
                         Check{' '}
                         <Link
+                            className='hsl-link'
                             to='https://www.hsl.fi/en'
                             target='_blank'
                             rel='noreferrer'
@@ -67,20 +58,9 @@ const Helsinki = () => {
                         planner tool (Reittiopas) that helps users find the best
                         routes and plan their trips efficiently.
                     </p>
-                    <p>
-                        <Link
-                            to='https://reittiopas.hsl.fi/etusivu/-/Rautatiel%C3%A4isenkatu%205%2C%20Helsinki%3A%3A60.201434%2C24.93556?locale=en'
-                            target='_blank'
-                            rel='noreferrer'
-                            className='info-link'
-                        >
-                            {' '}
-                            <span className='arrow-icon'>
-                                <FaArrowRight />
-                            </span>
-                            HSL Route Search | Business College Helsinki
-                        </Link>
-                    </p>
+                    <LinkButton url='https://reittiopas.hsl.fi/etusivu/-/Rautatiel%C3%A4isenkatu%205%2C%20Helsinki%3A%3A60.201434%2C24.93556?locale=en'>
+                        HSL Route Search | Business College Helsinki
+                    </LinkButton>
                 </div>
                 <img
                     className='tram-img'
@@ -91,62 +71,18 @@ const Helsinki = () => {
             <div className='section info-section'>
                 <div className='info-text'>
                     <h2>Explore Helsinki</h2>
-                    <p>
-                        <Link
-                            className='info-link'
-                            to='https://www.myhelsinki.fi/your-local-guide-to-helsinki'
-                            target='_blank'
-                            rel='noreferrer'
-                        >
-                            {' '}
-                            <span className='arrow-icon'>
-                                <FaArrowRight />
-                            </span>
-                            MyHelsinki.fi
-                        </Link>
-                    </p>
-                    <p>
-                        <Link
-                            className='info-link'
-                            to='https://www.myhelsinki.fi/en/see-and-do/events'
-                            target='_blank'
-                            rel='noreferrer'
-                        >
-                            {' '}
-                            <span className='arrow-icon'>
-                                <FaArrowRight />
-                            </span>
-                            MyHelsinki.fi | Events
-                        </Link>
-                    </p>
-                    <p>
-                        <Link
-                            className='info-link'
-                            to='https://www.myhelsinki.fi/see-and-do/sights/top-15-sights-in-helsinki'
-                            target='_blank'
-                            rel='noreferrer'
-                        >
-                            {' '}
-                            <span className='arrow-icon'>
-                                <FaArrowRight />
-                            </span>
-                            Top 15 Sights in Helsinki
-                        </Link>
-                    </p>
-                    <p>
-                        <Link
-                            className='info-link'
-                            to='https://www.visitfinland.com/en/articles/top-10-must-see-museums-in-helsinki-region/'
-                            target='_blank'
-                            rel='noreferrer'
-                        >
-                            {' '}
-                            <span className='arrow-icon'>
-                                <FaArrowRight />
-                            </span>
-                            Top 10 Museums in Helsinki
-                        </Link>
-                    </p>
+                    <LinkButton url='https://www.myhelsinki.fi/your-local-guide-to-helsinki'>
+                        MyHelsinki.fi
+                    </LinkButton>
+                    <LinkButton url='https://www.myhelsinki.fi/en/see-and-do/events'>
+                        MyHelsinki.fi | Events
+                    </LinkButton>
+                    <LinkButton url='https://www.myhelsinki.fi/see-and-do/sights/top-15-sights-in-helsinki'>
+                        Top 15 Sights in Helsinki
+                    </LinkButton>
+                    <LinkButton url='https://www.visitfinland.com/en/articles/top-10-must-see-museums-in-helsinki-region/'>
+                        Top 10 Museums in Helsinki
+                    </LinkButton>
                 </div>
                 <img
                     className='helsinki-img'
