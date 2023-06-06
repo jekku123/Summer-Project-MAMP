@@ -11,9 +11,12 @@
 
 .homepage-cards {
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 1rem;
     gap: 1rem;
     margin-bottom: 3rem;
+    flex-flow: row wrap;
 }
 
 @media only screen and (max-width: 767px) {
@@ -25,10 +28,10 @@
         font-size: 1.5rem;
     }
 
-    .homepage-cards {
+    /* .homepage-cards {
         display: grid;
         grid-template-columns: none;
         grid-template-rows: repeat(3, 1fr);
         gap: 20px;
-    }
+    } */
 }

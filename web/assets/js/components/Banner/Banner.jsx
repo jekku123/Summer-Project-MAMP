@@ -1,6 +1,6 @@
 import React from 'react';
 import './Banner.css';
-import { Link } from 'react-router-dom';
+import LinkButton from '../LinkButton/LinkButton';
 
 const Banner = () => {
     return (
@@ -8,9 +8,7 @@ const Banner = () => {
             <div className='banner-content'>
                 <h2>BCH Events</h2>
                 <p>Explore events at Business College Helsinki</p>
-                <Link to='/events'>
-                    <button>All Events</button>
-                </Link>
+                <LinkButton url='/events'>All Events</LinkButton>
             </div>
         </div>
     );

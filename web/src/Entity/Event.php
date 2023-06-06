@@ -2,47 +2,20 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiFilter;
 use App\Entity\Invite;
 use App\Entity\Attendee;
 use App\Entity\Exhibition;
-use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Put;
-use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventRepository;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Serializer\Annotation\Groups;
-
-enum EventType: string
-{
-    case CONFERENCE = 'conference';
-    case SEMINAR = 'seminar';
-}
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-#[ApiResource(
-    operations: [
-        new Get(),
-        new GetCollection()
-    ],
-    normalizationContext: [
-        'groups' => ['event:read']
-    ],
-    formats:['json'],
-    order: ['start_at' => 'DESC'],
-    paginationEnabled: false,
-
-)]
-#[ApiFilter(SearchFilter::class, properties: ['type' => 'exact'])]
 class Event
 {
+    public const CONFERENCE = 'conference';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -50,33 +23,24 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['event:read'])]
     private ?string $type = null;
 
-    public const CONFERENCE = 'conference';
-
     #[ORM\Column(length: 255)]
-    #[Groups(['event:read'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['event:read'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['event:read'])]
     private ?string $location = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['event:read'])]
     private ?string $image = null;
 
     #[ORM\Column]
-    #[Groups(['event:read'])]
     private ?\DateTimeImmutable $start_at = null;
 
     #[ORM\Column]
-    #[Groups(['event:read'])]
     private ?\DateTimeImmutable $end_at = null;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Invite::class)]
@@ -86,26 +50,21 @@ class Event
     private Collection $attendees;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Exhibition::class)]
-    #[Groups(['event:read'])]
     private Collection $exhibitions;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Session::class)]
-    #[Groups(['event:read'])]
     private Collection $sessions;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: SideEvent::class)]
-    #[Groups(['event:read'])]
     private Collection $sideEvents;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Workshop::class)]
-    #[Groups(['event:read'])]
     private Collection $workshops;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Feedback::class)]
     private Collection $feedback;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Speaker::class)]
-    #[Groups(['event:read'])]
     private Collection $speakers;
 
     public function __construct()
@@ -446,11 +405,10 @@ class Event
     {
         return $this->type;
     }
-    
+
     public function setType(?string $type): self
     {
         $this->type = $type;
         return $this;
     }
-
 }
