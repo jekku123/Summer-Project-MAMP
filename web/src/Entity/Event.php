@@ -35,6 +35,7 @@ enum EventType: string
     normalizationContext: [
         'groups' => ['event:read']
     ],
+    formats:['json'],
     order: ['start_at' => 'DESC'],
     paginationEnabled: false,
 
@@ -45,6 +46,7 @@ class Event
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['event:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]

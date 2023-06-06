@@ -49,7 +49,7 @@ final class EventFactory extends ModelFactory
         return [
             'description' => self::faker()->text(),
             'end_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'image' => self::faker()->text(255),
+            'image' => self::faker()->imageUrl(),
             'location' => self::faker()->text(255),
             'start_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'title' => self::faker()->text(255),
