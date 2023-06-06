@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Faq.css';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 
 const Faq = ({ info }) => {
     const [expandedIndex, setExpandedIndex] = useState(null);
@@ -35,7 +36,7 @@ const Faq = ({ info }) => {
                       onMouseEnter={() => handleHover(index)}
                       onMouseLeave={() => handleLeave(index)}
                     >
-                      {expandedIndex === index ? '-' : '+'}
+                      {expandedIndex === index ? <FaMinus/> : <FaPlus/>}
                     </button>
                     <h3
                       className='question_title'
