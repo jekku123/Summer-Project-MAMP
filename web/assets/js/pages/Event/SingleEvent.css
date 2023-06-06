@@ -6,6 +6,12 @@
         no-repeat center/cover;
 }
 
+.loader {
+    padding-top: 120px;
+    text-align: center;
+    color: var(--light-color);
+}
+
 .header {
     text-align: center;
     margin-bottom: 20px;
@@ -14,7 +20,7 @@
 .title {
     font-size: 24px;
     font-weight: bold;
-    color: white;
+    color: var(--light-color);
 }
 
 .event-image {

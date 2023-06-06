@@ -1,9 +1,8 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useAxios from '../../hooks/useAxios';
-import './EventList.css';
-
 import Card from '../../components/Card/Card';
+import './EventList.css';
 
 const EventList = () => {
     const [searchInput, setSearchInput] = useState('');
