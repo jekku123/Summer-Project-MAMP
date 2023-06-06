@@ -32,7 +32,7 @@ class Exhibition
     #[ORM\Column]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'exhibition', targetEntity: Booth::class)]
+    #[ORM\OneToMany(mappedBy: 'exhibition', targetEntity: Booth::class, cascade: ['remove'])]
     private Collection $booths;
 
     #[ORM\ManyToOne(inversedBy: 'exhibitions')]

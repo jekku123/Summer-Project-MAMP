@@ -19,7 +19,6 @@ class Event
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['event:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -43,29 +42,32 @@ class Event
     #[ORM\Column]
     private ?\DateTimeImmutable $end_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Invite::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Invite::class, cascade: ['remove'])]
     private Collection $invites;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Attendee::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Attendee::class, cascade: ['remove'])]
     private Collection $attendees;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Exhibition::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Exhibition::class, cascade: ['remove'])]
     private Collection $exhibitions;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Session::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Session::class, cascade: ['remove'])]
     private Collection $sessions;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: SideEvent::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: SideEvent::class, cascade: ['remove'])]
     private Collection $sideEvents;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Workshop::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Workshop::class, cascade: ['remove'])]
     private Collection $workshops;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Feedback::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Feedback::class, cascade: ['remove'])]
     private Collection $feedback;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Speaker::class)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Speaker::class, cascade: ['remove'])]
     private Collection $speakers;
+
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Notification::class, cascade: ['remove'])]
+    private Collection $notifications;
 
     public function __construct()
     {
@@ -77,6 +79,7 @@ class Event
         $this->workshops = new ArrayCollection();
         $this->feedback = new ArrayCollection();
         $this->speakers = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -409,6 +412,36 @@ class Event
     public function setType(?string $type): self
     {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getEvent() === $this) {
+                $notification->setEvent(null);
+            }
+        }
+
         return $this;
     }
 }

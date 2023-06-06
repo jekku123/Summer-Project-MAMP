@@ -37,11 +37,12 @@ class Mailer
         $email = (new Email())
             ->from('business.college@bc.fi')
             ->to($invite->getEmail())
-            ->subject('You been invited for our event!!')
-            ->text('Super awesome')
+            ->subject('Invite to: ' . $invite->getEvent()->getTitle())
+            ->text('Please come')
             ->html('
-            <h1>Please come</h1>
+            <h1>Please come to our ' . $invite->getEvent()->getType() . '</h1>
             <p>Lets have a good one!</p>
+            <p>' . $invite->getEvent()->getStartAt()->format('Y-m-d H:i:s') . ' @ ' . $invite->getEvent()->getLocation() . '</p>
             <small>-Business College-</small>
             ');
 
