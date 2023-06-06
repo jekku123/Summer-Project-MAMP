@@ -7,7 +7,6 @@
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "api-platform/core": "^3.1",
         "doctrine/doctrine-bundle": "^2.9",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
@@ -23,6 +22,7 @@
         "symfony/flex": "^2",
         "symfony/form": "6.2.*",
         "symfony/framework-bundle": "6.2.*",
+        "symfony/mailer": "6.2.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/property-access": "6.2.*",
         "symfony/property-info": "6.2.*",
@@ -73,7 +73,8 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "populate": "./auto-run.sh"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -85,6 +86,7 @@
         }
     },
     "require-dev": {
+        "codegyre/robo": "^4.0",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "symfony/debug-bundle": "6.2.*",
         "symfony/maker-bundle": "^1.48",

@@ -16,19 +16,15 @@ class Booth
     private ?int $id = null;
 
     #[ORM\Column(length: 20)]
-    #[Groups(['event:read'])]
     private ?string $booth_number = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['event:read'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['event:read'])]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'booths')]
-    #[Groups(['event:read'])]
     private ?Company $company = null;
 
     #[ORM\ManyToOne(inversedBy: 'booths')]

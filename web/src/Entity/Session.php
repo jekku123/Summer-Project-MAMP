@@ -19,30 +19,24 @@ class Session
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['event:read'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['event:read'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['event:read'])]
     private ?string $location = null;
 
     #[ORM\Column]
-    #[Groups(['event:read'])]
     private ?\DateTimeImmutable $start_at = null;
 
     #[ORM\Column]
-    #[Groups(['event:read'])]
     private ?\DateTimeImmutable $end_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     private ?Event $event = null;
 
     #[ORM\ManyToMany(targetEntity: Speaker::class, inversedBy: 'sessions')]
-    #[Groups(['event:read'])]
     private Collection $speakers;
 
     public function __construct()
