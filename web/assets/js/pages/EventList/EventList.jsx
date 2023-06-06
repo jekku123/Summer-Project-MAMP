@@ -55,9 +55,9 @@ const EventList = () => {
             </div>
             <div className='eventlist'>
                 {searchFilter
-                    .filter((event) => {
-                        return radioFilter ? event.type === radioFilter : event;
-                    })
+                    .filter((event) =>
+                        radioFilter ? event.type === radioFilter : event
+                    )
                     .map((event) => (
                         <Card
                             key={event.id}
