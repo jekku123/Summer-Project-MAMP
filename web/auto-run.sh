@@ -16,5 +16,5 @@ bin/console doctrine:fixtures:load --no-interaction
 echo -e "\033[1;37m___________________________________________________"
 echo -e ""
 echo -e "Database succesfully populated with fake data!"
-echo -e "-nice-"
+echo -e ""
 echo -e "\033[1;37m___________________________________________________"
