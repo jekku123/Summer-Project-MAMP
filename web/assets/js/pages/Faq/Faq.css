@@ -1,8 +1,6 @@
 /* FaqInfo component */
 
 .faq-background {
-    background: url(https://images.unsplash.com/photo-1533135175465-90ac0c0e030f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1655&q=80)
-        no-repeat center/cover;
     padding: 1rem 0.6rem 2rem 0.6rem;
 }
 
