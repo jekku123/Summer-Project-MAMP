@@ -40,7 +40,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/attendee', name: 'post_attendee', methods: ['POST'])]
-    public function new(Request $request, AttendeeRepository $attendees, MailerInterface $mailer): Response
+    public function new(Request $request, AttendeeRepository $attendees, MailerInterface $mailerInterface): Response
     {
         $attendee = new Attendee();
 
@@ -51,7 +51,7 @@ class EventController extends AbstractController
 
         $attendees->save($attendee, true);
 
-        $mailer = new Mailer($mailer);
+        $mailer = new Mailer($mailerInterface);
         $mailer->sendEmail($attendee);
 
         return $this->redirectToRoute('app_home');
