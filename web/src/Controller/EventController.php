@@ -14,7 +14,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use App\Mailer\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 
-#[Route('/api', name: 'api_')          ]
+#[Route('/api', name: 'api_')]
 class EventController extends AbstractController
 {
     #[Route('/events', name: 'get_events', methods: ['GET'])]
