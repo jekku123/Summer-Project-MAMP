@@ -1,86 +1,92 @@
 /* FaqInfo component */
 
 .faq-background {
-    padding: 1rem 0.6rem 2rem 0.6rem;
+  padding: 1rem 0.6rem 2rem 0.6rem;
 }
 
 .faqinfo {
-    width: 95%;
-    margin: 2rem auto 10rem auto;
-    margin-top: 100px;
+  width: 95%;
+  margin: 2rem auto 10rem auto;
+  margin-top: 100px;
 
-    border-radius: 8px;
-    box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
-    background-color: white;
-    padding: 0.8rem;
+  border-radius: 8px;
+  box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+  background-color: white;
+  padding: 0.8rem;
 }
 
 .faqinfo h1,
 .faq-qa h3 {
-    color: rgba(115, 3, 76, 1);
-    margin: 2rem 0 1rem 0;
+  color: rgba(115, 3, 76, 1);
+  margin: 2rem 0 1rem 0;
 }
 
 hr {
-    margin-bottom: 0.5rem;
-    border: solid 1px gray;
+  margin-bottom: 0.5rem;
+  border: solid 1px gray;
 }
 
 .faqinfo p {
-    text-align: justify;
+  text-align: justify;
 }
 
 /* Faq component */
 .faq {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-.faq-btns {
-    margin-right: 10px;
+.btn_expand {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(115, 3, 76, 1);
+  color: white;
+  transition: transform 0.3s;
+  cursor: pointer;
+  margin-right: 0.5rem;
 }
 
-.faq-btns button {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: none;
-    background-color: rgba(115, 3, 76, 1);
-    color: white;
-    transition: transform 0.3s;
-    cursor: pointer;
-}
-
-.faq-btns button:hover {
-    background-color: rgb(49, 144, 36);
-    color: white;
-    transform: rotate(360deg);
+.btn_expand:hover {
+  background-color: rgb(49, 144, 36);
+  color: white;
+  transform: rotate(360deg);
 }
 
 .faq-qa h3 {
-    color: rgba(115, 3, 76, 1);
-    margin: 2rem 0 1rem 0;
-    cursor: pointer;
+  color: rgba(115, 3, 76, 1);
+  margin: 2rem 0 1rem 0;
+  cursor: pointer;
+}
+.faq-qa {
+  display: flex;
+  flex-direction: column;
+}
+
+.question {
+  display: flex;
+  align-items: center;
 }
 
 .answer {
-    border-radius: 5px;
-    background-color: rgba(242, 216, 206, 1);
-    padding: 1rem;
-    position: relative;
+  border-radius: 5px;
+  background-color: rgba(242, 216, 206, 1);
+  padding: 1rem;
+  position: relative;
 }
 
 .answer:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 40%;
-    width: 0;
-    height: 0;
-    border: 20px solid transparent;
-    border-right-color: rgba(242, 216, 206, 1);
-    border-left: 0;
-    border-top: 0;
-    margin-top: -10px;
-    margin-left: -20px;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-right-color: rgba(242, 216, 206, 1);
+  border-left: 0;
+  border-top: 0;
+  margin-top: -10px;
+  margin-left: -20px;
 }
