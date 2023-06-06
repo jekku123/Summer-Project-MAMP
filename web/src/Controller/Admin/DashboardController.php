@@ -9,6 +9,8 @@ use App\Entity\Company;
 use App\Entity\Workshop;
 use App\Entity\Speaker;
 use App\Entity\Exhibition;
+use App\Entity\SideEvent;
+use App\Entity\Invite;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 
@@ -45,10 +47,14 @@ class DashboardController extends AbstractDashboardController
       yield MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class);
       yield MenuItem::linkToCrud('Workshops', 'fa-solid fa-star', Workshop::class);
       yield MenuItem::subMenu('Exhibitions', 'fas fa-map-marker-alt')
-        ->setSubItems([
-      MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class),
-      MenuItem::linkToCrud('Booths', 'fa-sharp fa-solid fa-table', Booth::class),
-      MenuItem::linkToCrud('Companies', 'fa-solid fa-suitcase', Company::class),
-        ]);
+      ->setSubItems([
+        MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class),
+        MenuItem::linkToCrud('Booths', 'fa-sharp fa-solid fa-table', Booth::class),
+        MenuItem::linkToCrud('Companies', 'fa-solid fa-suitcase', Company::class),
+      ]);
+      yield MenuItem::linkToCrud('Side events', 'fas fa-map-marker-alt', SideEvent::class);
+      yield MenuItem::section('');
+      yield MenuItem::linkToCrud('Invitees', 'fas fa-map-marker-alt', Invite::class);
+
   }
 }
