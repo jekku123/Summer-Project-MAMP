@@ -25,7 +25,7 @@
     line-height: 1.5;
 }
 
-.info-section a {
+a.hsl-link {
     color: black;
 }
 
@@ -37,24 +37,6 @@
 .info-text h2 {
     color: var(--main-text-color);
     margin: 20px 0;
-}
-
-a.info-link {
-    display: inline-block;
-    padding: 12px;
-    margin: 0.5rem 0;
-    background-color: var(--main-bg-color);
-    border-radius: 3px;
-    color: #f9f9f9;
-    text-decoration: none;
-}
-
-a.info-link:hover {
-    background-color: rgb(174, 6, 115);
-}
-
-span.arrow-icon {
-    margin-right: 10px;
 }
 
 .tram-img,
@@ -94,5 +76,10 @@ span.arrow-icon {
     .tram-img,
     .helsinki-img {
         margin: 0;
+    }
+
+    .tram-img,
+    .helsinki-img {
+        width: 100%;
     }
 }

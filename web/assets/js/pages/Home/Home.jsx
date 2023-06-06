@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from '../../components/Banner/Banner';
-import Card from '../../components/Card/Card';
+import LandingCard from '../../components/LandingCard/LandingCard';
 import './Home.css';
 
 const Home = () => {
@@ -8,11 +8,31 @@ const Home = () => {
         <div className='home'>
             <Banner />
             <div className='home-content'>
-                <h2>Upcoming Events</h2>
                 <div className='homepage-cards'>
-                    <Card />
-                    <Card />
-                    <Card />
+                    <LandingCard
+                        heading='Events'
+                        info='View all ongoing events at Business College Helsinki'
+                        url='/events'
+                        urltext='Browse Events'
+                    />
+                    <LandingCard
+                        heading='Helsinki Info'
+                        info='View more information about Helsinki'
+                        url='/helsinki'
+                        urltext='Helsinki'
+                    />
+                    <LandingCard
+                        heading='Frequently Asked Questions'
+                        info='In the FAQ page you can find answers to different questions'
+                        url='/faq'
+                        urltext='FAQ'
+                    />
+                    <LandingCard
+                        heading='Business College Helsinki'
+                        info='Discover more about our school on the official website'
+                        url='https://en.bc.fi/'
+                        urltext='BCH homepage'
+                    />
                 </div>
             </div>
         </div>
