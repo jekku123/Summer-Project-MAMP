@@ -1,32 +1,39 @@
 /* FaqInfo component */
 
 .faq-background {
-  padding: 1rem 0.6rem 2rem 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  padding: 20px;
+}
+.faq-background h1 {
+  padding-bottom: 20px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .faqinfo {
-  width: 95%;
-  margin: 2rem auto 10rem auto;
-  margin-top: 100px;
-  margin-bottom: 40px;
-  border-radius: 8px;
+  border-radius: 5px;
   box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
   background-color: white;
   padding: 20px;
-}
-
-.faqinfo h1 {
-  color: rgba(115, 3, 76, 1);
-  margin: 2rem 0 1rem 0;
+  margin-bottom: 20px;
+  width: 90vw;
 }
 
 hr {
-  margin-bottom: 0.5rem;
-  border: solid 1px gray;
+  margin-top: 1rem;
 }
 
 .faqinfo p {
   text-align: justify;
+  line-height: 1.5;
 }
 
 /* Faq component */
@@ -93,4 +100,14 @@ hr {
   border-top: 0;
   margin-top: -10px;
   margin-left: -20px;
+}
+@media (min-width: 1024px) {
+  .faqinfo {
+    width: 85vw;
+    margin-bottom: 20px;
+    padding: 40px;
+  }
+  .faq-background {
+    padding: 20px;
+  }
 }
