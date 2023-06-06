@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaArrowUp } from 'react-icons/fa';
 import './ScrollTopBtn.css';
 
 const ScrollTopBtn = () => {
@@ -28,7 +29,9 @@ const ScrollTopBtn = () => {
             onClick={scrollToTop}
             style={{ display: visible ? 'flex' : 'none' }}
         >
-            <p>Go top!</p>
+            <p>
+                <FaArrowUp />
+            </p>
         </div>
     );
 };
