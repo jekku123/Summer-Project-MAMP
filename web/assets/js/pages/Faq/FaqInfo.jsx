@@ -40,11 +40,11 @@ function FaqInfo() {
 
     return (
         <div className='faq-background'>
+                <h1>FAQ</h1>
             <div className='faqinfo'>
-                <h1>Frequently Asked Questions</h1>
 
-                <hr />
                 <p>Here are some answers to frequently asked questions about seminars and conferences organized by Business College Helsinki.</p>
+                <hr />
 
                 <Faq info={faqData} />
             </div>
