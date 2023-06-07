@@ -1,58 +1,41 @@
 .event-card {
-    width: 450px;
-    height: 410px;
+    width: 400px;
+    height: auto;
     margin: auto;
-    margin-bottom: 1.5rem;
-    background: rgb(250, 233, 227);
-    padding: 0.5em;
-    border-radius: 6px;
+    margin-bottom: 2rem;
+    background: var(--light-color);
+    padding: 1rem;
+    border-radius: 5px;
     box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+    text-align: center;
+}
+
+.event-card:hover {
+    transform: scale(1.01);
 }
 
 .event-card img {
-    height: 250px;
+    height: 200px;
     width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
-.event-card h3 {
-    text-align: center;
-    margin-bottom: 0.8rem;
+.event-card h3,
+.event-card p {
+    margin: 1rem;
+    font-weight: 400;
 }
 
-.event-card h5 {
-    text-align: center;
+span.date {
+    font-weight: 300;
 }
-
-.event-card a {
-    text-decoration: none;
-}
-
-#more-info {
-    font-size: small;
-    color: rgb(245, 11, 163);
-    margin: 0.4rem 0 0.2rem 0;
-    text-align: center;
-    text-decoration: none;
-}
-
 
 @media only screen and (max-width: 767px) {
     .event-card {
-        width: 300px;
-        height: 320px;
-        background: rgb(250, 233, 227);
         padding: 0.5em;
-        border-radius: 6px;
-        box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
     }
-
     .event-card img {
-        height: 200px;
-        width: 100%;
-    }
-
-    #more-info {
-        font-size: small;
-        color: rgb(245, 11, 163);
+        height: 150px;
     }
 }
