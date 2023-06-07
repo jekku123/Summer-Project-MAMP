@@ -1,69 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from "axios";
 import './SingleEvent.css';
+import useAxios from '../../hooks/useAxios';
 
 function SingleEvent() {
     const { id } = useParams();
-    const [eventDescription, setEventDescription] = useState([]);
 
-    useEffect(() => {
-        axios.get('http://localhost:8007/api/events').then((data) => {
-            const totalEvents = data.data;
-            const findEvent = totalEvents.find((event) => +event.id === +id);
-            setEventDescription(findEvent);
-        });
-    }, [id]);
+    const [data, isLoading] = useAxios(
+        `http://localhost:8007/api/events/${id}`
+    );
 
-    if (!eventDescription) {
-        return <div>Loading...</div>;
-    }
-
-
-
-    return (
+    return isLoading ? (
+        <div className='loader'>
+            <h2>Loading..</h2>
+        </div>
+    ) : (
         <div className='event'>
-
-            <h1 className='title'>About the Event</h1>
-
+            <div className='header'>
+                <h1 className='title'>About the Event</h1>
+            </div>
             <div className='section1'>
                 <div className='section1-main'>
                     <h2 className='section-title'>Event Information</h2>
                     <div className='section-content'>
                         <p>
-                            <strong>Title:</strong> {eventDescription.title}
+                            <strong>Title:</strong> {data.title}
                         </p>
                         <p>
-                            <strong>Description:</strong> {eventDescription.description}
+                            <strong>Description:</strong> {data.description}
                         </p>
                         <p>
-                            <strong>Location:</strong> {eventDescription.location}
+                            <strong>Location:</strong> {data.location}
                         </p>
                         <p>
-                            <strong>Start Date:</strong> {eventDescription.start_at}
+                            <strong>Start Date:</strong> {data.start_at}
                         </p>
                         <p>
-                            <strong>End Date:</strong> {eventDescription.end_at}
+                            <strong>End Date:</strong> {data.end_at}
                         </p>
                     </div>
                 </div>
                 <img
                     className='event-image'
-                    src={eventDescription.image}
-                    alt={eventDescription.title}
+                    src={data.image}
+                    alt={data.title}
                 />
             </div>
 
             <div className='section'>
                 <h2 className='section-title'>Speakers</h2>
                 <div className='section-content'>
-                    {eventDescription.speakers && eventDescription.speakers.map((speaker, i) =>
-                        <div className='speaker' key={speaker.firstname}>
-                            <p>{speaker.firstname}{speaker.lastname}</p>
-                        </div>
-                    )}
+                    {data.speakers &&
+                        data.speakers.map((speaker, i) => (
+                            <div className='speaker' key={i}>
+                                <p className='speaker-name'>
+                                    {speaker.firstname}
+                                    {speaker.lastname}
+                                </p>
+                            </div>
+                        ))}
                 </div>
-
             </div>
 
             <div className='section'>
@@ -90,10 +86,7 @@ function SingleEvent() {
                         </div>
                     )}
                 </div>
-
             </div>
-
-
 
             <div className='section'>
                 <h2 className='section-title'>Exhibition</h2>
@@ -122,19 +115,38 @@ function SingleEvent() {
                                     </p>
                                     <p> <strong>About company: </strong>{booth.company.description}</p>
                                 </div>
-                            )}
-
 
                         </div>
                     )}
+                                {exhibition.booths.map((booth, i) => (
+                                    <div className='booth' key={i}>
+                                        <p className='booth-title'>
+                                            booth number: {booth.booth_number}
+                                        </p>
+                                        <p className='booth-title'>
+                                            title: {booth.title}
+                                        </p>
+                                        <p className='booth-description'>
+                                            description: {booth.description}
+                                        </p>
+
+                                        <p className='booth-company'>
+                                            <a href='https://www.neste.com/'>
+                                                company: {booth.company.name}
+                                            </a>
+                                        </p>
+                                        <p>{booth.company.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
                 </div>
-
             </div>
-
 
             <div className='section'>
                 <h2 className='section-title'>Workshops</h2>
                 <div className='section-content'>
+
                     {eventDescription.workshops && eventDescription.workshops.map((workshop, i) =>
                         <div className='workshop' key={workshop.title}>
                             <p><strong>Title:</strong>{workshop.title}</p>
@@ -153,13 +165,13 @@ function SingleEvent() {
                             </p>
                         </div>
                     )}
+
                 </div>
-
             </div>
-
 
             <div className='section'>
                 <h2 className='section-title'>Side Events</h2>
+
                 {eventDescription.sideEvents && eventDescription.sideEvents.map((sideEvent, i) =>
                     <div className='section-content'>
                         <div className='side-event' key={sideEvent.title}>
@@ -170,9 +182,9 @@ function SingleEvent() {
                             </p>
                             <p>Start Time: {sideEvent.start_at}</p>
                             <p>End Time: {sideEvent.end_at}</p>
+
                         </div>
-                    </div>
-                )}
+                    ))}
             </div>
         </div>
     );

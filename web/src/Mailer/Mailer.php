@@ -3,6 +3,7 @@
 namespace App\Mailer;
 
 use App\Entity\Attendee;
+use App\Entity\Invite;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -25,6 +26,23 @@ class Mailer
             ->html('
             <h1>Thank you for registering!</h1>
             <p>Lets have a good one!</p>
+            <small>-Business College-</small>
+            ');
+
+        $this->mailer->send($email);
+    }
+
+    public function sendInvite(Invite $invite): void
+    {
+        $email = (new Email())
+            ->from('business.college@bc.fi')
+            ->to($invite->getEmail())
+            ->subject('Invite to: ' . $invite->getEvent()->getTitle())
+            ->text('Please come')
+            ->html('
+            <h1>Please come to our ' . $invite->getEvent()->getType() . '</h1>
+            <p>Lets have a good one!</p>
+            <p>' . $invite->getEvent()->getStartAt()->format('Y-m-d H:i:s') . ' @ ' . $invite->getEvent()->getLocation() . '</p>
             <small>-Business College-</small>
             ');
 

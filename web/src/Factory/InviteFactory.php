@@ -47,7 +47,7 @@ final class InviteFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'email' => self::faker()->text(255),
+            'email' => self::faker()->email(),
         ];
     }
 

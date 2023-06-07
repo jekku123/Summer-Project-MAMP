@@ -47,9 +47,9 @@ final class BoothFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'booth_number' => self::faker()->text(20),
-            'description' => self::faker()->text(),
-            'title' => self::faker()->text(100),
+            'booth_number' => self::faker()->randomDigit(),
+            'title' => self::faker()->bs(),
+            'description' => self::faker()->paragraph(),
         ];
     }
 

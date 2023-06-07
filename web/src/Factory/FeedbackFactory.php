@@ -47,7 +47,7 @@ final class FeedbackFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'message' => self::faker()->text(),
+            'message' => self::faker()->text(100),
         ];
     }
 

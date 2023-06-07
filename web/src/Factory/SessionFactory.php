@@ -47,11 +47,11 @@ final class SessionFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'description' => self::faker()->text(),
+            'description' => self::faker()->paragraph(),
             'end_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'location' => self::faker()->text(100),
+            'location' => self::faker()->address(),
             'start_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'title' => self::faker()->text(100),
+            'title' => self::faker()->catchPhrase(),
         ];
     }
 

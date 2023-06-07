@@ -47,12 +47,12 @@ final class EventFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'description' => self::faker()->text(),
+            'description' => self::faker()->paragraph(),
             'end_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'image' => self::faker()->imageUrl(),
-            'location' => self::faker()->text(255),
+            'location' => self::faker()->address(),
             'start_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'title' => self::faker()->text(255),
+            'title' => self::faker()->catchPhrase(),
             'type' => self::faker()->randomElement(['seminar', 'conference']),
         ];
     }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Dancing+Script&family=Lato:wght@300&family=Playfair+Display&family=Roboto+Slab&family=Tourney:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -12,11 +12,23 @@
 }
 
 :root {
+    /* Header, Footer, LinkButton bg color */
     --main-bg-color: rgba(115, 3, 76, 1);
-    --secondary-bg-color: rgba(115, 3, 76, 1);
+
+    /* FAQ questions color, used in some headings */
     --main-text-color: rgba(115, 3, 76, 1);
-    --secondary-text-color: rgba(115, 3, 76, 1);
-    --accent-color: rgba(115, 3, 76, 1);
+
+    /* Primary light bg and text color in the page content area */
+    --light-color: #f9f9f9;
+
+    /* Secondary light bg and text color, Header and Footer text color */
+    --secondary-light-color: #f2d8ce;
+
+    /* Color for aria-current=['page'] */
+    --current-active-page-color: #dd8101;
+
+    /* Currently used for hover in LinkButton */
+    --accent-bg-color: rgb(174, 6, 115);
 }
 
 body {
