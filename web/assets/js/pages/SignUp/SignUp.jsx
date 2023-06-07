@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
 import useAxios from '../../hooks/useAxios';
-import useForm from '../../hooks/useForm';
+import useForm from './useForm';
 import TextField from './components/TextField';
 import alertBox from './utils/alertBox';
 import './SignUp.css';
