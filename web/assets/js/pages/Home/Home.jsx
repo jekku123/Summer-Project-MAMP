@@ -10,12 +10,6 @@ const Home = () => {
             <div className='home-content'>
                 <div className='homepage-cards'>
                     <LandingCard
-                        heading='Events'
-                        info='View all ongoing events at Business College Helsinki'
-                        url='/events'
-                        urltext='Browse Events'
-                    />
-                    <LandingCard
                         heading='Helsinki Info'
                         info='View more information about Helsinki'
                         url='/helsinki'
