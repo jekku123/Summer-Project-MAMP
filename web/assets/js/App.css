@@ -29,6 +29,8 @@
 
     /* Currently used for hover in LinkButton */
     --accent-bg-color: rgb(174, 6, 115);
+
+    --dark-bg-color: #2c3150;
 }
 
 body {
