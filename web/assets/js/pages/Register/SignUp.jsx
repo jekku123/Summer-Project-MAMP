@@ -10,6 +10,7 @@ const SignUp = () => {
         email: '',
         phone: '',
     });
+
     const params = useParams();
 
     const handleChanges = (e) => {
@@ -23,7 +24,18 @@ const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = { ...formData, event_id: params.id };
-        axios.post(`http://localhost:8007/api/attendee`, data);
+        axios
+            .post(`http://localhost:8007/api/attendee`, data)
+            .then(() => {
+                alert('Thanks you for signing up');
+                setFormData({
+                    firstname: '',
+                    lastname: '',
+                    email: '',
+                    phone: '',
+                });
+            })
+            .catch((err) => alert('Error, just couldnt :('));
     };
 
     return (
@@ -36,6 +48,7 @@ const SignUp = () => {
                         name='firstname'
                         id='firstname'
                         onChange={handleChanges}
+                        value={formData.firstname}
                     />
                 </div>
 
@@ -45,15 +58,26 @@ const SignUp = () => {
                         name='lastname'
                         id='lastname'
                         onChange={handleChanges}
+                        value={formData.lastname}
                     />
                 </div>
                 <div className='textfield'>
                     <label htmlFor='email'>Email</label>
-                    <input name='email' id='email' onChange={handleChanges} />
+                    <input
+                        name='email'
+                        id='email'
+                        onChange={handleChanges}
+                        value={formData.email}
+                    />
                 </div>
                 <div className='textfield'>
                     <label htmlFor='phone'>Phone</label>
-                    <input name='phone' id='phone' onChange={handleChanges} />
+                    <input
+                        name='phone'
+                        id='phone'
+                        onChange={handleChanges}
+                        value={formData.phone}
+                    />
                 </div>
                 <button type='submit'>Sign up</button>
             </form>
