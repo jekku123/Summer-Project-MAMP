@@ -8,7 +8,7 @@ import EventList from './pages/EventList/EventList';
 import ScrollTopBtn from './components/ScrollTopBtn/ScrollTopBtn';
 import SingleEvent from './pages/Event/SingleEvent';
 import './App.css';
-import SignUp from './pages/Register/SignUp';
+import SignUp from './pages/SignUp/SignUp';
 
 function App() {
     return (

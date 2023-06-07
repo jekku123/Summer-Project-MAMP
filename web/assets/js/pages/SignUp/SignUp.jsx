@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import './SignUp.css';
+import useAxios from '../../hooks/useAxios';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const SignUp = () => {
     });
 
     const params = useParams();
+    const [data] = useAxios(`http://localhost:8007/api/events/${params.id}`);
 
     const handleChanges = (e) => {
         const { name, value } = e.target;
@@ -23,11 +25,11 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = { ...formData, event_id: params.id };
+        const postData = { ...formData, event_id: params.id };
         axios
-            .post(`http://localhost:8007/api/attendee`, data)
+            .post(`http://localhost:8007/api/attendee`, postData)
             .then(() => {
-                alert('Thanks you for signing up');
+                alert(`Thank you for signing up to ${data.title}`);
                 setFormData({
                     firstname: '',
                     lastname: '',
@@ -79,7 +81,9 @@ const SignUp = () => {
                         value={formData.phone}
                     />
                 </div>
-                <button type='submit'>Sign up</button>
+                <div>
+                    <button type='submit'>Sign up</button>
+                </div>
             </form>
         </div>
     );
