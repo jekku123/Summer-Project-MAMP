@@ -9,11 +9,10 @@
     margin-top: 100px;
     margin-bottom: 40px;
     padding: 20px;
-    height: 100vh;
 }
 .faq-background h1 {
     padding-bottom: 20px;
-    color: white;
+    color: var(--light-color);
     font-size: 24px;
     font-weight: bold;
     text-align: center;
@@ -22,7 +21,7 @@
 .faqinfo {
     border-radius: 5px;
     box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
-    background-color: white;
+    background-color: var(--light-color);
     padding: 20px;
     margin-bottom: 30px;
     width: 90vw;
@@ -48,8 +47,8 @@ hr {
     height: 20px;
     border-radius: 50%;
     border: none;
-    background-color: rgba(115, 3, 76, 1);
-    color: white;
+    background-color: var(--main-bg-color);
+    color: var(--light-color);
     transition: transform 0.3s;
     cursor: pointer;
     margin-right: 0.5rem;
@@ -59,7 +58,7 @@ hr {
 }
 
 .question_title {
-    color: rgba(115, 3, 76, 1);
+    color: var(--main-bg-color);
     cursor: pointer;
 }
 .btn_expand.hovered {
@@ -81,7 +80,7 @@ hr {
 
 .answer {
     border-radius: 5px;
-    background-color: rgba(242, 216, 206, 1);
+    background-color: var(--secondary-light-color);
     padding: 1rem;
     position: relative;
     margin-left: 1rem;
@@ -96,7 +95,7 @@ hr {
     width: 0;
     height: 0;
     border: 20px solid transparent;
-    border-right-color: rgba(242, 216, 206, 1);
+    border-right-color: var(--secondary-light-color);
     border-left: 0;
     border-top: 0;
     margin-top: -10px;
