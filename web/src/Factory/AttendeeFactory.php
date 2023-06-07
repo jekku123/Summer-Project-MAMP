@@ -50,7 +50,7 @@ final class AttendeeFactory extends ModelFactory
             'firstname' => self::faker()->firstName(),
             'lastname' => self::faker()->lastName(),
             'email' => self::faker()->email(),
-            'phone' => self::faker()->phoneNumber(),
+            'phone' => self::faker()->text(10),
             'registered_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }

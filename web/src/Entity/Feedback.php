@@ -17,7 +17,7 @@ class Feedback
     #[ORM\Column(type: Types::TEXT)]
     private ?string $message = null;
 
-    #[ORM\ManyToOne(inversedBy: 'feedback')]
+    #[ORM\ManyToOne(inversedBy: 'feedback', cascade: ['remove'])]
     private ?Attendee $attendee = null;
 
     #[ORM\ManyToOne(inversedBy: 'feedback')]
