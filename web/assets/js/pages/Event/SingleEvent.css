@@ -1,33 +1,28 @@
-.conference {
+.event {
     padding: 20px;
     margin-top: 100px;
     margin-bottom: 40px;
-    background: url(https://images.unsplash.com/photo-1533135175465-90ac0c0e030f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1655&q=80)
-        no-repeat center/cover;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 20px;
+    background: url(https://images.unsplash.com/photo-1533135175465-90ac0c0e030f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1655&q=80) no-repeat center/cover;
 }
 
 .title {
     font-size: 24px;
     font-weight: bold;
     color: white;
+    text-align: center;
 }
 
 .event-image {
-    width: 550px;
-    margin-right: 2rem;
+    width: 500px;
+    height: auto;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 3px;
 }
 
 .section1 {
-    height: 500px;
-    margin-bottom: 30px;
-    background-color: #f9f9f9;
+    width: 85vw;
+    margin: auto auto 1.5rem auto;
+    background-color: white;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -36,143 +31,112 @@
 }
 
 .section1-main {
-    background-color: rgb(250, 233, 227);
-    border-radius: 8px;
-    width: 50%;
+    border-radius: 3px;
+    width: 57%;
+    background-color: antiquewhite;
     padding: 20px;
+    margin-right: 0.5rem;
 }
 
 .section {
-    margin-bottom: 30px;
-    background-color: #f9f9f9;
+    width: 85vw;
+    margin: auto auto 1.5rem auto;
+    background-color: white;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .section-title {
-    font-size: 20px;
-    font-weight: bold;
     margin-bottom: 10px;
-    color: #333;
+    color: var(--main-text-color);
 }
 
 .section-content {
     margin-left: 20px;
 }
 
-.company {
+.section-content p,
+.exhibition-booth p {
+    margin: 1rem;
+    line-height: 1.5;
+}
+
+.section-content strong,
+.exhibition-booth strong {
+    color: var(--main-text-color);
+}
+
+
+.session,
+.workshop {
     margin-bottom: 10px;
+    padding: 20px;
+    background-color: antiquewhite;
 }
 
-.company-name {
-    font-weight: bold;
-    color: #333;
-}
-
-.company-description {
-    color: #666;
-}
-
-.company-website {
-    color: #666;
-}
-
-.speaker {
-    margin-bottom: 10px;
-}
-
-.speaker-name {
-    font-weight: bold;
-    color: #333;
-}
-
-.speaker-organization {
-    color: #666;
-}
-
-.session {
-    margin-bottom: 10px;
-}
-
-.session-title {
-    font-weight: bold;
-    color: #333;
-}
-
-.session-description {
-    color: #666;
-}
-
-.session-location {
-    color: #666;
-}
 
 .exhibition {
     margin-bottom: 10px;
+
 }
 
-.exhibition-title {
-    font-weight: bold;
-    color: #333;
+.exhibition-booth {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #e4e6eb;
 }
 
-.exhibition-description {
-    color: #666;
-}
 
-.booth {
+
+.side-event {
     margin-bottom: 10px;
 }
 
-.booth-title {
-    font-weight: bold;
-    color: #333;
+
+@media (max-width: 1024px) {
+
+    .event-image {
+        width: 50%;
+    }
+
+    .section1,
+    .section {
+        width: 90vw;
+    }
 }
 
-.booth-description {
-    color: #666;
-}
+@media (max-width: 800px) {
 
-.event {
-    margin-bottom: 10px;
-}
-
-.event-title {
-    font-weight: bold;
-    color: #333;
-}
-
-.event-description {
-    color: #666;
-}
-
-.event-location {
-    color: #666;
-}
-
-/* mobile version */
-
-@media (max-width: 767px) {
-    .section1 {
-        display: block;
+    .section1,
+    .section {
+        flex-flow: row wrap;
     }
 
     .section1-main {
         width: 100%;
-        background-color: white;
     }
 
     .event-image {
-        height: 280px;
+        width: 99%;
+        margin-top: 0.5rem;
+
+    }
+}
+
+@media (max-width: 480px) {
+
+    .section1-main,
+    .event-image {
+        margin: 0;
+    }
+
+    .event-image {
         width: 100%;
+        margin-top: 0.5rem;
     }
 
     .section-title {
-        font-size: 18px;
-    }
-
-    .section-content p {
-        font-size: 14px;
+        text-align: center;
     }
 }

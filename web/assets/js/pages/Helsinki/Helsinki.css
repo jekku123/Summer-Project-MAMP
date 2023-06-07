@@ -46,10 +46,12 @@ a.hsl-link {
 }
 
 @media (max-width: 1024px) {
+
     .tram-img,
     .helsinki-img {
         width: 50%;
     }
+
     .info-section {
         width: 90vw;
     }
@@ -59,9 +61,11 @@ a.hsl-link {
     .info-section {
         flex-flow: row wrap;
     }
+
     .info-text {
         width: 100%;
     }
+
     .tram-img,
     .helsinki-img {
         margin: 0 1.5rem;
@@ -70,6 +74,7 @@ a.hsl-link {
 }
 
 @media (max-width: 480px) {
+
     .info-text,
     .tram-img,
     .helsinki-img {

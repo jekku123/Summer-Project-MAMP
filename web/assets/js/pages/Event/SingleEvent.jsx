@@ -22,10 +22,9 @@ function SingleEvent() {
 
 
     return (
-        <div className='conference'>
-            <div className='header'>
-                <h1 className='title'>About the Event</h1>
-            </div>
+        <div className='event'>
+
+            <h1 className='title'>About the Event</h1>
 
             <div className='section1'>
                 <div className='section1-main'>
@@ -59,8 +58,8 @@ function SingleEvent() {
                 <h2 className='section-title'>Speakers</h2>
                 <div className='section-content'>
                     {eventDescription.speakers && eventDescription.speakers.map((speaker, i) =>
-                        <div className='speaker' key={i}>
-                            <p className='speaker-name'>{speaker.firstname}{speaker.lastname}</p>
+                        <div className='speaker' key={speaker.firstname}>
+                            <p>{speaker.firstname}{speaker.lastname}</p>
                         </div>
                     )}
                 </div>
@@ -71,19 +70,23 @@ function SingleEvent() {
                 <h2 className='section-title'>Sessions</h2>
                 <div className='section-content'>
                     {eventDescription.sessions && eventDescription.sessions.map((session, i) =>
-                        <div className='session' key={i}>
-                            <p className='session-title'>title: {session.title}</p>
-                            <p className='session-description'>description: {session.description}</p>
-                            <p className='session-location'>location: {session.location}</p>
-                            <p className='session-datetime'>
-                                Start Date/Time: {session.start_at}
+                        <div className='session' key={session.title}>
+                            <p><strong>Title:</strong> {session.title}</p>
+                            <p><strong>Description:</strong> {session.description}</p>
+                            <p><strong>Location:</strong> {session.location}</p>
+                            <p>
+                                <strong>Start Date:</strong> {session.start_at}
                             </p>
-                            <p className='session-datetime'>
-                                End Date/Time:   {session.end_at}
+                            <p>
+                                <strong>End Date:</strong>   {session.end_at}
                             </p>
-                            {session.speakers.map((speaker, i) =>
-                                <p className='session-speaker'>speaker: {speaker.firstname}{speaker.lastname}</p>
-                            )}
+                            <p> <strong>Speakers:</strong>
+                                {session.speakers.map((speaker, i) =>
+
+                                    <li key={speaker.lastname}>{speaker.firstname}{speaker.lastname}</li>
+
+                                )}
+                            </p>
                         </div>
                     )}
                 </div>
@@ -96,30 +99,31 @@ function SingleEvent() {
                 <h2 className='section-title'>Exhibition</h2>
                 <div className='section-content'>
                     {eventDescription.exhibitions && eventDescription.exhibitions.map((exhibition, i) =>
-                        <div>
-                            <div className='exhibition'>
-                                <p className='exhibition-title'>title: {exhibition.title}</p>
-                                <p className='exhibition-description'>description: {exhibition.description}</p>
-                                <p className='exhibition-location'>location:{exhibition.location}</p>
-                                <p className='exhibition-datetime'>
-                                    Start Time: {exhibition.start_at}
+                        <div className='exhibition' key={exhibition.title}>
+                            <div className='exhibition-info'>
+                                <p><strong>Title: </strong>{exhibition.title}</p>
+                                <p><strong>Description: </strong>{exhibition.description}</p>
+                                <p><strong>Location: </strong>{exhibition.location}</p>
+                                <p>
+                                    <strong>Start Date/Time: </strong> {exhibition.start_at}
                                 </p>
-                                <p className='exhibition-datetime'>End Time: {exhibition.end_at}</p>
+                                <p><strong>End Date/Time: </strong>{exhibition.end_at}</p>
                             </div>
-
+                            <p> <strong>Booths:</strong></p>
                             {exhibition.booths.map((booth) =>
-                                <div className='booth'>
-                                    <p className='booth-title'>booth number: {booth.booth_number}</p>
-                                    <p className='booth-title'>title: {booth.title}</p>
-                                    <p className='booth-description'>description: {booth.description}</p>
+                                <div className='exhibition-booth' key={booth.booth_number}>
+                                    <p><strong>Booth number: </strong> {booth.booth_number}</p>
+                                    <p><strong>Title: </strong> {booth.title}</p>
+                                    <p><strong>Description: </strong> {booth.description}</p>
 
 
-                                    <p className='booth-company'>
-                                        <a href='https://www.neste.com/'>company: {booth.company.name}</a>
+                                    <p className='booth-company'> <strong>Company: </strong>
+                                        <a href='https://www.neste.com/'>{booth.company.name}</a>
                                     </p>
-                                    <p>{booth.company.description}</p>
+                                    <p> <strong>About company: </strong>{booth.company.description}</p>
                                 </div>
                             )}
+
 
                         </div>
                     )}
@@ -132,19 +136,21 @@ function SingleEvent() {
                 <h2 className='section-title'>Workshops</h2>
                 <div className='section-content'>
                     {eventDescription.workshops && eventDescription.workshops.map((workshop, i) =>
-                        <div className='session' key={i}>
-                            <p className='session-title'>title: {workshop.title}</p>
-                            <p className='session-description'>description: {workshop.description}</p>
-                            <p className='session-location'>location: {workshop.location}</p>
-                            <p className='session-datetime'>
-                                Start Date/Time: {workshop.start_at}
+                        <div className='workshop' key={workshop.title}>
+                            <p><strong>Title:</strong>{workshop.title}</p>
+                            <p><strong>Description:</strong>{workshop.description}</p>
+                            <p><strong>Location:</strong>{workshop.location}</p>
+                            <p>
+                                <strong>Start Date/Time:</strong> {workshop.start_at}
                             </p>
-                            <p className='session-datetime'>
-                                End Date/Time:   {workshop.end_at}
+                            <p>
+                                <strong>End Date/Time:</strong>   {workshop.end_at}
                             </p>
-                            {workshop.speakers.map((speaker) =>
-                                <p className='session-speaker'>speaker: {speaker.firstname}{speaker.lastname}</p>
-                            )}
+                            <p> <strong>Speakers:</strong>
+                                {workshop.speakers.map((speaker) =>
+                                    <li key={speaker.firstname}>{speaker.firstname}{speaker.lastname}</li>
+                                )}
+                            </p>
                         </div>
                     )}
                 </div>
@@ -156,14 +162,14 @@ function SingleEvent() {
                 <h2 className='section-title'>Side Events</h2>
                 {eventDescription.sideEvents && eventDescription.sideEvents.map((sideEvent, i) =>
                     <div className='section-content'>
-                        <div className='event' key={i}>
-                            <p className='event-title'>title: {sideEvent.title}</p>
-                            <p className='event-description'>description: {sideEvent.description}</p>
-                            <p className='event-location'>
+                        <div className='side-event' key={sideEvent.title}>
+                            <p>title: {sideEvent.title}</p>
+                            <p>description: {sideEvent.description}</p>
+                            <p>
                                 Location: {sideEvent.location}
                             </p>
-                            <p className='event-datetime'>Start Time: {sideEvent.start_at}</p>
-                            <p className='event-datetime'>End Time: {sideEvent.end_at}</p>
+                            <p>Start Time: {sideEvent.start_at}</p>
+                            <p>End Time: {sideEvent.end_at}</p>
                         </div>
                     </div>
                 )}
