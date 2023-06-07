@@ -7,16 +7,16 @@ nav ul {
 
 nav ul li a {
     text-decoration: none;
-    color: rgba(242, 216, 206, 1);
+    color: var(--secondary-light-color);
 }
 
-nav ul li a:hover {
+/* nav ul li a:hover {
     color: rgb(221, 129, 1);
     transition: 0.3s ease;
-}
+} */
 
 [aria-current='page'] {
-    color: rgb(221, 129, 1);
+    color: var(--current-active-page-color);
 }
 
 .burger {
@@ -30,7 +30,7 @@ nav ul li a:hover {
     height: 3px;
     margin: 5px auto;
     transition: all 0.3s ease-in-out;
-    background-color: white;
+    background-color: var(--secondary-light-color);
 }
 
 /* Mobile version styles */
@@ -39,7 +39,8 @@ nav ul li a:hover {
     top: 100px;
     right: 0;
     width: 100%;
-    padding: 0 2em 2em;
+    background-color: rgb(13, 12, 15);
+    padding: 2em 2em 2em 3em;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.3s ease, opacity 0.3s ease;
@@ -68,7 +69,6 @@ nav ul li a:hover {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    /* Adjust mobile navbar positioning */
     .mobile-nav ul {
         display: flex;
         flex-direction: column;
