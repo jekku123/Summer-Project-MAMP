@@ -5,9 +5,8 @@
     padding-top: 100px;
 }
 
-.textfield label {
-    display: block;
-    margin-bottom: 3px;
+.signup h2 {
+    color: var(--light-color);
 }
 
 form button {
