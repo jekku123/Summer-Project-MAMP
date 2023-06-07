@@ -6,10 +6,10 @@
     background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
     color: var(--light-color);
     height: 100vh;
     position: relative;
+    box-shadow: inset 0 0 10vw 10vw rgb(13, 12, 15);
 }
 
 .banner-content {
@@ -31,5 +31,9 @@
 @media (max-width: 700px) {
     .banner-content {
         padding-left: 3em;
+    }
+
+    .banner-container {
+        box-shadow: inset 0 0 10vw 7.5vw rgb(13, 12, 15);
     }
 }
