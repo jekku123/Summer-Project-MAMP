@@ -47,7 +47,10 @@ final class AttendeeFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'email' => self::faker()->text(50),
+            'firstname' => self::faker()->firstName(),
+            'lastname' => self::faker()->lastName(),
+            'email' => self::faker()->email(),
+            'phone' => self::faker()->phoneNumber(),
             'registered_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }

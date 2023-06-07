@@ -26,7 +26,7 @@ class Speaker
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bio = null;
 
-    #[ORM\Column(length: 30, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $organization = null;
 
     #[ORM\Column(length: 100, nullable: true)]

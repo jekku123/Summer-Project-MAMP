@@ -72,7 +72,8 @@ class EventController extends AbstractController
                 'end_at' => $event->getEndAt()->format('Y-m-d H:i:s'),
                 'sessions' => $this->getSessionData($event),
                 'exhibitions' => $this->getExhibitionData($event),
-                'workshops' => $this->getWorkshopData($event)
+                'workshops' => $this->getWorkshopData($event),
+                'speakers' => $this->getSpeakersData(($event))
             ];
         }
         return $data;

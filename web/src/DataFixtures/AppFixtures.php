@@ -27,13 +27,13 @@ class AppFixtures extends Fixture
 
         EventFactory::createMany(3, static function (int $i) {
             return [
-              'type' => 'conference', // Set the type as a string value
-              'title' => "Conference $i",
+                'type' => 'conference', // Set the type as a string value
+                'title' => "Conference $i",
                 'invites' => InviteFactory::createMany(70),
                 'attendees' => AttendeeFactory::createMany(50),
                 'speakers' => SpeakerFactory::createMany(12),
                 'sideEvents' => SideEventFactory::createMany(3),
-                'feedback' => FeedbackFactory::createMany(10),
+                'feedback' => FeedbackFactory::createMany(10, ['attendee' => AttendeeFactory::random()]),
                 'exhibitions' => ExhibitionFactory::createMany(
                     1,
                     function () {

@@ -47,8 +47,9 @@ final class CompanyFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'description' => self::faker()->text(),
-            'name' => self::faker()->text(50),
+            'description' => self::faker()->catchPhrase(),
+            'name' => self::faker()->company(),
+            'website' => self::faker()->url()
         ];
     }
 

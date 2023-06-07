@@ -10,6 +10,7 @@ use App\Entity\Company;
 use App\Entity\Workshop;
 use App\Entity\Speaker;
 use App\Entity\Exhibition;
+use App\Entity\Feedback;
 use App\Entity\SideEvent;
 use App\Entity\Invite;
 use App\Entity\Notification;
@@ -57,5 +58,6 @@ class DashboardController extends AbstractDashboardController
     yield MenuItem::linkToCrud('Invites', 'fas fa-map-marker-alt', Invite::class);
     yield MenuItem::linkToCrud('Attendees', 'fas fa-map-marker-alt', Attendee::class);
     yield MenuItem::linkToCrud('Notifications', 'fas fa-map-marker-alt', Notification::class);
+    yield MenuItem::linkToCrud('Feedback', 'fas fa-map-marker-alt', Feedback::class);
   }
 }
