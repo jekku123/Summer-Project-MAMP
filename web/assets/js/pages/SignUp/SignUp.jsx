@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import './SignUp.css';
@@ -11,7 +11,6 @@ const SignUp = () => {
         email: '',
         phone: '',
     });
-
     const params = useParams();
     const [data] = useAxios(`http://localhost:8007/api/events/${params.id}`);
 
@@ -37,7 +36,7 @@ const SignUp = () => {
                     phone: '',
                 });
             })
-            .catch((err) => alert('Error, just couldnt :('));
+            .catch((err) => alert('Error! just couldnt :('));
     };
 
     return (
