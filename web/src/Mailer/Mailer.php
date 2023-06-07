@@ -34,6 +34,7 @@ class Mailer
 
     public function sendInvite(Invite $invite): void
     {
+        $id = $invite->getEvent()->getId();
         $email = (new Email())
             ->from('business.college@bc.fi')
             ->to($invite->getEmail())
@@ -43,6 +44,7 @@ class Mailer
             <h1>Please come to our ' . $invite->getEvent()->getType() . '</h1>
             <p>Lets have a good one!</p>
             <p>' . $invite->getEvent()->getStartAt()->format('Y-m-d H:i:s') . ' @ ' . $invite->getEvent()->getLocation() . '</p>
+            <a href="http://localhost:8007/signup/' . $id . '">Sign up</a>
             <small>-Business College-</small>
             ');
 
