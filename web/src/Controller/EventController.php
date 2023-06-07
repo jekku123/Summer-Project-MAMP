@@ -12,7 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use App\Mailer\Mailer;
+use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bundle\MakerBundle\EventRegistry;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/api', name: 'api_')]
 class EventController extends AbstractController
@@ -40,21 +44,28 @@ class EventController extends AbstractController
     }
 
     #[Route('/attendee', name: 'post_attendee', methods: ['POST'])]
-    public function new(Request $request, AttendeeRepository $attendees, MailerInterface $mailerInterface): Response
+    public function new(Request $request, AttendeeRepository $attendees, MailerInterface $mailerInterface, EventRepository $events): JsonResponse
     {
+
+        $data = json_decode($request->getContent(), true);
+
+        $eventsRepo = $events->findBy(['id' => $data['event_id']]);
+        $event = $eventsRepo[0];
+
         $attendee = new Attendee();
 
-        $attendee->setFirstName($request->request->get('firstname') ?? '');
-        $attendee->setLastName($request->request->get('lastname') ?? '');
-        $attendee->setEmail($request->request->get('email') ?? '');
-        $attendee->setPhone($request->request->get('phone')) ?? '';
+        $attendee->setEvent($event);
+        $attendee->setFirstName($data['firstname'] ?? '');
+        $attendee->setLastName($data['lastname'] ?? '');
+        $attendee->setEmail($data['email'] ?? '');
+        $attendee->setPhone($data['phone'] ?? '');
 
         $attendees->save($attendee, true);
 
         $mailer = new Mailer($mailerInterface);
         $mailer->sendEmail($attendee);
 
-        return $this->redirectToRoute('app_home');
+        return $this->json('Attendee added');
     }
 
     public function getEventsData($events): array
