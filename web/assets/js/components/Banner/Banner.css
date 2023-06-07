@@ -7,7 +7,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    color: white;
+    color: var(--light-color);
     height: 100vh;
     position: relative;
 }
@@ -15,7 +15,7 @@
 .banner-content {
     display: flex;
     flex-direction: column;
-    padding-left: 100px;
+    padding-left: 64px;
     position: relative;
     gap: 100px;
 }
@@ -28,18 +28,8 @@
     font-size: 3rem;
 }
 
-.banner-container a {
-    text-decoration: none;
-}
-
-.banner-content button {
-    background-color: var(--main-bg-color);
-    color: white;
-    border-radius: 5px;
-    border: none;
-    padding: 1em 2em;
-}
-
-.banner-content button:hover {
-    background-color: rgb(140, 5, 93);
+@media (max-width: 700px) {
+    .banner-content {
+        padding-left: 3em;
+    }
 }
