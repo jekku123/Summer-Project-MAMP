@@ -10,7 +10,11 @@ function SingleEvent() {
         `http://localhost:8007/api/events/${id}`
     );
 
-    return (
+    return isLoading ? (
+        <div className='loader'>
+            <h2>Loading</h2>
+        </div>
+    ) : (
         <div className='event'>
             <h1 className='title'>About the Event</h1>
 
