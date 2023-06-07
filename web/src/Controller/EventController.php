@@ -84,6 +84,7 @@ class EventController extends AbstractController
         $data = [];
         foreach ($event->getSessions() as $session) {
             $data[] = [
+                'id' => $session->getId(),
                 'title' => $session->getTitle(),
                 'description' => $session->getDescription(),
                 'location' => $session->getLocation(),
@@ -100,6 +101,7 @@ class EventController extends AbstractController
         $data = [];
         foreach ($event->getExhibitions() as $exhibition) {
             $data[] = [
+                'id' => $exhibition->getId(),
                 'title' => $exhibition->getTitle(),
                 'description' => $exhibition->getDescription(),
                 'location' => $exhibition->getLocation(),
@@ -116,6 +118,7 @@ class EventController extends AbstractController
         $data = [];
         foreach ($event->getWorkshops() as $workshop) {
             $data[] = [
+                'id' => $workshop->getId(),
                 'title' => $workshop->getTitle(),
                 'description' => $workshop->getDescription(),
                 'location' => $workshop->getLocation(),
@@ -132,8 +135,8 @@ class EventController extends AbstractController
         $data = [];
         foreach ($session->getSpeakers() as $speaker) {
             $data[] = [
-                'firstname' => $speaker->getFirstname(),
-                'lastname' => $speaker->getLastname(),
+                'id' => $speaker->getId(),
+                'name' => $speaker->getFullname(),
                 'bio' => $speaker->getBio(),
                 'organization' => $speaker->getOrganization(),
                 'photo' => $speaker->getPhoto(),
@@ -147,10 +150,12 @@ class EventController extends AbstractController
         $data = [];
         foreach ($exhibition->getBooths() as $booth) {
             $data[] = [
+                'id' => $booth->getId(),
                 'booth_number' => $booth->getBoothNumber(),
                 'title' => $booth->getTitle(),
                 'description' => $booth->getDescription(),
                 'company' =>  [
+                    'id' => $booth->getCompany()->getId(),
                     'name' => $booth->getCompany()->getName(),
                     'description' => $booth->getCompany()->getDescription(),
                     'website' => $booth->getCompany()->getWebsite()

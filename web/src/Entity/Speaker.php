@@ -70,6 +70,11 @@ class Speaker
         return $this;
     }
 
+    public function getFullname(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function getLastname(): ?string
     {
         return $this->lastname;
