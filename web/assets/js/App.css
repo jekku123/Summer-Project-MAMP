@@ -29,6 +29,9 @@
 
     /* Currently used for hover in LinkButton */
     --accent-bg-color: rgb(174, 6, 115);
+
+    /* Background color for cards in single page */
+    --card-bg-color: rgb(249, 237, 221);
 }
 
 body {
