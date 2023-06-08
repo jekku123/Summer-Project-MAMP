@@ -218,11 +218,11 @@ function SingleEvent() {
                         data.sideEvents.map((sideEvent, i) => (
                             <div className='section-content'>
                                 <div className='side-event' key={sideEvent.id}>
-                                    <p>title: {sideEvent.title}</p>
-                                    <p>description: {sideEvent.description}</p>
-                                    <p>Location: {sideEvent.location}</p>
-                                    <p>Start Time: {sideEvent.start_at}</p>
-                                    <p>End Time: {sideEvent.end_at}</p>
+                                    <p> <strong>Title:</strong> {sideEvent.title}</p>
+                                    <p><strong>Description:</strong> {sideEvent.description}</p>
+                                    <p><strong>Location:</strong> {sideEvent.location}</p>
+                                    <p><strong>Start Date/Time:</strong> {sideEvent.start_at}</p>
+                                    <p><strong>End Date/Time:</strong> {sideEvent.end_at}</p>
                                 </div>
                             </div>
                         ))}
