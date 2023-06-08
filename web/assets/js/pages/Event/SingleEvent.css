@@ -100,6 +100,8 @@
 
 .side-event {
     margin-bottom: 10px;
+    background-color: var(--card-bg-color);
+    padding: 20px;
 }
 
 @media (max-width: 1024px) {
@@ -114,6 +116,7 @@
 }
 
 @media (max-width: 800px) {
+
     .section1,
     .section {
         flex-flow: row wrap;
@@ -130,6 +133,7 @@
 }
 
 @media (max-width: 480px) {
+
     .section1-main,
     .event-image {
         margin: 0;
