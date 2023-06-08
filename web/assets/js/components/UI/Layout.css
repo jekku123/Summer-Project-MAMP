@@ -1,7 +1,6 @@
 .page-container {
     position: relative;
     min-height: 100vh;
-    background-color: var(--dark-bg-color);
 }
 
 .page-content {

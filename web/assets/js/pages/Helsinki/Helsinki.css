@@ -16,6 +16,7 @@
     display: flex;
     justify-content: space-between;
     width: 85vw;
+    box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
 }
 
 .info-section p {
