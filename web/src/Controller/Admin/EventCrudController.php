@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -50,5 +51,9 @@ class EventCrudController extends AbstractCrudController
             'years' => range(date('Y'), date('Y') + 5),
             'widget' => 'single_text',
         ]);
+        yield CollectionField::new('sessions')->useEntryCrudForm()->onlyWhenUpdating();
+        yield CollectionField::new('workshops')->useEntryCrudForm()->onlyWhenUpdating();
+        yield CollectionField::new('exhibitions')->useEntryCrudForm()->onlyWhenUpdating();
+        yield CollectionField::new('sideEvents')->useEntryCrudForm()->onlyWhenUpdating();
     }
 }

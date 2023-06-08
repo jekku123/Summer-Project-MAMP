@@ -22,19 +22,19 @@ class WorkshopCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('event')
-        ->setFormTypeOptions([
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('e')
-                    ->andWhere('e.type = :type')
-                    ->setParameter('type', Event::CONFERENCE);
-            },
-            'choice_label' => 'title',
-        ]);
+            ->setFormTypeOptions([
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('e')
+                        ->andWhere('e.type = :type')
+                        ->setParameter('type', Event::CONFERENCE);
+                },
+                'choice_label' => 'title',
+            ]);
         yield AssociationField::new('speakers')
-        ->autocomplete()
-        ->setFormTypeOption('multiple', true)
-        ->setFormTypeOption('by_reference', false);
-          yield TextField::new('title');
+            ->autocomplete()
+            ->setFormTypeOption('multiple', true)
+            ->setFormTypeOption('by_reference', false)->hideOnIndex();
+        yield TextField::new('title');
         yield TextareaField::new('description');
         yield TextField::new('location');
         yield DateTimeField::new('start_at')->setFormTypeOptions([
