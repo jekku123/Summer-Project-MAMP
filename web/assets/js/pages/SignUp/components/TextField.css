@@ -1,0 +1,10 @@
+.textfield label {
+    display: block;
+    margin-bottom: 3px;
+    text-transform: capitalize;
+    color: var(--light-color);
+}
+
+.textfield input {
+    margin-bottom: 10px;
+}

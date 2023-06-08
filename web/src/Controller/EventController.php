@@ -12,7 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use App\Mailer\Mailer;
+use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bundle\MakerBundle\EventRegistry;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/api', name: 'api_')]
 class EventController extends AbstractController
@@ -40,21 +44,28 @@ class EventController extends AbstractController
     }
 
     #[Route('/attendee', name: 'post_attendee', methods: ['POST'])]
-    public function new(Request $request, AttendeeRepository $attendees, MailerInterface $mailerInterface): Response
+    public function new(Request $request, AttendeeRepository $attendees, MailerInterface $mailerInterface, EventRepository $events): JsonResponse
     {
+
+        $data = json_decode($request->getContent(), true);
+
+        $eventsRepo = $events->findBy(['id' => $data['event_id']]);
+        $event = $eventsRepo[0];
+
         $attendee = new Attendee();
 
-        $attendee->setFirstName($request->request->get('firstname') ?? '');
-        $attendee->setLastName($request->request->get('lastname') ?? '');
-        $attendee->setEmail($request->request->get('email') ?? '');
-        $attendee->setPhone($request->request->get('phone')) ?? '';
+        $attendee->setEvent($event);
+        $attendee->setFirstName($data['firstname'] ?? '');
+        $attendee->setLastName($data['lastname'] ?? '');
+        $attendee->setEmail($data['email'] ?? '');
+        $attendee->setPhone($data['phone'] ?? '');
 
         $attendees->save($attendee, true);
 
         $mailer = new Mailer($mailerInterface);
         $mailer->sendEmail($attendee);
 
-        return $this->redirectToRoute('app_home');
+        return $this->json('Attendee added');
     }
 
     public function getEventsData($events): array
@@ -84,6 +95,7 @@ class EventController extends AbstractController
         $data = [];
         foreach ($event->getSessions() as $session) {
             $data[] = [
+                'id' => $session->getId(),
                 'title' => $session->getTitle(),
                 'description' => $session->getDescription(),
                 'location' => $session->getLocation(),
@@ -100,6 +112,7 @@ class EventController extends AbstractController
         $data = [];
         foreach ($event->getExhibitions() as $exhibition) {
             $data[] = [
+                'id' => $exhibition->getId(),
                 'title' => $exhibition->getTitle(),
                 'description' => $exhibition->getDescription(),
                 'location' => $exhibition->getLocation(),
@@ -116,6 +129,7 @@ class EventController extends AbstractController
         $data = [];
         foreach ($event->getWorkshops() as $workshop) {
             $data[] = [
+                'id' => $workshop->getId(),
                 'title' => $workshop->getTitle(),
                 'description' => $workshop->getDescription(),
                 'location' => $workshop->getLocation(),
@@ -132,8 +146,8 @@ class EventController extends AbstractController
         $data = [];
         foreach ($session->getSpeakers() as $speaker) {
             $data[] = [
-                'firstname' => $speaker->getFirstname(),
-                'lastname' => $speaker->getLastname(),
+                'id' => $speaker->getId(),
+                'name' => $speaker->getFullname(),
                 'bio' => $speaker->getBio(),
                 'organization' => $speaker->getOrganization(),
                 'photo' => $speaker->getPhoto(),
@@ -147,10 +161,12 @@ class EventController extends AbstractController
         $data = [];
         foreach ($exhibition->getBooths() as $booth) {
             $data[] = [
+                'id' => $booth->getId(),
                 'booth_number' => $booth->getBoothNumber(),
                 'title' => $booth->getTitle(),
                 'description' => $booth->getDescription(),
                 'company' =>  [
+                    'id' => $booth->getCompany()->getId(),
                     'name' => $booth->getCompany()->getName(),
                     'description' => $booth->getCompany()->getDescription(),
                     'website' => $booth->getCompany()->getWebsite()

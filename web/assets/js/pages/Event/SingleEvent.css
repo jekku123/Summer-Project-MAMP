@@ -2,8 +2,6 @@
     padding: 20px;
     margin-top: 100px;
     margin-bottom: 40px;
-    background: url(https://images.unsplash.com/photo-1533135175465-90ac0c0e030f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1655&q=80) no-repeat center/cover;
-
 }
 
 .loader {
@@ -82,7 +80,6 @@
     color: var(--main-text-color);
 }
 
-
 .session,
 .workshop {
     margin-bottom: 10px;
@@ -90,10 +87,8 @@
     background-color: var(--card-bg-color);
 }
 
-
 .exhibition {
     margin-bottom: 10px;
-
 }
 
 .exhibition-booth {
@@ -103,15 +98,11 @@
 
 }
 
-
-
 .side-event {
     margin-bottom: 10px;
 }
 
-
 @media (max-width: 1024px) {
-
     .event-image {
         width: 50%;
     }
@@ -123,7 +114,6 @@
 }
 
 @media (max-width: 800px) {
-
     .section1,
     .section {
         flex-flow: row wrap;
@@ -136,12 +126,10 @@
     .event-image {
         width: 99%;
         margin-top: 0.5rem;
-
     }
 }
 
 @media (max-width: 480px) {
-
     .section1-main,
     .event-image {
         margin: 0;

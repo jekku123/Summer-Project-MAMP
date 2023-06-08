@@ -24,37 +24,43 @@ const Faq = ({ info }) => {
     };
 
     return (
-      <div>
-          {info.map((item, index) => (
-              <div className='faq' key={index}>
-                  <div className='faq-qa'>
-                    <div className='question'>
-                    <button
-                      id={`button_${index}`}
-                      className={`btn_expand ${expandedIndex === index ? 'expanded' : ''}`}
-                      onClick={() => handleToggle(index)}
-                      onMouseEnter={() => handleHover(index)}
-                      onMouseLeave={() => handleLeave(index)}
-                    >
-                      {expandedIndex === index ? <FaMinus/> : <FaPlus/>}
-                    </button>
-                    <h3
-                      className='question_title'
-                      onClick={() => handleToggle(index)}
-                      onMouseEnter={() => handleHover(index)}
-                      onMouseLeave={() => handleLeave(index)}
-                    >
-                      {item.question}
-                    </h3>
+        <>
+            {info.map((item, index) => (
+                <div className='faq' key={index}>
+                    <div className='faq-qa'>
+                        <div className='question'>
+                            <button
+                                id={`button_${index}`}
+                                className={`btn_expand ${
+                                    expandedIndex === index ? 'expanded' : ''
+                                }`}
+                                onClick={() => handleToggle(index)}
+                                onMouseEnter={() => handleHover(index)}
+                                onMouseLeave={() => handleLeave(index)}
+                            >
+                                {expandedIndex === index ? (
+                                    <FaMinus />
+                                ) : (
+                                    <FaPlus />
+                                )}
+                            </button>
+                            <h3
+                                className='question_title'
+                                onClick={() => handleToggle(index)}
+                                onMouseEnter={() => handleHover(index)}
+                                onMouseLeave={() => handleLeave(index)}
+                            >
+                                {item.question}
+                            </h3>
+                        </div>
+                        {expandedIndex === index && (
+                            <p className='answer'>{item.answer}</p>
+                        )}
                     </div>
-                      {expandedIndex === index && (
-                      <p className='answer'>{item.answer}</p>
-                      )}
-                  </div>
-              </div>
-          ))}
-      </div>
-  );
+                </div>
+            ))}
+        </>
+    );
 };
 
 export default Faq;

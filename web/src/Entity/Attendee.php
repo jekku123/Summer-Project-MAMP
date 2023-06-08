@@ -28,6 +28,7 @@ class Attendee
     private ?string $phone = null;
 
     #[ORM\ManyToOne(inversedBy: 'attendees')]
+    #[ORM\JoinColumn(name: "event_id", referencedColumnName: "id")]
     private ?Event $event = null;
 
     #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'attendees')]

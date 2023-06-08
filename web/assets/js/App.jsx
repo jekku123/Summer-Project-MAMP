@@ -8,7 +8,7 @@ import EventList from './pages/EventList/EventList';
 import ScrollTopBtn from './components/ScrollTopBtn/ScrollTopBtn';
 import SingleEvent from './pages/Event/SingleEvent';
 import './App.css';
-
+import SignUp from './pages/SignUp/SignUp';
 
 function App() {
     return (
@@ -21,6 +21,7 @@ function App() {
                         <Route path='/events' element={<EventList />} />
                         <Route path='/:id' element={<SingleEvent />} />
                         <Route path='/faq' element={<FaqInfo />} />
+                        <Route path='/signup/:id' element={<SignUp />} />
                     </Route>
                 </Routes>
                 <ScrollTopBtn />

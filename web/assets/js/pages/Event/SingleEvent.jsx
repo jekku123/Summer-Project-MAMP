@@ -11,8 +11,10 @@ function SingleEvent() {
     );
 
     return isLoading ? (
-        <div className='loader'>
-            <h2>Loading</h2>
+        <div className='event'>
+            <div className='loader'>
+                <h2>Loading</h2>
+            </div>
         </div>
     ) : (
         <div className='event'>

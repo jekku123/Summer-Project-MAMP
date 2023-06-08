@@ -1,12 +1,12 @@
 .home-content {
-    background: url(https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat center/cover;
+    background-color: rgb(13, 12, 15); /* color picked from the banner img */
 }
 
 .homepage-cards {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 0 1rem 1rem;
     margin-bottom: 3rem;
     flex-flow: row wrap;
 }
@@ -17,6 +17,6 @@
     }
 
     .home h2 {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 }
