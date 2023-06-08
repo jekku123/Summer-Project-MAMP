@@ -55,15 +55,12 @@ function SingleEvent() {
                         {data.speakers &&
                             data.speakers.map((speaker, i) => (
                                 <div className='speaker' key={speaker.id}>
-                                    <p>
-                                        {speaker.name}
-                                    </p>
+                                    <p>{speaker.name}</p>
                                 </div>
                             ))}
                     </div>
                 </div>
             ) : null}
-
 
             <div className='section'>
                 <h2 className='section-title'>Sessions</h2>
@@ -93,9 +90,7 @@ function SingleEvent() {
                                     {' '}
                                     <strong>Speakers:</strong>
                                     {session.speakers.map((speaker, i) => (
-                                        <li key={speaker.id}>
-                                            {speaker.name}
-                                        </li>
+                                        <li key={speaker.id}>{speaker.name}</li>
                                     ))}
                                 </p>
                             </div>
@@ -139,7 +134,7 @@ function SingleEvent() {
                                     {exhibition.booths.map((booth) => (
                                         <div
                                             className='exhibition-booth'
-                                            key={booth.booth_number}
+                                            key={booth.id}
                                         >
                                             <p>
                                                 <strong>Booth number: </strong>{' '}
@@ -207,7 +202,6 @@ function SingleEvent() {
                                         {workshop.speakers.map((speaker) => (
                                             <li key={speaker.id}>
                                                 {speaker.name}
-
                                             </li>
                                         ))}
                                     </p>
@@ -234,11 +228,8 @@ function SingleEvent() {
                         ))}
                 </div>
             ) : null}
-
         </div>
     );
 }
 
 export default SingleEvent;
-
-

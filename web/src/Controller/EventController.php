@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Attendee;
 use App\Entity\Event;
 use App\Entity\Exhibition;
+use App\Entity\SideEvent;
 use App\Repository\AttendeeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,10 +82,28 @@ class EventController extends AbstractController
                 'image' => $event->getImage(),
                 'start_at' => $event->getStartAt()->format('Y-m-d H:i:s'),
                 'end_at' => $event->getEndAt()->format('Y-m-d H:i:s'),
+                'sideEvents' => $this->getSideEventData($event),
                 'sessions' => $this->getSessionData($event),
                 'exhibitions' => $this->getExhibitionData($event),
                 'workshops' => $this->getWorkshopData($event),
                 'speakers' => $this->getSpeakersData(($event))
+            ];
+        }
+        return $data;
+    }
+
+    public function getSideEventData(Event $event): array
+    {
+        $data = [];
+        foreach ($event->getSideEvents() as $event) {
+            $data[] = [
+                'id' => $event->getId(),
+                'title' => $event->getTitle(),
+                'description' => $event->getDescription(),
+                'location' => $event->getLocation(),
+                'image' => $event->getImage(),
+                'start_at' => $event->getStartAt()->format('Y-m-d H:i:s'),
+                'end_at' => $event->getEndAt()->format('Y-m-d H:i:s'),
             ];
         }
         return $data;
