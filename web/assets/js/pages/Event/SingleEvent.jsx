@@ -54,10 +54,9 @@ function SingleEvent() {
                     <div className='section-content-speakers'>
                         {data.speakers &&
                             data.speakers.map((speaker, i) => (
-                                <div className='speaker' key={speaker.firstname}>
+                                <div className='speaker' key={speaker.id}>
                                     <p>
-                                        {speaker.firstname}
-                                        {speaker.lastname}
+                                        {speaker.name}
                                     </p>
                                 </div>
                             ))}
@@ -71,7 +70,7 @@ function SingleEvent() {
                 <div className='section-content'>
                     {data.sessions &&
                         data.sessions.map((session, i) => (
-                            <div className='session' key={session.title}>
+                            <div className='session' key={session.id}>
                                 <p>
                                     <strong>Title:</strong> {session.title}
                                 </p>
@@ -94,9 +93,8 @@ function SingleEvent() {
                                     {' '}
                                     <strong>Speakers:</strong>
                                     {session.speakers.map((speaker, i) => (
-                                        <li key={speaker.lastname}>
-                                            {speaker.firstname}
-                                            {speaker.lastname}
+                                        <li key={speaker.id}>
+                                            {speaker.name}
                                         </li>
                                     ))}
                                 </p>
@@ -111,7 +109,7 @@ function SingleEvent() {
                     <div className='section-content'>
                         {data.exhibitions &&
                             data.exhibitions.map((exhibition, i) => (
-                                <div className='exhibition' key={exhibition.title}>
+                                <div className='exhibition' key={exhibition.id}>
                                     <div className='exhibition-info'>
                                         <p>
                                             <strong>Title: </strong>
@@ -182,7 +180,7 @@ function SingleEvent() {
                     <div className='section-content'>
                         {data.workshops &&
                             data.workshops.map((workshop, i) => (
-                                <div className='workshop' key={workshop.title}>
+                                <div className='workshop' key={workshop.id}>
                                     <p>
                                         <strong>Title:</strong>
                                         {workshop.title}
@@ -207,9 +205,9 @@ function SingleEvent() {
                                         {' '}
                                         <strong>Speakers:</strong>
                                         {workshop.speakers.map((speaker) => (
-                                            <li key={speaker.firstname}>
-                                                {speaker.firstname}
-                                                {speaker.lastname}
+                                            <li key={speaker.id}>
+                                                {speaker.name}
+
                                             </li>
                                         ))}
                                     </p>
@@ -225,7 +223,7 @@ function SingleEvent() {
                     {data.sideEvents &&
                         data.sideEvents.map((sideEvent, i) => (
                             <div className='section-content'>
-                                <div className='side-event' key={sideEvent.title}>
+                                <div className='side-event' key={sideEvent.id}>
                                     <p>title: {sideEvent.title}</p>
                                     <p>description: {sideEvent.description}</p>
                                     <p>Location: {sideEvent.location}</p>
