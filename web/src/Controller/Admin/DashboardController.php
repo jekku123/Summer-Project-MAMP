@@ -41,6 +41,8 @@ class DashboardController extends AbstractDashboardController
 
   public function configureMenuItems(): iterable
   {
+    yield MenuItem::linkToUrl('Back to home!', 'fas fa-home', 'http://localhost:8007');
+    yield MenuItem::section('');
     yield MenuItem::linkToCrud('Events', 'fas fa-map-marker-alt', Event::class);
     yield MenuItem::section('Manage speakers');
     yield MenuItem::linkToCrud('Speakers', 'fas fa-microphone', Speaker::class);
