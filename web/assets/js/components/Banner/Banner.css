@@ -24,6 +24,11 @@
     line-height: 1.4;
 }
 
+.banner-content p a {
+    text-decoration: none;
+    color: var(--secondary-light-color);
+}
+
 .banner-container h2 {
     font-size: 3rem;
 }

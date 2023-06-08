@@ -6,7 +6,8 @@
 }
 
 .signup h2 {
-    color: var(--light-color);
+    color: black;
+    padding: 20px;
 }
 
 form button {

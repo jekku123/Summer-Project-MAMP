@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Notification;
 use App\Mailer\Texter;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -19,15 +21,17 @@ class NotificationCrudController extends AbstractCrudController
     {
         $this->texterInterface = $texterInterface;
     }
-    public function configureCrud(Crud $crud): Crud
-    {
-        return $crud
-          ->setEntityLabelInSingular('Notification')
-            ->setEntityLabelInPlural('Notifications');
-    }
+
     public static function getEntityFqcn(): string
     {
         return Notification::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Notification')
+            ->setEntityLabelInPlural('Notifications');
     }
 
     public function configureFields(string $pageName): iterable

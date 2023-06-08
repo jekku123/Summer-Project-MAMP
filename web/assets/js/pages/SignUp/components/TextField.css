@@ -2,9 +2,10 @@
     display: block;
     margin-bottom: 3px;
     text-transform: capitalize;
-    color: var(--light-color);
+    color: black;
 }
 
 .textfield input {
     margin-bottom: 10px;
+    font-family: inherit;
 }

@@ -3,7 +3,8 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post" class="loginform">
+<div class='loginform-container'>
+<form method="post" class='loginform'>
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -27,4 +28,5 @@
         Sign in
     </button>
 </form>
+</div>
 {% endblock %}

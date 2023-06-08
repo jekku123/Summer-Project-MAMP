@@ -1,5 +1,11 @@
 body {
-    background-color: white;
+}
+
+.loginform-container {
+    background-color: black;
+    color: var(--light-color);
+    padding-top: 100px;
+    height: 100vh;
 }
 
 .loginform {

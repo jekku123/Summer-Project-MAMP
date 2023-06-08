@@ -33,7 +33,7 @@ const SignUp = () => {
 
     return (
         <div className='signup'>
-            <h2>Sign up for the event</h2>
+            <h2>Sign up for {event.title}</h2>
             <form onSubmit={(e) => handleSubmit(e, submit)}>
                 {Object.keys(formData).map((fieldname, i) => (
                     <TextField
