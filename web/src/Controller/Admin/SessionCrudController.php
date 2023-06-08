@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class SessionCrudController extends AbstractCrudController
 {
@@ -16,7 +17,12 @@ class SessionCrudController extends AbstractCrudController
   {
     return Session::class;
   }
-
+  public function configureCrud(Crud $crud): Crud
+  {
+      return $crud
+        ->setEntityLabelInSingular('Session')
+          ->setEntityLabelInPlural('Sessions');
+  }
 
   public function configureFields(string $pageName): iterable
   {
