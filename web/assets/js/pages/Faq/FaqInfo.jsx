@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Faq from './Faq';
 import './Faq.css';
 
@@ -29,28 +29,32 @@ function FaqInfo() {
             answer: 'Refund policies for our seminars and conferences may vary. Generally, if you notify us of your cancellation within a certain period before the event, you may be eligible for a refund. However, please check the specific refund policy mentioned on the event page or contact our event team for further assistance.',
         },
         {
-            question: 'Will there be parking facilities available at the event venue?',
+            question:
+                'Will there be parking facilities available at the event venue?',
             answer: 'Yes, we provide parking facilities for attendees at our event venues. However, the availability of parking spaces may vary depending on the location and demand. We recommend arriving early to secure a parking spot. If you prefer to use public transportation, we will provide information on nearby public transport options on the event page.',
         },
         {
-            question: 'Can I present a paper or speak at one of your conferences?',
+            question:
+                'Can I present a paper or speak at one of your conferences?',
             answer: 'Yes, we welcome paper presentations and speaker proposals for our conferences. If you have relevant expertise and would like to contribute to one of our events, please visit the event page and look for the "Call for Papers" or "Call for Speakers" section. There, you will find instructions on how to submit your proposal.',
         },
     ];
 
     return (
         <div className='faq-background'>
-                <h1>FAQ</h1>
+            <h1 className='title'>FAQ</h1>
             <div className='faqinfo'>
-
-                <p>Here are some answers to frequently asked questions about seminars and conferences organized by Business College Helsinki.</p>
+                <p>
+                    Here are some answers to frequently asked questions about
+                    seminars and conferences organized by Business College
+                    Helsinki.
+                </p>
                 <hr />
 
                 <Faq info={faqData} />
             </div>
         </div>
-    )
+    );
 }
 
 export default FaqInfo;
-
