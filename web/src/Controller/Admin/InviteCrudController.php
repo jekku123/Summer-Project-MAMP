@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Mailer\MailerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class InviteCrudController extends AbstractCrudController
 {
@@ -18,7 +19,12 @@ class InviteCrudController extends AbstractCrudController
     {
         $this->mailerInterface = $mailerInterface;
     }
-
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+          ->setEntityLabelInSingular('Invite')
+            ->setEntityLabelInPlural('Invites');
+    }
     public static function getEntityFqcn(): string
     {
         return Invite::class;

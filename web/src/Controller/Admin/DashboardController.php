@@ -42,24 +42,25 @@ class DashboardController extends AbstractDashboardController
   public function configureMenuItems(): iterable
   {
     yield MenuItem::linkToUrl('Back to home!', 'fas fa-home', 'http://localhost:8007');
-    yield MenuItem::section('');
+    yield MenuItem::section('Manage events');
     yield MenuItem::linkToCrud('Events', 'fas fa-map-marker-alt', Event::class);
-    yield MenuItem::section('Manage speakers');
-    yield MenuItem::linkToCrud('Speakers', 'fas fa-microphone', Speaker::class);
     yield MenuItem::section('Event details');
     yield MenuItem::linkToCrud('Sessions', 'fas fa-map-marker-alt', Session::class);
     yield MenuItem::linkToCrud('Workshops', 'fa-solid fa-star', Workshop::class);
     yield MenuItem::subMenu('Exhibitions', 'fas fa-map-marker-alt')
-      ->setSubItems([
-        MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class),
-        MenuItem::linkToCrud('Booths', 'fa-sharp fa-solid fa-table', Booth::class),
-        MenuItem::linkToCrud('Companies', 'fa-solid fa-suitcase', Company::class),
-      ]);
+    ->setSubItems([
+      MenuItem::linkToCrud('Exhibitions', 'fas fa-map-marker-alt', Exhibition::class),
+      MenuItem::linkToCrud('Booths', 'fa-sharp fa-solid fa-table', Booth::class),
+      MenuItem::linkToCrud('Companies', 'fa-solid fa-suitcase', Company::class),
+    ]);
     yield MenuItem::linkToCrud('Side events', 'fas fa-map-marker-alt', SideEvent::class);
-    yield MenuItem::section('');
-    yield MenuItem::linkToCrud('Invites', 'fas fa-map-marker-alt', Invite::class);
+    yield MenuItem::section('Manage event attendees');
+    yield MenuItem::linkToCrud('Speakers', 'fas fa-microphone', Speaker::class);
     yield MenuItem::linkToCrud('Attendees', 'fas fa-map-marker-alt', Attendee::class);
+    yield MenuItem::section('Notifications and feedback');
     yield MenuItem::linkToCrud('Notifications', 'fas fa-map-marker-alt', Notification::class);
     yield MenuItem::linkToCrud('Feedback', 'fas fa-map-marker-alt', Feedback::class);
+    yield MenuItem::section('Send invites');
+    yield MenuItem::linkToCrud('Invites', 'fas fa-map-marker-alt', Invite::class);
   }
 }

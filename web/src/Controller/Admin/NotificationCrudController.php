@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Notifier\TexterInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class NotificationCrudController extends AbstractCrudController
 {
@@ -18,7 +19,12 @@ class NotificationCrudController extends AbstractCrudController
     {
         $this->texterInterface = $texterInterface;
     }
-
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+          ->setEntityLabelInSingular('Notification')
+            ->setEntityLabelInPlural('Notifications');
+    }
     public static function getEntityFqcn(): string
     {
         return Notification::class;

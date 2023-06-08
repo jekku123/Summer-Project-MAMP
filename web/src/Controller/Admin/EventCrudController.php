@@ -23,6 +23,13 @@ class EventCrudController extends AbstractCrudController
         return Event::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+          ->setEntityLabelInSingular('Event')
+            ->setEntityLabelInPlural('Events');
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         return $actions

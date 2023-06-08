@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class BoothCrudController extends AbstractCrudController
 {
@@ -14,7 +15,12 @@ class BoothCrudController extends AbstractCrudController
     {
         return Booth::class;
     }
-
+    public function configureCrud(Crud $crud): Crud
+  {
+    return $crud
+        ->setEntityLabelInSingular('Booth')
+        ->setEntityLabelInPlural('Booths');
+  }
     
     public function configureFields(string $pageName): iterable
     {

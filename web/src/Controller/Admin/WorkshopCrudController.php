@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 
 class WorkshopCrudController extends AbstractCrudController
@@ -18,7 +19,12 @@ class WorkshopCrudController extends AbstractCrudController
     {
         return Workshop::class;
     }
-
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+          ->setEntityLabelInSingular('Workshop')
+            ->setEntityLabelInPlural('Workshops');
+    }
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('event')

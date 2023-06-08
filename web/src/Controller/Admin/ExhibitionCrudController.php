@@ -10,12 +10,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class ExhibitionCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
         return Exhibition::class;
+    }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+          ->setEntityLabelInSingular('Exhibition')
+            ->setEntityLabelInPlural('Exhibitions');
     }
 
     public function configureFields(string $pageName): iterable
