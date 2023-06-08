@@ -20,6 +20,7 @@
     font-weight: bold;
     text-align: center;
     color: var(--light-color);
+    text-transform: capitalize;
 }
 
 .event-image {
@@ -32,10 +33,9 @@
 .section1 {
     width: 85vw;
     margin: auto auto 1.5rem auto;
-    background-color: white;
+    background-color: var(--light-color);
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
 }
@@ -43,7 +43,7 @@
 .section1-main {
     border-radius: 3px;
     width: 57%;
-    background-color: antiquewhite;
+    background-color: var(--card-bg-color);
     padding: 20px;
     margin-right: 0.5rem;
 }
@@ -51,22 +51,25 @@
 .section {
     width: 85vw;
     margin: auto auto 1.5rem auto;
-    background-color: white;
+    background-color: var(--light-color);
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .section-title {
     margin-bottom: 10px;
     color: var(--main-text-color);
+    text-transform: capitalize;
 }
 
-.section-content {
-    margin-left: 20px;
+
+.section-content-speakers {
+    background-color: var(--card-bg-color);
+    padding: 20px;
 }
 
 .section-content p,
+.section-content-speakers p,
 .exhibition-booth p {
     margin: 1rem;
     line-height: 1.5;
@@ -81,7 +84,7 @@
 .workshop {
     margin-bottom: 10px;
     padding: 20px;
-    background-color: antiquewhite;
+    background-color: var(--card-bg-color);
 }
 
 .exhibition {
@@ -91,7 +94,8 @@
 .exhibition-booth {
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #e4e6eb;
+    background-color: var(--card-bg-color);
+
 }
 
 .side-event {
