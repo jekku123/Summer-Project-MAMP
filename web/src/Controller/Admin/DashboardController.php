@@ -44,8 +44,7 @@ class DashboardController extends AbstractDashboardController
     yield MenuItem::linkToUrl('Back to home!', 'fas fa-home', 'http://localhost:8007');
 
     yield MenuItem::section('Manage events');
-    yield MenuItem::linkToCrud('Conferences', 'fas fa-map-marker-alt', Event::class);
-    yield MenuItem::linkToCrud('Seminars', 'fas fa-map-marker-alt', Feedback::class);
+    yield MenuItem::linkToCrud('Events', 'fas fa-map-marker-alt', Event::class);
 
     yield MenuItem::section('Affiliates');
     yield MenuItem::linkToCrud('Speakers', 'fas fa-microphone', Speaker::class);
